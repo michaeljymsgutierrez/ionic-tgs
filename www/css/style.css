@@ -48,10 +48,17 @@
 }
 
 #input-wrapper {
+	width: 68%;
+	border-bottom: 1px solid #E6E6E6;
 	display: inline-block;
 }
 
 #input-wrapper input::-webkit-input-placeholder {
 	font-style: italic;
 	font-size: 16px;
+}
+
+#settings-store-arrow {
+	position: absolute;
+	margin-left: -20px !important;
 }
