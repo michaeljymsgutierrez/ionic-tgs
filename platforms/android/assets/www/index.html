@@ -7,46 +7,44 @@
 
     <link rel="manifest" href="manifest.json">
 
-    <!-- un-comment this code to enable service worker
-    <script>
-      if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('service-worker.js')
-          .then(() => console.log('service worker installed'))
-          .catch(err => console.log('Error', err));
-      }
-    </script>-->
+    <!-- compiled css output -->
+    <link href="css/ionic.app.css" rel="stylesheet">
 
-    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+    <!-- custom style css -->
     <link href="css/style.css" rel="stylesheet">
 
-    <!-- 
-    IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
-    <link href="css/ionic.app.css" rel="stylesheet">
-    -->
-
-    <!-- ionic/angularjs js -->
+    <!-- ionic budle -->
     <script src="lib/ionic/js/ionic.bundle.js"></script>
 
     <!-- ngCordova -->
     <script src="lib/ngCordova/dist/ng-cordova.min.js"></script>
-    
-    <!-- cordova script (this will be a 404 during development) -->
-    <script src="cordova.js"></script>
 
+    <!-- cordova script (this will be a 404 during development) -->
+    <script src="cordova.js"></script>s
+    
     <!-- your app's js -->
     <script src="js/app.js"></script>
+      
+    <!-- state and configuration -->
+    <script src="js/state.js"></script>
+    
+    <!-- controllers -->
+    <script src="js/controller.js"></script>
 
   </head>
 
-  <body ng-app="tgs">
+  <body ng-app="tgs" class="platform-android platform-cordova platform-webview">
 
-    <ion-pane>
-      <ion-header-bar class="bar-stable">
-        <h1 class="title">Ionic Blank Starter</h1>
-      </ion-header-bar>
-      <ion-content>
-      </ion-content>
-    </ion-pane>
+   <!-- Initialize back button -->
+   <ion-nav-bar class="bar-stable">
+      <ion-nav-back-button></ion-nav-back-button>
+   </ion-nav-bar>
+
+   <!-- Render the ion views -->
+   <ion-pane>
+      <ion-nav-view></ion-nav-view>
+  </ion-pane>
 
   </body>
+
 </html>

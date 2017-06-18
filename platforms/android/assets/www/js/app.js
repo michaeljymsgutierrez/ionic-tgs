@@ -1,7 +1,8 @@
-// Main module
+// main tgs module
 var app = angular.module('tgs', ['ionic','ngCordova']);
 
 app.run(function($ionicPlatform) {
+  
     $ionicPlatform.ready(function() {
       
       if(window.cordova && window.cordova.plugins.Keyboard) {
