@@ -8,11 +8,16 @@ app.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider){
 	$stateProvider
 	.state('settings',{
 		url:'/settings',
-		templateUrl: 'templates/settings.html',
+		templateUrl: 'templates/template-settings/settings.html',
+		controller: 'mainCtrl'
+	})
+	.state('store',{
+		url: '/store',
+		templateUrl: 'templates/template-settings/store-settings.html',
 		controller: 'mainCtrl'
 	});
 
-	$urlRouterProvider.otherwise('/settings');
+	$urlRouterProvider.otherwise('/store');
 
 	
 });
