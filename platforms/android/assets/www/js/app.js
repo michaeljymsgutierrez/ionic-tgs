@@ -1,7 +1,7 @@
 // main tgs module
 var app = angular.module('tgs', ['ionic','ngCordova']);
 
-app.run(function($ionicPlatform) {
+app.run(function($ionicPlatform, $cordovaSQLite) {
   
     $ionicPlatform.ready(function() {
       
@@ -14,5 +14,15 @@ app.run(function($ionicPlatform) {
         StatusBar.styleDefault();
       }
 
-    })
+       // db = $cordovaSQLite.openDB({name:'tgs.db',location:'default'});
+       db = window.openDatabase("tgs.db", "1.0", "Cordova Demo", 200000);
+       
+       $cordovaSQLite.execute(db,'CREATE TABLE IF NOT EXISTS store_settings(id text primary key, store_code text, branch_name text, store_type text, store_manager)')
+       .then(function(res){
+       		console.log(res);
+       },function(err){
+       		console.log(err);
+       });
+
+    });
 });
