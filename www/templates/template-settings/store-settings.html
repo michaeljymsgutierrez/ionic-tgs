@@ -10,7 +10,7 @@
 	</ion-nav-buttons>
 
 	<ion-nav-buttons side="right">
-			 <a id="view-title-color" ng-click="" class="button button-icon icon">DONE</a>
+			 <a id="view-title-color" class="button button-icon icon" ng-click="save_store_settings()">DONE</a>
 	</ion-nav-buttons>
 
 
@@ -20,36 +20,36 @@
 			<div class="item" style="border: none">
 				<span id="store-form-label">Store Code</span>  
 				<div id="input-wrapper" style="margin-left: 60px;"> 
-					<input type="text" placeholder="Enter Store Code">
+					<input type="text" placeholder="Enter Store Code" ng-model="store_form.store_code">
 				</div>
 			</div>
 
 			<div class="item" style="border: none">
 				<span id="store-form-label">Branch Name</span>  
 				<div id="input-wrapper" style="margin-left: 40px;"> 
-					<input type="text" placeholder="Branch Name">
+					<input type="text" placeholder="Branch Name" ng-model="store_form.store_branch">
 				</div>
 			</div>
 
 			<div class="item" style="border: none">
 				<span id="store-form-label">Store Address</span>  
 				<div id="input-wrapper" style="margin-left:34px;"> 
-					<input type="text" placeholder="Store Address">
+					<input type="text" placeholder="Store Address" ng-model="store_form.store_address">
 				</div>
 			</div>
 
 			<div class="item" style="border: none">
 				<span id="store-form-label">Store Type</span>  
-				<div id="input-wrapper" style="margin-left:59px;"> 
-					<input type="text" placeholder="Store Type" ng-click="storeType()">
+				<div id="input-wrapper" style="margin-left:59px;" ng-click="storeType()"> 
+					<input type="text" placeholder="Store Type" ng-model="store_form.store_type">
 				</div>
-				<i class="icon ion-chevron-right" id="settings-store-arrow" style="margin-left: 35%" ng-click="storeType()"></i>
+				<i class="icon ion-chevron-right" id="settings-store-arrow" style="margin-left: 35%"></i>
 			</div>
 
 			<div class="item" style="border: none">
 				<span id="store-form-label">Store Manager</span>  
 				<div id="input-wrapper" style="margin-left:30px;"> 
-					<input type="text" placeholder="Store Manager">
+					<input type="text" placeholder="Store Manager" ng-model="store_form.store_manager">
 				</div>
 			</div>
 
