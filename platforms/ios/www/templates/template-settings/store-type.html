@@ -1,0 +1,18 @@
+<!-- Store Type Popup  Template -->
+
+<div style="margin-bottom: 20px">
+	<div class="list">
+		  <div class="item item-icon-left borderless">
+		    <i class="icon"><input  type='radio' name="store-type" ng-model="store_type" value="Mall"/></i> Mall
+		  </div>
+
+		  <div class="item item-icon-left borderless">
+		    <i class="icon"><input  type='radio' name="store-type" ng-model="store_type" value="Instore"/></i> Instore
+		  </div>
+ 	</div>
+</div>
+
+<div align="right" class="settings-footer">
+	<span style="margin-right: 40px;" ng-click="closeStoreType.cancel()">CANCEL</span> 
+	<span style="margin-right: 20px" ng-click="closeStoreType.okay(store_type)">OK</span>
+</div>

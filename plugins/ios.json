@@ -27,6 +27,9 @@
         },
         "cordova-sqlite-storage": {
             "PACKAGE_NAME": "io.ionic.starter"
+        },
+        "cordova-plugin-x-toast": {
+            "PACKAGE_NAME": "com.ionicframework.manginasaltgs786518"
         }
     },
     "dependent_plugins": {}
