@@ -14,7 +14,7 @@ app.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider){
 	.state('store',{
 		url: '/store',
 		templateUrl: 'templates/template-settings/store-settings.html',
-		controller: 'mainCtrl'
+		controller: 'settingsCtrl'
 	});
 
 	$urlRouterProvider.otherwise('/store');
