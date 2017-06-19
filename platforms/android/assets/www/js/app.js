@@ -14,12 +14,13 @@ app.run(function($ionicPlatform, $cordovaSQLite) {
         StatusBar.styleDefault();
       }
 
-       // db = $cordovaSQLite.openDB({name:'tgs.db',location:'default'});
-       db = window.openDatabase("tgs.db", "1.0", "Cordova Demo", 200000);
+       db = $cordovaSQLite.openDB({name:'tgs.db',location:'default'});
+       // db = window.openDatabase("tgs.db", "1.0", "Cordova Demo", 200000);
        
-       $cordovaSQLite.execute(db,'CREATE TABLE IF NOT EXISTS store_settings(id text primary key, store_code text, branch_name text, store_type text, store_manager)')
-       .then(function(res){
-       		console.log(res);
+       // Initialize table for store settings
+       $cordovaSQLite.execute(db,'CREATE TABLE IF NOT EXISTS store_settings(id integer primary key, store_code text, store_branch text, store_address text, store_type text, store_manager)')
+       .then(function(res){ 
+          console.log(res);
        },function(err){
        		console.log(err);
        });
