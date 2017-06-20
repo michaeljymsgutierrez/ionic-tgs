@@ -39,7 +39,7 @@ app.run(function($ionicPlatform, $cordovaSQLite, $ionicPickerI18n) {
        });
 
        // Initialize table for payday weekday schedule
-       $cordovaSQLite.execute(db,'CREATE TABLE IF NOT EXISTS payday_weekday(id ineteger primary key, payday_weekday_date text, payday_weekday_start text, payday_weekday_end text)')
+       $cordovaSQLite.execute(db,'CREATE TABLE IF NOT EXISTS payday_weekday (id integer primary key, payday_weekday_date text, payday_weekday_start text, payday_weekday_end text)')
        .then(function(res){
           console.log(res);
        },function(err){
