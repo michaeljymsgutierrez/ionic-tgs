@@ -1,7 +1,7 @@
 // main tgs module
-var app = angular.module('tgs', ['ionic','ngCordova']);
+var app = angular.module('tgs', ['ionic','ngCordova','ion-datetime-picker']);
 
-app.run(function($ionicPlatform, $cordovaSQLite) {
+app.run(function($ionicPlatform, $cordovaSQLite, $ionicPickerI18n) {
   
     $ionicPlatform.ready(function() {
       
@@ -13,6 +13,11 @@ app.run(function($ionicPlatform, $cordovaSQLite) {
       if(window.StatusBar) {
         StatusBar.styleDefault();
       }
+
+      // ION-datetime-picker style configuration
+      $ionicPickerI18n.okClass = "button-assertive";
+      $ionicPickerI18n.cancelClass = "button-stable";
+      $ionicPickerI18n.arrowButtonClass = "button-assertive";
 
        db = $cordovaSQLite.openDB({name:'tgs.db',location:'default'});
        // db = window.openDatabase("tgs.db", "1.0", "Cordova Demo", 200000);
