@@ -23,9 +23,15 @@ app.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider){
 		url: '/language',
 		templateUrl: 'templates/template-settings/survey-language.html',
 		controller: 'settingsCtrl'
-	});;
+	})
+	.state('survey-home',{
+		cache: false,
+		url: '/survey/home',
+		templateUrl: 'templates/template-settings/survey-settings-home.html',
+		controller: 'settingsCtrl'
+	});
 
-	$urlRouterProvider.otherwise('/settings');
+	$urlRouterProvider.otherwise('/survey/home');
 
 	
 });
