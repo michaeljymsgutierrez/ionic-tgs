@@ -99,3 +99,19 @@ input[type='radio']:checked:before {
 .borderless {
 	border: none;
 }
+
+#custom-divider {
+	background-color: #E6E6E6; 
+	height: 10px;
+	width: 540px; 
+	position: absolute;
+	margin-top: 14px;
+	margin-left: 5%;
+}
+
+
+/* Survey Language Settings */
+#language-text {
+	font-weight: bold;
+	margin-left: 30px;
+}
