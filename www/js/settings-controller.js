@@ -1,9 +1,26 @@
 // Settings Controller
-app.controller('settingsCtrl',function($scope, $ionicPopup, $rootScope, $cordovaSQLite, $location, Toast){
+app.controller('settingsCtrl',function($scope, $ionicPopup, $rootScope, $cordovaSQLite, $location, Toast, $ionicPlatform){
 
 	// Initialize store object for settings
 	// rootScope  is used due to hiding of popup
 	$rootScope.store_form = { };
+
+	// Platform ready code execution 
+	$ionicPlatform.ready(function(){
+			//  Load all current settings from db when state on store settings
+			$cordovaSQLite.execute(db,"SELECT * FROM store_settings").then(function(res){
+				data = res.rows.item(0);
+				$rootScope.store_form.store_code = data.store_code;
+				$rootScope.store_form.store_branch = data.store_branch;
+				$rootScope.store_form.store_address = data.store_address;
+				$rootScope.store_form.store_type = data.store_type;
+				$rootScope.store_form.store_manager = data.store_manager;
+			},function(err){
+				// Error fetching current store settings
+				console.log(errr);
+			});
+	});
+
  
 	// Popup show store type
 	$scope.storeType =  function(){
