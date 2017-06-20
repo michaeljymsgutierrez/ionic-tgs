@@ -120,3 +120,39 @@ input[type='radio']:checked:before {
 	width: 10px; 
 	border: transparent;
 }
+
+/* Survey Settings Home */
+
+#survey-settings-date {
+	background: white;
+	display: inline-block;
+	margin-left: 70px;
+	font-size: 15px;
+	font-style: italic;
+}
+
+#survey-settings-date-non-payday {
+	background:white;
+	display: inline-block;
+	margin-left: 38px;
+    font-size: 15px;
+    font-style: italic;
+}
+
+#survey-settings-text {
+	margin-left: 30px;
+	font-weight: bold;
+}
+
+.settings-arrow {
+	margin-left: 130px;
+}
+
+#custom-divider-survey {
+	background-color: #E6E6E6; 
+	height: 10px;
+	width: 540px; 
+	position: absolute;
+	margin-top: 14px;
+	margin-left: 4%;
+}
