@@ -1,5 +1,5 @@
 // Settings Controller
-app.controller('settingsCtrl',function($scope, $ionicPopup, $rootScope, $cordovaSQLite, $location, Toast, $ionicPlatform){
+app.controller('settingsCtrl',function($scope, $ionicPopup, $rootScope, $cordovaSQLite, $location, Toast, $ionicPlatform, $state, $timeout){
 
 	// Initialize store object for settings
 	// rootScope  is used due to hiding of popup
@@ -20,7 +20,6 @@ app.controller('settingsCtrl',function($scope, $ionicPopup, $rootScope, $cordova
 				console.log(errr);
 			});
 	});
-
  
 	// Popup show store type
 	$scope.storeType =  function(){
@@ -44,8 +43,12 @@ app.controller('settingsCtrl',function($scope, $ionicPopup, $rootScope, $cordova
 	};
 
 	// Insert-Update function for store settings
-	$scope.save_store_settings = function(){
+	$scope.save_store_settings = function(){ console.log($rootScope.store_form);
 		if($rootScope.store_form.store_code == undefined || $rootScope.store_form.store_branch == undefined || $rootScope.store_form.store_address == undefined || $rootScope.store_form.store_type == undefined || $rootScope.store_form.store_manager == undefined){
+			// 
+			Toast.show("Please fill up all fields before saving . . .","long","center");
+		}
+		else if($rootScope.store_form.store_code == "" || $rootScope.store_form.store_branch == "" || $rootScope.store_form.store_address == "" || $rootScope.store_form.store_type == "" || $rootScope.store_form.store_manager == ""){
 			Toast.show("Please fill up all fields before saving . . .","long","center");
 		}
 		else{
@@ -56,6 +59,9 @@ app.controller('settingsCtrl',function($scope, $ionicPopup, $rootScope, $cordova
 					[$rootScope.store_form.store_code, $rootScope.store_form.store_branch, $rootScope.store_form.store_address, $rootScope.store_form.store_type, $rootScope.store_form.store_manager])
 					.then(function(res){
 						Toast.show("Store settings successfully saved . . .","long","center");
+						$timeout(function(){
+							$state.go('settings');
+						},3000);
 						console.log(res);
 					},function(err){
 						// Error inserting on table
@@ -69,6 +75,9 @@ app.controller('settingsCtrl',function($scope, $ionicPopup, $rootScope, $cordova
 					[$rootScope.store_form.store_code, $rootScope.store_form.store_branch, $rootScope.store_form.store_address, $rootScope.store_form.store_type, $rootScope.store_form.store_manager,id])
 					.then(function(res){
 						Toast.show("Store settings successfully updated . . .","long","center");
+						$timeout(function(){
+							$state.go('settings');
+						},3000);
 						console.log(res);
 					},function(err){
 						// Error updating table
