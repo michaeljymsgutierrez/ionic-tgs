@@ -7,6 +7,7 @@ app.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider){
 	// Initialization of States
 	$stateProvider
 	.state('settings',{
+		cache: false,
 		url:'/settings',
 		templateUrl: 'templates/template-settings/settings.html',
 		controller: 'mainCtrl'
@@ -16,9 +17,15 @@ app.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider){
 		url: '/store',
 		templateUrl: 'templates/template-settings/store-settings.html',
 		controller: 'settingsCtrl'
-	});
+	})
+	.state('survey',{
+		cache: false,
+		url: '/survey',
+		templateUrl: 'templates/template-settings/survey-language.html',
+		controller: 'settingsCtrl'
+	});;
 
-	$urlRouterProvider.otherwise('/store');
+	$urlRouterProvider.otherwise('/survey');
 
 	
 });
