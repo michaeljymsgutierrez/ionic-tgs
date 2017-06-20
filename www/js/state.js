@@ -18,14 +18,14 @@ app.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider){
 		templateUrl: 'templates/template-settings/store-settings.html',
 		controller: 'settingsCtrl'
 	})
-	.state('survey',{
+	.state('language',{
 		cache: false,
-		url: '/survey',
+		url: '/language',
 		templateUrl: 'templates/template-settings/survey-language.html',
 		controller: 'settingsCtrl'
 	});;
 
-	$urlRouterProvider.otherwise('/survey');
+	$urlRouterProvider.otherwise('/settings');
 
 	
 });
