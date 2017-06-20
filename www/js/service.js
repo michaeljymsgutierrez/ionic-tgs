@@ -18,4 +18,9 @@ app.service('dateFormatter',function($filter){
 	this.toTime = function(dt){
 	   return $filter('date')(dt,'H:mm');
 	}
+
+	// Convert datetime to timestamp
+	this.toTimestamp = function(dt){
+		return Math.floor(new Date(dt).getTime()/1000);
+	}
 });
