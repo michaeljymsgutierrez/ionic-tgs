@@ -27,6 +27,27 @@ app.controller('settingsCtrl',function($scope, $ionicPopup, $rootScope, $cordova
 				// Error fetching current store settings
 				console.log(errr);
 			});
+
+			//  Load current survey language settings from db when state on survey language
+			$cordovaSQLite.execute(db,"SELECT * FROM  survey_language").then(function(res){
+				if(res.rows.length != 0){
+					if(res.rows.item(0).language == "English"){
+						$scope.survey_language = {
+							value1: true,
+							value2: false
+						}
+					}
+					else if(res.rows.item(0).language == "Tagalog"){
+						$scope.survey_language = {
+							value1: false,
+							value2: true
+						}
+					}
+				}
+			},function(err){
+				// Error fetching current survey language
+				console.log(err);
+			});
 	});
  
 	// Popup show store type
@@ -133,7 +154,6 @@ app.controller('settingsCtrl',function($scope, $ionicPopup, $rootScope, $cordova
 					console.log(err);
 				});
 			}
-
 		},function(err){
 			// Error fetching data survey language
 			console.log(err);
