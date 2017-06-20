@@ -14,15 +14,19 @@
 
 			<div class="item item-icon-right" id="settings-item">
 			    <span id="language-text">English</span>
-			    <i class="icon" id="settings-arrow"><ion-checkbox style="width: 10px; border: transparent;" class="checkbox-assertive"></ion-checkbox></i>
+			    <i class="icon" id="settings-arrow">
+			    	<ion-checkbox class="checkbox-assertive survey-checkbox"  name="language-type" ng-model="survey_language.value1" ng-change="select_language('English')"></ion-checkbox>
+			    </i>
 			    <div id="custom-divider"></div>
 			</div>
+
 			<div class="item item-icon-right" id="settings-item">
 			    <span id="language-text">Tagalog</span>
-			    <i class="icon" id="settings-arrow"><ion-checkbox style="width: 10px; border: transparent;" class="checkbox-assertive"></ion-checkbox></i>
+			    <i class="icon" id="settings-arrow">
+			    	<ion-checkbox class="checkbox-assertive survey-checkbox" name="language-type" ng-model="survey_language.value2" ng-change="select_language('Tagalog')"></ion-checkbox>
+			    </i>
 			</div>
 
 		</div>
 	</ion-content>
-
 </ion-view>
