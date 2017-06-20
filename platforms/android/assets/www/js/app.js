@@ -25,5 +25,13 @@ app.run(function($ionicPlatform, $cordovaSQLite) {
        		console.log(err);
        });
 
+       // Initialize table for survey language
+       $cordovaSQLite.execute(db,'CREATE TABLE IF NOT EXISTS survey_language (id integer primary key, language text)')
+       .then(function(res){
+          console.log(res);
+       },function(err){
+          console.log(err);
+       });
+
     });
 });
