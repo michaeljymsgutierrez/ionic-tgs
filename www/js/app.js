@@ -64,5 +64,14 @@ app.run(function($ionicPlatform, $cordovaSQLite, $ionicPickerI18n) {
           console.log(err);
        });
 
+
+        // Initialize table for non payday weekday schedule
+       $cordovaSQLite.execute(db,'CREATE TABLE IF NOT EXISTS non_payday_weekend (id integer primary key, non_payday_weekend_date text, non_payday_weekend_start text, non_payday_weekend_end text)')
+       .then(function(res){
+          console.log(res);
+       },function(err){
+          console.log(err);
+       });
+
     });
 });
