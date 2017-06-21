@@ -193,6 +193,9 @@ app.controller('settingsCtrl',function($scope, $ionicPopup, $rootScope, $cordova
 							[dateFormatter.toStandard($scope.payday_weekday.date), dateFormatter.toStandard($scope.payday_weekday.start), dateFormatter.toStandard($scope.payday_weekday.end)])
 							.then(function(res){
 								Toast.show("Successfully saved Payday Weekday schedule . . .","long","center");
+								$timeout(function(){
+									$state.go('survey-home');
+								},3000);
 							},function(err){
 								// Error insert data
 								console.log(err);
@@ -204,6 +207,9 @@ app.controller('settingsCtrl',function($scope, $ionicPopup, $rootScope, $cordova
 							[dateFormatter.toStandard($scope.payday_weekday.date), dateFormatter.toStandard($scope.payday_weekday.start), dateFormatter.toStandard($scope.payday_weekday.end), id])
 							.then(function(res){ console.log(id)
 								Toast.show("Successfully updated Payday Weekday schedule . . .","long","center");
+								$timeout(function(){
+									$state.go('survey-home');
+								},3000);
 							},function(err){
 								// Error update data
 								console.log(err);
