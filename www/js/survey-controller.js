@@ -1,5 +1,5 @@
 // Survey Controller
-app.controller('surveyCtrl',function($ionicSideMenuDelegate, $scope, $ionicHistory, $rootScope){
+app.controller('surveyCtrl',function($ionicSideMenuDelegate, $scope, $ionicHistory, $rootScope, $window){
 
 	// Toggle Sidemenu on survey controller
 	$rootScope.toggleLeft = function(){
@@ -14,8 +14,12 @@ app.controller('surveyCtrl',function($ionicSideMenuDelegate, $scope, $ionicHisto
    		// Return ratio
       	return $ionicSideMenuDelegate.getOpenRatio();
     },function (ratio){
-    	// Broaccast the value
+    	// Broadcast the value
 	  	$rootScope.sidemenuopened = (ratio == 1);
     });
+
+   	// Iniailize ease access data from localstorage
+    $rootScope.store_name = $window.localStorage.getItem('store_name');
+    $rootScope.store_type = $window.localStorage.getItem('store_type');
 
 });
