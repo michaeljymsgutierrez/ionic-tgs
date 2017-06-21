@@ -14,6 +14,11 @@ app.service('dateFormatter',function($filter){
 		return $filter('date')(dt,'yyyy-MM-dd');
 	}
 
+	// Convert datetime to standart 24hr formate datetime
+	this.toStandard = function(dt){
+		return $filter('date')(dt,'yyyy-MM-dd HH:mm:ss');
+	}
+
 	// Convert ISO to 24 HR format
 	this.toTime = function(dt){
 	   return $filter('date')(dt,'H:mm');
