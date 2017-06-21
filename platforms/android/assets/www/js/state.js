@@ -23,7 +23,19 @@ app.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider){
 		url: '/language',
 		templateUrl: 'templates/template-settings/survey-language.html',
 		controller: 'settingsCtrl'
-	});;
+	})
+	.state('survey-home',{
+		cache: false,
+		url: '/survey/home',
+		templateUrl: 'templates/template-settings/survey-settings-home.html',
+		controller: 'settingsCtrl'
+	})
+	.state('payday-weekday',{
+		cache: false,
+		url: '/payday/weekday',
+		templateUrl: 'templates/template-settings/survey-settings/payday-weekday.html',
+		controller: 'settingsCtrl'
+	});
 
 	$urlRouterProvider.otherwise('/settings');
 

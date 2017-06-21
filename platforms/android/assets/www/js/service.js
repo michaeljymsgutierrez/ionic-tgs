@@ -6,3 +6,26 @@ app.service('Toast',function($cordovaToast){
 		$cordovaToast.show(msg,duration,pos);
 	};
 });
+
+// Service for formatting date 
+app.service('dateFormatter',function($filter){
+	// Convert ISO to date only
+	this.toDate = function(dt){
+		return $filter('date')(dt,'yyyy-MM-dd');
+	}
+
+	// Convert datetime to standart 24hr formate datetime
+	this.toStandard = function(dt){
+		return $filter('date')(dt,'yyyy-MM-dd HH:mm:ss');
+	}
+
+	// Convert ISO to 24 HR format
+	this.toTime = function(dt){
+	   return $filter('date')(dt,'H:mm');
+	}
+
+	// Convert datetime to timestamp
+	this.toTimestamp = function(dt){
+		return Math.floor(new Date(dt).getTime()/1000);
+	}
+});

@@ -5599,7 +5599,7 @@ ion-tabs.tabs-striped.tabs-color-active-dark .tab-item.tab-item-active, ion-tabs
   text-align: center; }
 
 .popup-title {
-  /*color: white;  I add this bg color */
+  /* color: white;  I add this bg color */
   margin: 0;
   padding: 0;
   font-size: 15px; }
