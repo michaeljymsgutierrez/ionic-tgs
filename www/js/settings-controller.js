@@ -23,6 +23,9 @@ app.controller('settingsCtrl',function($scope, $ionicPopup, $rootScope, $cordova
 	// Initialize non payday weekend object
 	$scope.nonpayday_weekend = { };
 
+	// Initialize main display survey settings schedule
+	$scope.summary_schedule = { };
+
 	// Platform ready code execution 
 	$ionicPlatform.ready(function(){
 			//  Load all current settings from db when state on store settings
@@ -68,6 +71,7 @@ app.controller('settingsCtrl',function($scope, $ionicPopup, $rootScope, $cordova
 					$scope.payday_weekday.date = new Date(data.payday_weekday_date);
 					$scope.payday_weekday.start = new Date(data.payday_weekday_start);
 					$scope.payday_weekday.end =  new Date(data.payday_weekday_end);
+					$scope.summary_schedule.pwd = dateFormatter.summarize($scope.payday_weekday.date, $scope.payday_weekday.start, $scope.payday_weekday.end);
 				}
 			},function(err){
 				// Error fetching current payday weekday schedule
@@ -81,6 +85,7 @@ app.controller('settingsCtrl',function($scope, $ionicPopup, $rootScope, $cordova
 					$scope.nonpayday_weekday.date = new Date(data.non_payday_weekday_date);
 					$scope.nonpayday_weekday.start = new Date(data.non_payday_weekday_start);
 					$scope.nonpayday_weekday.end =  new Date(data.non_payday_weekday_end);
+					$scope.summary_schedule.npwd = dateFormatter.summarize($scope.nonpayday_weekday.date, $scope.nonpayday_weekday.start, $scope.nonpayday_weekday.end);
 				}
 			},function(err){
 				// Error fetching current payday weekday schedule
@@ -95,6 +100,7 @@ app.controller('settingsCtrl',function($scope, $ionicPopup, $rootScope, $cordova
 					$scope.payday_weekend.date = new Date(data.payday_weekend_date);
 					$scope.payday_weekend.start = new Date(data.payday_weekend_start);
 					$scope.payday_weekend.end =  new Date(data.payday_weekend_end);
+					$scope.summary_schedule.pwe = dateFormatter.summarize($scope.payday_weekend.date, $scope.payday_weekend.start, $scope.payday_weekend.end );
 				}
 			},function(err){
 				// Error fetching current payday weekday schedule
@@ -109,6 +115,7 @@ app.controller('settingsCtrl',function($scope, $ionicPopup, $rootScope, $cordova
 					$scope.nonpayday_weekend.date = new Date(data.non_payday_weekend_date);
 					$scope.nonpayday_weekend.start = new Date(data.non_payday_weekend_start);
 					$scope.nonpayday_weekend.end =  new Date(data.non_payday_weekend_end);
+					$scope.summary_schedule.npwe = dateFormatter.summarize($scope.nonpayday_weekend.date, $scope.nonpayday_weekend.start, $scope.nonpayday_weekend.end);
 				}
 			},function(err){
 				// Error fetching current payday weekday schedule
