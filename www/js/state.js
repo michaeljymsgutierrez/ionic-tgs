@@ -47,6 +47,12 @@ app.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider){
 		url: '/payday/weekend',
 		templateUrl: 'templates/template-settings/survey-settings/payday-weekend.html',
 		controller: 'settingsCtrl'
+	})	
+	.state('nonpayday-weekend',{
+		cache: false,
+		url: '/nonpayday/weekend',
+		templateUrl: 'templates/template-settings/survey-settings/nonpayday-weekend.html',
+		controller: 'settingsCtrl'
 	});
 
 	$urlRouterProvider.otherwise('/settings');
