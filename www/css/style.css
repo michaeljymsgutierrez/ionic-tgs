@@ -240,5 +240,20 @@ div.time-value-end {
 	color: #FFFFFF; 
 	font-size: 35px; 
 	margin-top: 50px; 
-	text-align: center
+	text-align: center;
+	font-weight: bold;
+}
+
+#side-menu-store-name {
+	color: #FFFFFF;
+	font-size: 20px;
+	margin-left: 22%;
+	margin-top: 100%;
+}
+
+#home-footer {
+	text-align:center; 
+	margin-top: 350px;
+	font-size: 25px; 
+	color: #FFFFFF;
 }
