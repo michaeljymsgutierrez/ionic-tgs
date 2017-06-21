@@ -1,10 +1,13 @@
 // Main Controller
 // Consist of controllers on load at a time
 
-app.controller('settingsLoadCtrl',function($scope, $cordovaSQLite, $ionicPlatform, $timeout){
+app.controller('settingsLoadCtrl',function($scope, $cordovaSQLite, $ionicPlatform, $timeout, $state, $ionicSideMenuDelegate){
 
 	//  On platform ready
 	$ionicPlatform.ready(function(){
+		
+		// Disable side menu  
+		$ionicSideMenuDelegate.canDragContent(false)
 
 		// Initialize settings status object
 		$scope.status_settings = { 
@@ -52,6 +55,10 @@ app.controller('settingsLoadCtrl',function($scope, $cordovaSQLite, $ionicPlatfor
 			}
 		},500);
 
+		// Start Using the app
+		$scope.startapp = function(){
+			$state.go('app-home');
+		}
 
 	});
 
