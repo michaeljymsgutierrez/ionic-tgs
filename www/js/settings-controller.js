@@ -14,6 +14,9 @@ app.controller('settingsCtrl',function($scope, $ionicPopup, $rootScope, $cordova
 	// Initialize payday week day object
 	$scope.payday_weekday = { };
 
+	// Initialize non payday week day object
+	$scope.nonpayday_weekday = { };
+
 	// Platform ready code execution 
 	$ionicPlatform.ready(function(){
 			//  Load all current settings from db when state on store settings
@@ -59,6 +62,19 @@ app.controller('settingsCtrl',function($scope, $ionicPopup, $rootScope, $cordova
 					$scope.payday_weekday.date = new Date(data.payday_weekday_date);
 					$scope.payday_weekday.start = new Date(data.payday_weekday_start);
 					$scope.payday_weekday.end =  new Date(data.payday_weekday_end);
+				}
+			},function(err){
+				// Error fetching current payday weekday schedule
+				console.log(err);
+			});
+
+			// Load current payday weekday settings schedule
+			$cordovaSQLite.execute(db,"SELECT * FROM non_payday_weekday").then(function(res){
+				if(res.rows.length != 0){
+					data = res.rows.item(0);
+					$scope.nonpayday_weekday.date = new Date(data.non_payday_weekday_date);
+					$scope.nonpayday_weekday.start = new Date(data.non_payday_weekday_start);
+					$scope.nonpayday_weekday.end =  new Date(data.non_payday_weekday_end);
 				}
 			},function(err){
 				// Error fetching current payday weekday schedule
@@ -205,8 +221,58 @@ app.controller('settingsCtrl',function($scope, $ionicPopup, $rootScope, $cordova
 						id = res.rows.item(0).id;
 						$cordovaSQLite.execute(db,"UPDATE payday_weekday SET payday_weekday_date = ?, payday_weekday_start = ?, payday_weekday_end = ? WHERE id = ?",
 							[dateFormatter.toStandard($scope.payday_weekday.date), dateFormatter.toStandard($scope.payday_weekday.start), dateFormatter.toStandard($scope.payday_weekday.end), id])
-							.then(function(res){ console.log(id)
+							.then(function(res){
 								Toast.show("Successfully updated Payday Weekday schedule . . .","long","center");
+								$timeout(function(){
+									$state.go('survey-home');
+								},3000);
+							},function(err){
+								// Error update data
+								console.log(err);
+							});
+					}
+				},function(err){
+					// Error fetching data from payday weekday
+					console.log(err);
+				});
+
+			}
+
+		}
+	};
+
+
+	// Non Payday weekday function
+	$scope.save_nonpayday_weekday = function(){
+		if($scope.nonpayday_weekday.date == "" || $scope.nonpayday_weekday.date == undefined || $scope.nonpayday_weekday.start == "" || $scope.nonpayday_weekday.start == undefined || $scope.nonpayday_weekday.end == "" || $scope.nonpayday_weekday.end == undefined ){
+			Toast.show("Please set all fields before saving . . .","long","center");
+		}
+		else{
+			// Validate if starts time > ends time
+			if(dateFormatter.toTimestamp($scope.nonpayday_weekday + " " + $scope.nonpayday_weekday.start) >= dateFormatter.toTimestamp($scope.nonpayday_weekday + " " + $scope.nonpayday_weekday.end)){
+				Toast.show("Please set all fields correctly before saving . . .","long","center");
+			}
+			else{
+				$cordovaSQLite.execute(db,'SELECT * FROM non_payday_weekday').then(function(res){
+					if(res.rows.length == 0){
+						$cordovaSQLite.execute(db,"INSERT INTO non_payday_weekday (non_payday_weekday_date, non_payday_weekday_start, non_payday_weekday_end) VALUES (?,?,?)",
+							[dateFormatter.toStandard($scope.nonpayday_weekday.date), dateFormatter.toStandard($scope.nonpayday_weekday.start), dateFormatter.toStandard($scope.nonpayday_weekday.end)])
+							.then(function(res){
+								Toast.show("Successfully saved Non Payday Weekday schedule . . .","long","center");
+								$timeout(function(){
+									$state.go('survey-home');
+								},3000);
+							},function(err){
+								// Error insert data
+								console.log(err);
+							});
+					}
+					else{
+						id = res.rows.item(0).id;
+						$cordovaSQLite.execute(db,"UPDATE non_payday_weekday SET non_payday_weekday_date = ?, non_payday_weekday_start = ?, non_payday_weekday_end = ? WHERE id = ?",
+							[dateFormatter.toStandard($scope.nonpayday_weekday.date), dateFormatter.toStandard($scope.nonpayday_weekday.start), dateFormatter.toStandard($scope.nonpayday_weekday.end), id])
+							.then(function(res){
+								Toast.show("Successfully updated Non Payday Weekday schedule . . .","long","center");
 								$timeout(function(){
 									$state.go('survey-home');
 								},3000);
