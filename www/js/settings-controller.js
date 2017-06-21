@@ -11,11 +11,14 @@ app.controller('settingsCtrl',function($scope, $ionicPopup, $rootScope, $cordova
 		value2: false
 	}
 
-	// Initialize payday week day object
+	// Initialize payday weekday object
 	$scope.payday_weekday = { };
 
-	// Initialize non payday week day object
+	// Initialize non payday weekday object
 	$scope.nonpayday_weekday = { };
+
+	// Initialize payday weekend object
+	$scope.payday_weekend = { };
 
 	// Platform ready code execution 
 	$ionicPlatform.ready(function(){
@@ -75,6 +78,20 @@ app.controller('settingsCtrl',function($scope, $ionicPopup, $rootScope, $cordova
 					$scope.nonpayday_weekday.date = new Date(data.non_payday_weekday_date);
 					$scope.nonpayday_weekday.start = new Date(data.non_payday_weekday_start);
 					$scope.nonpayday_weekday.end =  new Date(data.non_payday_weekday_end);
+				}
+			},function(err){
+				// Error fetching current payday weekday schedule
+				console.log(err);
+			});
+
+
+			// Load current payday weekdend settings schedule
+			$cordovaSQLite.execute(db,"SELECT * FROM payday_weekend").then(function(res){
+				if(res.rows.length != 0){
+					data = res.rows.item(0);
+					$scope.payday_weekend.date = new Date(data.payday_weekend_date);
+					$scope.payday_weekend.start = new Date(data.payday_weekend_start);
+					$scope.payday_weekend.end =  new Date(data.payday_weekend_end);
 				}
 			},function(err){
 				// Error fetching current payday weekday schedule
@@ -290,5 +307,57 @@ app.controller('settingsCtrl',function($scope, $ionicPopup, $rootScope, $cordova
 
 		}
 	};
+
+
+	// Payday weekend function
+	$scope.save_payday_weekend = function(){
+		if($scope.payday_weekend.date == "" || $scope.payday_weekend.date == undefined || $scope.payday_weekend.start == "" || $scope.payday_weekend.start == undefined || $scope.payday_weekend.end == "" || $scope.payday_weekend.end == undefined ){
+			Toast.show("Please set all fields before saving . . .","long","center");
+		}
+		else{
+			// Validate if starts time > ends time
+			if(dateFormatter.toTimestamp($scope.payday_weekend + " " + $scope.payday_weekend.start) >= dateFormatter.toTimestamp($scope.payday_weekend + " " + $scope.payday_weekend.end)){
+				Toast.show("Please set all fields correctly before saving . . .","long","center");
+			}
+			else{
+				$cordovaSQLite.execute(db,'SELECT * FROM payday_weekend').then(function(res){
+					if(res.rows.length == 0){
+						$cordovaSQLite.execute(db,"INSERT INTO payday_weekend (payday_weekend_date, payday_weekend_start, payday_weekend_end) VALUES (?,?,?)",
+							[dateFormatter.toStandard($scope.payday_weekend.date), dateFormatter.toStandard($scope.payday_weekend.start), dateFormatter.toStandard($scope.payday_weekend.end)])
+							.then(function(res){
+								Toast.show("Successfully saved Payday Weekend schedule . . .","long","center");
+								$timeout(function(){
+									$state.go('survey-home');
+								},3000);
+							},function(err){
+								// Error insert data
+								console.log(err);
+							});
+					}
+					else{
+						id = res.rows.item(0).id;
+						$cordovaSQLite.execute(db,"UPDATE payday_weekend SET payday_weekend_date = ?, payday_weekend_start = ?, payday_weekend_end = ? WHERE id = ?",
+							[dateFormatter.toStandard($scope.payday_weekend.date), dateFormatter.toStandard($scope.payday_weekend.start), dateFormatter.toStandard($scope.payday_weekend.end), id])
+							.then(function(res){
+								Toast.show("Successfully updated Payday Weekend schedule . . .","long","center");
+								$timeout(function(){
+									$state.go('survey-home');
+								},3000);
+							},function(err){
+								// Error update data
+								console.log(err);
+							});
+					}
+				},function(err){
+					// Error fetching data from payday weekday
+					console.log(err);
+				});
+
+			}
+
+		}
+	};
+
+
 
 });
