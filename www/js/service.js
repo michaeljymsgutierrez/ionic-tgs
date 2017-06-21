@@ -21,7 +21,12 @@ app.service('dateFormatter',function($filter){
 
 	// Convert ISO to 24 HR format
 	this.toTime = function(dt){
-	   return $filter('date')(dt,'H:mm');
+	   return $filter('date')(dt,'HH:mm');
+	}
+
+	// Format scheds for display
+	this.summarize = function(dt,ts,te){
+		return $filter('date')(dt,'MMM dd, y') + "; " + $filter('date')(ts,'HH:mm') + " - " + $filter('date')(te,'HH:mm'); 
 	}
 
 	// Convert datetime to timestamp
