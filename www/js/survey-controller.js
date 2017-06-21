@@ -6,6 +6,9 @@ app.controller('surveyCtrl',function($ionicSideMenuDelegate, $scope, $ionicHisto
         $ionicSideMenuDelegate.toggleLeft();
     };
 
+	// Renable side menu  
+	$ionicSideMenuDelegate.canDragContent(true);
+
     // Clear History after start app 
     $ionicHistory.clearHistory();
 	
