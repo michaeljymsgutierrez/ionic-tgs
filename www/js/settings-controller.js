@@ -20,6 +20,9 @@ app.controller('settingsCtrl',function($scope, $ionicPopup, $rootScope, $cordova
 	// Initialize payday weekend object
 	$scope.payday_weekend = { };
 
+	// Initialize non payday weekend object
+	$scope.nonpayday_weekend = { };
+
 	// Platform ready code execution 
 	$ionicPlatform.ready(function(){
 			//  Load all current settings from db when state on store settings
@@ -92,6 +95,20 @@ app.controller('settingsCtrl',function($scope, $ionicPopup, $rootScope, $cordova
 					$scope.payday_weekend.date = new Date(data.payday_weekend_date);
 					$scope.payday_weekend.start = new Date(data.payday_weekend_start);
 					$scope.payday_weekend.end =  new Date(data.payday_weekend_end);
+				}
+			},function(err){
+				// Error fetching current payday weekday schedule
+				console.log(err);
+			});
+
+
+			// Load current nonpayday weekdend settings schedule
+			$cordovaSQLite.execute(db,"SELECT * FROM non_payday_weekend").then(function(res){
+				if(res.rows.length != 0){
+					data = res.rows.item(0);
+					$scope.nonpayday_weekend.date = new Date(data.non_payday_weekend_date);
+					$scope.nonpayday_weekend.start = new Date(data.non_payday_weekend_start);
+					$scope.nonpayday_weekend.end =  new Date(data.non_payday_weekend_end);
 				}
 			},function(err){
 				// Error fetching current payday weekday schedule
@@ -340,6 +357,57 @@ app.controller('settingsCtrl',function($scope, $ionicPopup, $rootScope, $cordova
 							[dateFormatter.toStandard($scope.payday_weekend.date), dateFormatter.toStandard($scope.payday_weekend.start), dateFormatter.toStandard($scope.payday_weekend.end), id])
 							.then(function(res){
 								Toast.show("Successfully updated Payday Weekend schedule . . .","long","center");
+								$timeout(function(){
+									$state.go('survey-home');
+								},3000);
+							},function(err){
+								// Error update data
+								console.log(err);
+							});
+					}
+				},function(err){
+					// Error fetching data from payday weekday
+					console.log(err);
+				});
+
+			}
+
+		}
+	};
+
+
+
+	// Non Payday weekend function
+	$scope.save_nonpayday_weekend = function(){
+		if($scope.nonpayday_weekend.date == "" || $scope.nonpayday_weekend.date == undefined || $scope.nonpayday_weekend.start == "" || $scope.nonpayday_weekend.start == undefined || $scope.nonpayday_weekend.end == "" || $scope.nonpayday_weekend.end == undefined ){
+			Toast.show("Please set all fields before saving . . .","long","center");
+		}
+		else{
+			// Validate if starts time > ends time
+			if(dateFormatter.toTimestamp($scope.nonpayday_weekend + " " + $scope.nonpayday_weekend.start) >= dateFormatter.toTimestamp($scope.nonpayday_weekend + " " + $scope.nonpayday_weekend.end)){
+				Toast.show("Please set all fields correctly before saving . . .","long","center");
+			}
+			else{
+				$cordovaSQLite.execute(db,'SELECT * FROM non_payday_weekend').then(function(res){
+					if(res.rows.length == 0){
+						$cordovaSQLite.execute(db,"INSERT INTO non_payday_weekend (non_payday_weekend_date, non_payday_weekend_start, non_payday_weekend_end) VALUES (?,?,?)",
+							[dateFormatter.toStandard($scope.nonpayday_weekend.date), dateFormatter.toStandard($scope.nonpayday_weekend.start), dateFormatter.toStandard($scope.nonpayday_weekend.end)])
+							.then(function(res){
+								Toast.show("Successfully saved Non Payday Weekend schedule . . .","long","center");
+								$timeout(function(){
+									$state.go('survey-home');
+								},3000);
+							},function(err){
+								// Error insert data
+								console.log(err);
+							});
+					}
+					else{
+						id = res.rows.item(0).id;
+						$cordovaSQLite.execute(db,"UPDATE non_payday_weekend SET non_payday_weekend_date = ?, non_payday_weekend_start = ?, non_payday_weekend_end = ? WHERE id = ?",
+							[dateFormatter.toStandard($scope.nonpayday_weekend.date), dateFormatter.toStandard($scope.nonpayday_weekend.start), dateFormatter.toStandard($scope.nonpayday_weekend.end), id])
+							.then(function(res){
+								Toast.show("Successfully updated Non Payday Weekend schedule . . .","long","center");
 								$timeout(function(){
 									$state.go('survey-home');
 								},3000);
