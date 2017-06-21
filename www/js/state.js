@@ -10,7 +10,7 @@ app.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider){
 		cache: false,
 		url:'/settings',
 		templateUrl: 'templates/template-settings/settings.html',
-		controller: 'mainCtrl'
+		controller: 'settingsLoadCtrl'
 	})
 	.state('store',{
 		cache: false,
