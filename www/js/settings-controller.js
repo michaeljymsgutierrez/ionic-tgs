@@ -51,6 +51,20 @@ app.controller('settingsCtrl',function($scope, $ionicPopup, $rootScope, $cordova
 				// Error fetching current survey language
 				console.log(err);
 			});
+
+			// Load current payday weekday settings schedule
+			$cordovaSQLite.execute(db,"SELECT * FROM payday_weekday").then(function(res){
+				if(res.rows.length != 0){
+					data = res.rows.item(0);
+					$scope.payday_weekday.date = new Date(data.payday_weekday_date);
+					$scope.payday_weekday.start = new Date(data.payday_weekday_start);
+					$scope.payday_weekday.end =  new Date(data.payday_weekday_end);
+				}
+			},function(err){
+				// Error fetching current payday weekday schedule
+				console.log(err);
+			});
+
 	});
  
 	// Popup show store type
@@ -176,7 +190,7 @@ app.controller('settingsCtrl',function($scope, $ionicPopup, $rootScope, $cordova
 				$cordovaSQLite.execute(db,'SELECT * FROM payday_weekday').then(function(res){
 					if(res.rows.length == 0){
 						$cordovaSQLite.execute(db,"INSERT INTO payday_weekday (payday_weekday_date, payday_weekday_start, payday_weekday_end) VALUES (?,?,?)",
-							[$scope.payday_weekday.date, $scope.payday_weekday.start, $scope.payday_weekday.end])
+							[dateFormatter.toStandard($scope.payday_weekday.date), dateFormatter.toStandard($scope.payday_weekday.start), dateFormatter.toStandard($scope.payday_weekday.end)])
 							.then(function(res){
 								Toast.show("Successfully saved Payday Weekday schedule . . .","long","center");
 							},function(err){
@@ -185,10 +199,10 @@ app.controller('settingsCtrl',function($scope, $ionicPopup, $rootScope, $cordova
 							});
 					}
 					else{
-						id = res.rows.item(0);
+						id = res.rows.item(0).id;
 						$cordovaSQLite.execute(db,"UPDATE payday_weekday SET payday_weekday_date = ?, payday_weekday_start = ?, payday_weekday_end = ? WHERE id = ?",
-							[$scope.payday_weekday.date, $scope.payday_weekday.start, $scope.payday_weekday.end, id])
-							.then(function(res){
+							[dateFormatter.toStandard($scope.payday_weekday.date), dateFormatter.toStandard($scope.payday_weekday.start), dateFormatter.toStandard($scope.payday_weekday.end), id])
+							.then(function(res){ console.log(id)
 								Toast.show("Successfully updated Payday Weekday schedule . . .","long","center");
 							},function(err){
 								// Error update data
