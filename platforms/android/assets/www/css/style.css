@@ -100,6 +100,13 @@ input[type='radio']:checked:before {
 	border: none;
 }
 
+.center {
+	top: 35px;
+	width: 40%; 
+	margin: auto;
+	display: block;
+}
+
 #custom-divider {
 	background-color: #E6E6E6; 
 	height: 10px;
@@ -107,6 +114,11 @@ input[type='radio']:checked:before {
 	position: absolute;
 	margin-top: 14px;
 	margin-left: 5%;
+}
+
+.opaque-content {
+   opacity: .5;
+   transition: opacity 300ms ease-in-out;
 }
 
 
@@ -173,4 +185,61 @@ div.time-value-end {
 	display: inline-block;
 	margin-left: 95px;
     font-size: 14px;
+}
+
+/* Survey Home */
+
+#tick-x {
+	height: 20px;
+	margin-top: 28px;
+	margin-left: 305px
+}
+
+#side-menu {
+	background-color: #136E35;
+	border-color: transparent;
+}
+
+#side-menu-container {
+	margin-top: 50px;
+	margin-left: 25px;
+}
+
+#side-menu-logo {
+	height: 100px;
+	margin-top: 40px !important; 
+	margin: auto; 
+	display: block;
+}
+
+#side-menu-item-text {
+	color: #ffffff; 
+	font-size: 18px;
+	margin-left: 60px; 
+	display: inline-block;
+	margin-top: 3px;
+}
+
+#side-list {
+	background-color: transparent;
+	border: none;
+}
+
+#side-menu-icons {
+	color: white;
+	font-size: 40px
+}
+
+#center-main {
+	margin-top: 20% !important;
+	width: 70%; 
+	margin: auto;
+	display: block;
+}
+
+#text-banner {
+	color: #FFFFFF; 
+	font-size: 35px; 
+	margin-top: 50px; 
+	text-align: center
 }
