@@ -100,6 +100,13 @@ input[type='radio']:checked:before {
 	border: none;
 }
 
+.center {
+	top: 35px;
+	width: 40%; 
+	margin: auto;
+	display: block;
+}
+
 #custom-divider {
 	background-color: #E6E6E6; 
 	height: 10px;
