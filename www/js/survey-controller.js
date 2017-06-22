@@ -21,7 +21,7 @@ app.controller('surveyCtrl',function($ionicSideMenuDelegate, $scope, $ionicHisto
 	  	$rootScope.sidemenuopened = (ratio == 1);
     });
 
-   	// Iniailize ease access data from localstorage
+   	// Initialize ease access data from localstorage
     $rootScope.store_name = $window.localStorage.getItem('store_name');
     $rootScope.store_type = $window.localStorage.getItem('store_type');
     $rootScope.language = $window.localStorage.getItem('language');
