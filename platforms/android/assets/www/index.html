@@ -53,6 +53,7 @@
   <ion-side-menus>
       <!-- Load the view and main content -->
       <ion-side-menu-content ng-class="{'opaque-content' : sidemenuopened}">
+
            <!-- Initialize back button -->
            <ion-nav-bar class="bar-assertive">
               <ion-nav-back-button></ion-nav-back-button>
@@ -61,15 +62,18 @@
            <ion-pane>
               <ion-nav-view></ion-nav-view>
            </ion-pane>
+
       </ion-side-menu-content>
 
       <ion-side-menu side="left" id="side-menu" width="350">
+
         <img src="./img/close.png" id="tick-x" ng-click="toggleLeft()"/>
         <img src="./img/logo.jpg" id="side-menu-logo"/>
 
         <div id="side-menu-container">
 
           <ion-list>
+
             <ion-item id="side-list">
               <a class="button button-clear item item-icon-left">
                 <i class="icon">
@@ -84,7 +88,7 @@
                 <i class="icon">
                   <i class="ion-ios-list-outline" id="side-menu-icons"></i>
                 </i>
-                <span id="side-menu-item-text"> Survey Type </span>
+                <span id="side-menu-item-text"> {{ store_type }} Type </span>
               </a>
             </ion-item>
 
@@ -105,11 +109,12 @@
                 <span id="side-menu-item-text"> Unsynced (100) </span>
               </a>
             </ion-item>
-
-
           </ion-list>
+          <div id="side-menu-store-name">{{ store_name }}</div>
         </div>
+
       </ion-side-menu>
+
   </ion-side-menus>
 
   </body>

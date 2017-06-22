@@ -247,7 +247,9 @@ div.time-value-end {
 #side-menu-store-name {
 	color: #FFFFFF;
 	font-size: 20px;
-	margin-left: 22%;
+	text-align: center;
+	/*margin-left: 15%;*/
+	width: 300px;
 	margin-top: 100%;
 }
 
