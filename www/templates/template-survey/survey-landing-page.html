@@ -1,0 +1,46 @@
+<!--  Survey Landing Page View  -->
+
+<ion-view id="settings-bg" hide-back-button="true">
+
+		<ion-nav-buttons side="left">
+		 	<a id="view-title-color"  class="button button-icon icon ion-navicon" ng-click="toggleLeft()"></a>
+		</ion-nav-buttons>
+
+	<ion-content scroll="false" id="survey-home-bg">
+	
+		<img src="./img/logo.jpg" id="landing-page-icon"/>
+		<div ng-if="language == 'English'">
+			<p class="store-type-text"> {{ store_type }} Survey </p>
+			<p class="landing-text">
+				<span>
+					 Kindly answer this survey form. <br/> <br/> <br/> <br/>
+				</span>
+				Thank you very much! <br/> <br/>
+				Please receive a special token upon <br/> returning the accomplished survey form <br/> <br/> <br/>
+				<button  id="landing-button" class="button button-clear">
+					Answer the Form
+				</button>
+				<br/> <br/> <br/> <br/> <br/>
+				The information that you will be disclosing to us <br/> will be of great significance for <br/> enhancing our service.
+			</p>
+		</div>
+
+		<div ng-if="language == 'Tagalog'">
+			<p class="store-type-text"> {{ store_type }} Survey </p>
+			<p class="landing-text">
+				<span>
+					 Maaari lang po sagutan ang form na ito.. <br/> <br/> <br/> <br/>
+				</span>
+				Maraming Salamat po!! <br/> <br/>
+				Tanggapin ang special token  <br/> pagbalik sa crew ng nasagutang form. <br/> <br/> <br/>
+				<button id="landing-button" class="button button-clear">
+					Sagutin and Form
+				</button>
+				<br/> <br/> <br/> <br/> <br/>
+				Ang impormasyon mula sa inyo <br/>  ay mahalaga para mapabuti <br/>  namin ang aming serbisyo.
+			</p>
+		</div>
+
+	</ion-content>
+
+</ion-view>

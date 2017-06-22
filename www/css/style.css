@@ -262,3 +262,31 @@ div.time-value-end {
 #survey-home-bg {
 	background-color: #136E35;
 }
+
+/* Survey Landing Page Home */
+
+#landing-page-icon {
+	margin-top: 60px !important;
+	width: 40%; 
+	margin: auto; 
+	display: block;
+}
+
+.store-type-text {
+	color: #FFFFFF;
+	text-align: center; 
+	font-size: 30px; 
+	margin-top: 40px;
+}
+
+.landing-text {
+	color: #FFFFFF; 
+	text-align: center; 
+	font-size: 17px;
+}
+
+#landing-button {
+	color: white; 
+	border-color: #FFFFFF;
+	 width: 200px;
+}
