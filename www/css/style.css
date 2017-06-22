@@ -117,7 +117,7 @@ input[type='radio']:checked:before {
 }
 
 .opaque-content {
-   opacity: 0.5;
+   opacity: 0.1;
 }
 
 
@@ -248,7 +248,6 @@ div.time-value-end {
 	color: #FFFFFF;
 	font-size: 20px;
 	text-align: center;
-	/*margin-left: 15%;*/
 	width: 300px;
 	margin-top: 100%;
 }
@@ -258,4 +257,8 @@ div.time-value-end {
 	margin-top: 350px;
 	font-size: 25px; 
 	color: #FFFFFF;
+}
+
+#survey-home-bg {
+	background-color: #136E35;
 }
