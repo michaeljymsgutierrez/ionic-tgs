@@ -290,3 +290,59 @@ div.time-value-end {
 	border-color: #FFFFFF;
 	 width: 200px;
 }
+
+/* Survey Form */
+
+.number {
+	color: red;
+	font-size: 26px;
+	font-weight: 	bold;
+	vertical-align:middle;
+}
+
+.question {
+	font-size: 16.5px;
+}
+
+#red-radio input[type='radio'] {
+    -webkit-appearance: none;
+    width: 25px;
+    height: 25px;
+    border: 2px solid red !important;
+    border-radius: 50%;
+    outline: none;
+}
+
+#red-radio input[type='radio']:before {
+    content: '';
+    display: block;
+    width: 70%;
+    height: 70%;
+    margin: 16% auto;    
+    border-radius: 50%;    
+}
+
+#red-radio input[type='radio']:checked:before {
+    background: red;
+}
+
+.option-text {
+	color: black;
+}
+
+.tab-option {
+	margin-left: 18px;
+}
+
+#line-break {
+	margin-left: 28px;
+}
+
+#survey-margin {
+	margin-top: 40px; 
+	margin-left: 40px;
+}
+
+#survey-background {
+	background-color: #FFFFFF;
+}
