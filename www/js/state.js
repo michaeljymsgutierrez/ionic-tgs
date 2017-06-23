@@ -85,7 +85,7 @@ app.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider){
 		controller: 'surveyCtrl'
 	});
 
-	$urlRouterProvider.otherwise('/survey-page3');
+	$urlRouterProvider.otherwise('/settings');
 
 	
 });
