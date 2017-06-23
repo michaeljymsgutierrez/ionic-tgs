@@ -104,6 +104,7 @@ app.controller('surveyCtrl',function($ionicSideMenuDelegate, $scope, $ionicHisto
     			Toast.show("Please set correct field values . . .","short","center");
     		}
     		else{
+    			$rootScope.answer.q6.ans = parseFloat($rootScope.answer.q6.ans).toFixed(2);
     			var data = JSON.stringify($rootScope.answer);
     			$window.localStorage.setItem('survey_answers',data);
     		}
