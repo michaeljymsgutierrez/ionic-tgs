@@ -6,6 +6,12 @@ app.controller('surveyCtrl',function($ionicSideMenuDelegate, $scope, $ionicHisto
         $ionicSideMenuDelegate.toggleLeft();
     };
 
+    // Clear temporary data before starting new survey
+    $rootScope.clearStorage = function(){
+    	$window.localStorage.removeItem('survey_answers');
+    	$state.go('survey-page1');
+    }
+
     // Initialize object that will hold the answers
     $rootScope.answer = { };
 
@@ -13,7 +19,9 @@ app.controller('surveyCtrl',function($ionicSideMenuDelegate, $scope, $ionicHisto
     	// Load the data to $rootScope.answers
     	// Comeup to this approach is due to un stoppable reload of controllers
     	data = $window.localStorage.getItem('survey_answers');
-    	$rootScope.answer = JSON.parse(data);
+    	if(data){
+    		$rootScope.answer = JSON.parse(data);
+    	}
     }
     catch(err){ };
 
@@ -49,9 +57,11 @@ app.controller('surveyCtrl',function($ionicSideMenuDelegate, $scope, $ionicHisto
     	console.log($rootScope.answer);
     };
 
+    $scope.debug();
+
     // Validate Page Content
     $scope.validatePage = {
-    	page1: function(){
+    	page1: function(){ 
     		// Page 1 validation
     		if($rootScope.answer.hasOwnProperty("q1") == false || $rootScope.answer.hasOwnProperty("q2") == false ){
     			Toast.show("Please fill up all fields . . .","short","center");
@@ -67,7 +77,19 @@ app.controller('surveyCtrl',function($ionicSideMenuDelegate, $scope, $ionicHisto
     	},
     	page2: function(){
     		// Page 2 validation
-    		   
+    		if($rootScope.answer.hasOwnProperty('q3') == false || $rootScope.answer.hasOwnProperty('q4') == false){
+    			Toast.show("Please fill up all fields . . .","short","center");
+    		}
+    		else if($rootScope.answer.hasOwnProperty('q4') == true && $rootScope.answer.q4.ans == 'Others' && $rootScope.answer.q4.hasOwnProperty('sub') == false){
+    			Toast.show("Please fill up all fields . . .","short","center");
+    		}
+    		else if($rootScope.answer.q4.ans == 'Others' && $rootScope.answer.q4.sub == ''){
+    			Toast.show("Please fill up all fields . . .","short","center");
+    		}
+    		else{
+    			var data = JSON.stringify($rootScope.answer);
+    			$window.localStorage.setItem('survey_answers',data);
+    		}
     	},
     	backState: function(page){ console.log(page);
     		var data = JSON.stringify($rootScope.answer);
