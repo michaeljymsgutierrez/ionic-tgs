@@ -77,9 +77,15 @@ app.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider){
 		url: '/survey-page2',
 		templateUrl: 'templates/template-survey/survey-page2.html',
 		controller: 'surveyCtrl'
+	})
+	.state('survey-page3',{
+		cache: false,
+		url: '/survey-page3',
+		templateUrl: 'templates/template-survey/survey-page3.html',
+		controller: 'surveyCtrl'
 	});
 
-	$urlRouterProvider.otherwise('/survey-landing');
+	$urlRouterProvider.otherwise('/survey-page3');
 
 	
 });
