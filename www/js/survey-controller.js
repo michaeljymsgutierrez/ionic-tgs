@@ -89,6 +89,23 @@ app.controller('surveyCtrl',function($ionicSideMenuDelegate, $scope, $ionicHisto
     		else{
     			var data = JSON.stringify($rootScope.answer);
     			$window.localStorage.setItem('survey_answers',data);
+    			$state.go('survey-page3');
+    		}
+    	},
+    	page3: function(){
+    		// Page 3 validation
+    		if($rootScope.answer.hasOwnProperty('q5') == false || $rootScope.answer.hasOwnProperty('q6') == false || $rootScope.answer.hasOwnProperty('q7') == false){
+    			Toast.show("Please fill up all fields . . .","short","center");
+    		}
+    		else if($rootScope.answer.hasOwnProperty('q5') == true && $rootScope.answer.q5.ans =='My companion' && $rootScope.answer.q5.hasOwnProperty('sub') == false ){
+    			Toast.show("Please fill up all fields . . .","short","center");
+    		}
+    		else if($rootScope.answer.hasOwnProperty('q6') == true && isNaN($rootScope.answer.q6.ans) == true){
+    			Toast.show("Please set correct field values . . .","short","center");
+    		}
+    		else{
+    			var data = JSON.stringify($rootScope.answer);
+    			$window.localStorage.setItem('survey_answers',data);
     		}
     	},
     	backState: function(page){ console.log(page);
