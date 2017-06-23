@@ -59,6 +59,30 @@ app.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider){
 		url: '/app-home',
 		templateUrl: 'templates/template-survey/app-home.html',
 		controller: 'surveyCtrl'
+	})
+	.state('survey-landing',{
+		cache: false,
+		url: '/survey-landing',
+		templateUrl: 'templates/template-survey/survey-landing-page.html',
+		controller: 'surveyCtrl'
+	})
+	.state('survey-page1',{
+		cache: false,
+		url: '/survey-page1',
+		templateUrl: 'templates/template-survey/survey-page1.html',
+		controller: 'surveyCtrl'
+	})
+	.state('survey-page2',{
+		cache: false,
+		url: '/survey-page2',
+		templateUrl: 'templates/template-survey/survey-page2.html',
+		controller: 'surveyCtrl'
+	})
+	.state('survey-page3',{
+		cache: false,
+		url: '/survey-page3',
+		templateUrl: 'templates/template-survey/survey-page3.html',
+		controller: 'surveyCtrl'
 	});
 
 	$urlRouterProvider.otherwise('/settings');

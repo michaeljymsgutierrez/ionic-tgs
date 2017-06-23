@@ -52,17 +52,18 @@
 
   <ion-side-menus>
       <!-- Load the view and main content -->
-      <ion-side-menu-content ng-class="{'opaque-content' : sidemenuopened}">
+      <ion-side-menu-content >
+          <div ng-class="{'opaque-content' : sidemenuopened}">
+               <!-- Initialize back button -->
+               <ion-nav-bar class="bar-assertive">
+                  <ion-nav-back-button></ion-nav-back-button>
+               </ion-nav-bar>
 
-           <!-- Initialize back button -->
-           <ion-nav-bar class="bar-assertive">
-              <ion-nav-back-button></ion-nav-back-button>
-           </ion-nav-bar>
-           <!-- Render the ion views -->
-           <ion-pane>
-              <ion-nav-view></ion-nav-view>
-           </ion-pane>
-
+               <!-- Render the ion views -->
+               <ion-pane>
+                  <ion-nav-view></ion-nav-view>
+               </ion-pane>
+          </div>
       </ion-side-menu-content>
 
       <ion-side-menu side="left" id="side-menu" width="350">
@@ -75,7 +76,7 @@
           <ion-list>
 
             <ion-item id="side-list">
-              <a class="button button-clear item item-icon-left">
+              <a class="button button-clear item item-icon-left" ui-sref="app-home" ng-click="toggleLeft()">
                 <i class="icon">
                   <i class="ion-ios-home-outline" id="side-menu-icons"></i>
                 </i>
@@ -84,7 +85,7 @@
             </ion-item>
 
             <ion-item id="side-list">
-              <a class="button button-clear item item-icon-left">
+              <a class="button button-clear item item-icon-left" ui-sref="survey-landing" ng-click="toggleLeft()">
                 <i class="icon">
                   <i class="ion-ios-list-outline" id="side-menu-icons"></i>
                 </i>
@@ -93,7 +94,7 @@
             </ion-item>
 
             <ion-item id="side-list">
-              <a class="button button-clear item item-icon-left">
+              <a class="button button-clear item item-icon-left" ui-sref="settings" ng-click="toggleLeft()">
                 <i class="icon">
                   <i class="ion-ios-gear-outline" id="side-menu-icons"></i>
                 </i>

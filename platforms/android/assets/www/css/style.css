@@ -54,7 +54,7 @@
 	display: inline-block;
 }
 
-#input-wrapper input::-webkit-input-placeholder {
+input::-webkit-input-placeholder {
 	font-style: italic;
 	font-size: 16px;
 }
@@ -117,7 +117,7 @@ input[type='radio']:checked:before {
 }
 
 .opaque-content {
-   opacity: 0.5;
+   opacity: 0.1;
 }
 
 
@@ -248,7 +248,6 @@ div.time-value-end {
 	color: #FFFFFF;
 	font-size: 20px;
 	text-align: center;
-	/*margin-left: 15%;*/
 	width: 300px;
 	margin-top: 100%;
 }
@@ -258,4 +257,120 @@ div.time-value-end {
 	margin-top: 350px;
 	font-size: 25px; 
 	color: #FFFFFF;
+}
+
+#survey-home-bg {
+	background-color: #136E35;
+}
+
+/* Survey Landing Page Home */
+
+#landing-page-icon {
+	margin-top: 60px !important;
+	width: 40%; 
+	margin: auto; 
+	display: block;
+}
+
+.store-type-text {
+	color: #FFFFFF;
+	text-align: center; 
+	font-size: 30px; 
+	margin-top: 40px;
+}
+
+.landing-text {
+	color: #FFFFFF; 
+	text-align: center; 
+	font-size: 17px;
+}
+
+#landing-button {
+	color: white; 
+	border-color: #FFFFFF;
+	 width: 200px;
+}
+
+/* Survey Form */
+
+.number {
+	color: red;
+	font-size: 26px;
+	font-weight: 	bold;
+	vertical-align:middle;
+}
+
+.question {
+	font-size: 16.5px;
+}
+
+#red-radio input[type='radio'] {
+    -webkit-appearance: none;
+    width: 25px;
+    height: 25px;
+    border: 2px solid red !important;
+    border-radius: 50%;
+    outline: none;
+}
+
+#red-radio input[type='radio']:before {
+    content: '';
+    display: block;
+    width: 70%;
+    height: 70%;
+    margin: 16% auto;    
+    border-radius: 50%;    
+}
+
+#red-radio input[type='radio']:checked:before {
+    background: red;
+}
+
+.option-text {
+	color: black;
+}
+
+.tab-option {
+	margin-left: 18px;
+}
+
+#line-break {
+	margin-left: 28px;
+}
+
+#survey-margin {
+	margin-top: 40px; 
+	margin-left: 40px;
+}
+
+#survey-background {
+	background-color: #FFFFFF;
+}
+
+#floater {
+	height: 50px
+}
+
+.bottom-liner {
+	border-bottom: 2px solid #E6E6E6; 
+	width: 300px;
+}
+
+.input-liner {
+	width: 300px;
+	font-size: 15px !important;
+}
+
+.tab-option2 {
+	margin-left: 38px;
+}
+
+.currency {
+    font-size: 25px; 
+	display: inline-block !important; 
+	position: absolute;
+}
+
+.currency-input {
+	margin-left: 30px;
 }
