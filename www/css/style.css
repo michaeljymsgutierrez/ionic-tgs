@@ -54,7 +54,7 @@
 	display: inline-block;
 }
 
-#input-wrapper input::-webkit-input-placeholder {
+input::-webkit-input-placeholder {
 	font-style: italic;
 	font-size: 16px;
 }
@@ -355,9 +355,11 @@ div.time-value-end {
 	border-bottom: 2px solid #E6E6E6; 
 	width:300px;
 }
+
 .input-liner {
 	width:300px;
 }
+
 .tab-option2 {
 	margin-left: 38px;
 }
