@@ -358,9 +358,19 @@ div.time-value-end {
 
 .input-liner {
 	width:300px;
+	font-size: 15px !important;
 }
 
 .tab-option2 {
 	margin-left: 38px;
 }
 
+.currency {
+    font-size: 25px; 
+	display: inline-block !important; 
+	position: absolute;
+}
+
+.currency-input {
+	margin-left: 30px;
+}
