@@ -24,15 +24,19 @@ app.controller('settingsLoadCtrl',function($scope, $cordovaSQLite, $ionicPlatfor
 		// Check all table settings
 		$cordovaSQLite.execute(db,'SELECT * FROM store_settings').then(function(res){
 			$scope.status_settings.store_settings = res.rows.length;
-			$window.localStorage.setItem('store_name',res.rows.item(0).store_branch);
-			$window.localStorage.setItem('store_code',res.rows.item(0).store_code);
-			$window.localStorage.setItem('store_type',res.rows.item(0).store_type);
-			$window.localStorage.setItem('store_manager',res.rows.item(0).store_manager);
+			if(res.rows.length != 0){
+				$window.localStorage.setItem('store_name',res.rows.item(0).store_branch);
+				$window.localStorage.setItem('store_code',res.rows.item(0).store_code);
+				$window.localStorage.setItem('store_type',res.rows.item(0).store_type);
+				$window.localStorage.setItem('store_manager',res.rows.item(0).store_manager);
+			}
 		});
 
 		$cordovaSQLite.execute(db,'SELECT * FROM survey_language').then(function(res){
 			$scope.status_settings.survey_language = res.rows.length; 
-			$window.localStorage.setItem('language',res.rows.item(0).language);
+			if(res.rows.length != 0){
+				$window.localStorage.setItem('language',res.rows.item(0).language);
+			}
 		});
 
 		$cordovaSQLite.execute(db,'SELECT * FROM payday_weekday').then(function(res){
