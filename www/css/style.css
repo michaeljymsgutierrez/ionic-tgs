@@ -374,3 +374,46 @@ div.time-value-end {
 .currency-input {
 	margin-left: 30px;
 }
+
+#multi-liner {
+	border-bottom: 2px solid #E6E6E6;
+}
+
+/* Two column Text */
+input.column-one {
+    float:left;
+    width: 230px;
+}
+
+input.column-two {
+	width: 230px;
+	float: right;
+	position: absolute; 
+	margin-left: 240px;
+}
+
+/* Two column Select */
+select.option-column-one {
+    float:left;
+    width: 200px;
+    height: 25px;
+    background-color: #FFFFFF;
+    border: 1px solid #FFFFFF;
+   	border-bottom: 2px solid #E6E6E6 !important;
+}
+
+select.option-column-two {
+	width: 200px;
+    height: 25px;
+	float: right;
+	position: absolute; 
+	margin-left: 35px;
+	background-color: #FFFFFF;
+    border: 1px solid #FFFFFF;
+   	border-bottom: 2px solid #E6E6E6 !important;
+}
+
+div.sub-2-column {
+	margin-left: 40px !important; 
+	position: absolute;
+}
