@@ -417,3 +417,12 @@ div.sub-2-column {
 	margin-left: 40px !important; 
 	position: absolute;
 }
+
+.question-2 {
+	font-size: 16px;
+}
+
+#question-tab {
+	font-size: 16.5px;
+	color: black !important;
+}
