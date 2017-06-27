@@ -308,7 +308,7 @@ div.time-value-end {
     -webkit-appearance: none;
     width: 25px;
     height: 25px;
-    border: 2px solid red !important;
+    border: 2px solid #666666 !important;
     border-radius: 50%;
     outline: none;
 }
@@ -324,6 +324,10 @@ div.time-value-end {
 
 #red-radio input[type='radio']:checked:before {
     background: red;
+}
+
+#red-radio input[type='radio']:checked {
+    border: 2px solid red !important;
 }
 
 .option-text {
