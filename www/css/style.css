@@ -300,6 +300,18 @@ div.time-value-end {
 	vertical-align:middle;
 }
 
+.label-bold {
+	color: black;
+	font-size: 26px;
+	font-weight: 	bold;
+	vertical-align:middle;
+}
+
+.sub-label {
+	font-size: 18px; 
+	font-weight: normal;
+}
+
 .question {
 	font-size: 16.5px;
 }
