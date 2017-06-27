@@ -324,7 +324,7 @@ app.controller('surveyCtrl',function($ionicSideMenuDelegate, $scope, $ionicHisto
                 var data = JSON.stringify($rootScope.answer); 
                 $window.localStorage.setItem('survey_answers',data);
                 if($rootScope.store_type == 'Mall' || $rootScope.store_type == 'Food Court'){
-                
+                    $state.go('personal-info');
                 }
             }
             
