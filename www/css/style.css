@@ -426,3 +426,7 @@ div.sub-2-column {
 	font-size: 16.5px;
 	color: black !important;
 }
+
+select.borderless-top{
+	border-top: 2px solid #FFFFFF; 
+}
