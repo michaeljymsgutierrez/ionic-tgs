@@ -466,6 +466,7 @@ select.borderless-one {
 	background-color: white; 
 	height: 25px;
 	width: 200px;
+	white-space: nowrap;
 }
 
 
