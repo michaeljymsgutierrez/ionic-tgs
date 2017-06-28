@@ -12,6 +12,23 @@ app.controller('surveyCtrl',function($ionicSideMenuDelegate, $scope, $ionicHisto
     	$state.go('survey-page1');
     }
 
+    // Function for removing data according to status companion age and range
+    $scope.companionAge = function(status, prop, val){
+        if(status == true){
+            $rootScope.answer.qP5[prop].companion_range = val;
+        }
+        else if(status == false){
+            try{
+                delete $rootScope.answer.qP5[prop];
+                delete $rootScope.answer.qP5[prop]['companion_range'];
+            } catch(err) { } 
+
+            try{
+                delete $rootScope.answer.qP5[prop]['total'];
+            } catch(err) { }
+        }
+    };
+
     // Filter Location QA Mall - Foodcourt
     $scope.QAFilter = {
         region: function(id){
@@ -82,6 +99,42 @@ app.controller('surveyCtrl',function($ionicSideMenuDelegate, $scope, $ionicHisto
 
     }
 
+
+    // Filter Location QP Mall - Foodcourt
+    $scope.QPFilter = {
+        region: function(id){
+            var temp = Location.province();
+            var province = [];
+            angular.forEach(temp,function(value ,key){
+                if(value.regCode == id){
+                    province.push(value);
+                }
+            });
+            $rootScope.qp_provinces = province;
+        },
+        province: function(id){
+            var temp = Location.cityMunicipal();
+            var cityMunicipal = [];
+            angular.forEach(temp,function(value,key){
+                if(value.provCode == id){
+                    cityMunicipal.push(value);
+                }
+            });
+            $rootScope.qp_city = cityMunicipal;
+        },
+        city: function(id){
+            var temp = Location.brgy();
+            var brgy = [];
+            angular.forEach(temp,function(value,key){ 
+                if(value.citymunCode == id){
+                    brgy.push(value);
+                }
+            });
+            $rootScope.qp_brgy =  brgy;
+        }
+
+    }
+
     // Initialize Locations for Question A Mall - Foodcourt
     $rootScope.qa_regions = Location.region();
     $rootScope.qa_provinces = [];
@@ -93,6 +146,13 @@ app.controller('surveyCtrl',function($ionicSideMenuDelegate, $scope, $ionicHisto
     $rootScope.qb_provinces = [];
     $rootScope.qb_city = [];
     $rootScope.qb_brgy = [];
+
+
+    // Initialize Locations for Question P Mall - Foodcourt
+    $rootScope.qp_regions = Location.region();
+    $rootScope.qp_provinces = [];
+    $rootScope.qp_city = [];
+    $rootScope.qp_brgy = [];
 
 
     // Initialize object that will hold the answers
@@ -116,6 +176,12 @@ app.controller('surveyCtrl',function($ionicSideMenuDelegate, $scope, $ionicHisto
             $rootScope.qb_provinces.push($rootScope.answer.qB.sub.province);
             $rootScope.qb_city.push($rootScope.answer.qB.sub.city);
             $rootScope.qb_brgy.push($rootScope.answer.qB.sub.brgy);
+
+            // Question P Mall - Foodcourt and Instore and Free Stand
+            $rootScope.qp_regions.push($rootScope.answer.qP3.sub.region);
+            $rootScope.qp_provinces.push($rootScope.answer.qP3.sub.province);
+            $rootScope.qp_city.push($rootScope.answer.qP3.sub.city);
+            $rootScope.qp_brgy.push($rootScope.answer.qP3.sub.brgy);
     	}
     } catch(err){ };
 
@@ -144,8 +210,15 @@ app.controller('surveyCtrl',function($ionicSideMenuDelegate, $scope, $ionicHisto
     // Delete Object Property
     $scope.deleteObj = {
     	dual: function(p1, p2){
-    		delete $rootScope.answer[p1][p2];
-    	}
+            try{
+                delete $rootScope.answer[p1][p2];
+            }catch(err) {}
+    	},
+        single: function(p1){
+            try {
+                delete $rootScope.answer[p1]; 
+            }catch(err){ }
+        }
     };
 
     // Debugger for answers
@@ -328,6 +401,218 @@ app.controller('surveyCtrl',function($ionicSideMenuDelegate, $scope, $ionicHisto
                 }
             }
             
+        },
+        pageQP: function(){
+            // Validation for QP
+            if($rootScope.answer.q4.ans != 'None'){
+                if($rootScope.answer.hasOwnProperty('qP1') == false || $rootScope.answer.hasOwnProperty('qP2') == false || $rootScope.answer.hasOwnProperty('qP4') == false || $rootScope.answer.hasOwnProperty('qP3') == false || $rootScope.answer.hasOwnProperty('qP5') == false){
+                    Toast.show("Please fill up all fields . . .","short","center");
+                }
+                else if($rootScope.answer.hasOwnProperty('qP3') == true && $rootScope.answer.qP3.hasOwnProperty('sub') == false){
+                    Toast.show("Please fill up all fields . . .","short","center");
+                }
+                else if($rootScope.answer.hasOwnProperty('qP3') == true && $rootScope.answer.qP3.hasOwnProperty('sub') == true && $rootScope.answer.qP3.sub.hasOwnProperty('est_name') == false){
+                    Toast.show("Please fill up all fields . . .","short","center");
+                }
+                else if($rootScope.answer.hasOwnProperty('qP3') == true && $rootScope.answer.qP3.hasOwnProperty('sub') == true && $rootScope.answer.qP3.sub.hasOwnProperty('est_name') == true && $rootScope.answer.qP3.sub.est_name == "" ){
+                    Toast.show("Please fill up all fields . . .","short","center");
+                }
+                else if($rootScope.answer.hasOwnProperty('qP3') == true && $rootScope.answer.qP3.hasOwnProperty('sub') == true && $rootScope.answer.qP3.sub.hasOwnProperty('est_name') == true && $rootScope.answer.qP3.sub.est_name == null ){
+                    Toast.show("Please fill up all fields . . .","short","center");
+                }
+                else if($rootScope.answer.hasOwnProperty('qP3') == true && $rootScope.answer.qP3.hasOwnProperty('sub') == true && $rootScope.answer.qP3.sub.hasOwnProperty('region') == true && $rootScope.answer.qP3.sub.region == "" ){
+                    Toast.show("Please fill up all fields . . .","short","center");
+                }
+                else if($rootScope.answer.hasOwnProperty('qP3') == true && $rootScope.answer.qP3.hasOwnProperty('sub') == true && $rootScope.answer.qP3.sub.hasOwnProperty('region') == true && $rootScope.answer.qP3.sub.region == null ){
+                    Toast.show("Please fill up all fields . . .","short","center");
+                }
+
+                else if($rootScope.answer.hasOwnProperty('qP3') == true && $rootScope.answer.qP3.hasOwnProperty('sub') == true && $rootScope.answer.qP3.sub.hasOwnProperty('province') == true && $rootScope.answer.qP3.sub.province == "" ){
+                    Toast.show("Please fill up all fields . . .","short","center");
+                }
+                else if($rootScope.answer.hasOwnProperty('qP3') == true && $rootScope.answer.qP3.hasOwnProperty('sub') == true && $rootScope.answer.qP3.sub.hasOwnProperty('province') == true && $rootScope.answer.qP3.sub.province == null ){
+                    Toast.show("Please fill up all fields . . .","short","center");
+                }
+
+                else if($rootScope.answer.hasOwnProperty('qP3') == true && $rootScope.answer.qP3.hasOwnProperty('sub') == true && $rootScope.answer.qP3.sub.hasOwnProperty('city') == true && $rootScope.answer.qP3.sub.city == "" ){
+                    Toast.show("Please fill up all fields . . .","short","center");
+                }
+                else if($rootScope.answer.hasOwnProperty('qP3') == true && $rootScope.answer.qP3.hasOwnProperty('sub') == true && $rootScope.answer.qP3.sub.hasOwnProperty('city') == true && $rootScope.answer.qP3.sub.province == null ){
+                    Toast.show("Please fill up all fields . . .","short","center");
+                }
+
+                else if($rootScope.answer.hasOwnProperty('qP3') == true && $rootScope.answer.qP3.hasOwnProperty('sub') == true && $rootScope.answer.qP3.sub.hasOwnProperty('brgy') == true && $rootScope.answer.qP3.sub.brgy == "" ){
+                    Toast.show("Please fill up all fields . . .","short","center");
+                }
+                else if($rootScope.answer.hasOwnProperty('qP3') == true && $rootScope.answer.qP3.hasOwnProperty('sub') == true && $rootScope.answer.qP3.sub.hasOwnProperty('brgy') == true && $rootScope.answer.qP3.sub.brgy == null ){
+                    Toast.show("Please fill up all fields . . .","short","center");
+                }
+
+                else if($rootScope.answer.hasOwnProperty('qP3') == true && $rootScope.answer.qP3.hasOwnProperty('sub') == true && $rootScope.answer.qP3.sub.hasOwnProperty('region') == false){
+                    Toast.show("Please fill up all fields . . .","short","center");
+                }
+                else if($rootScope.answer.hasOwnProperty('qP3') == true && $rootScope.answer.qP3.hasOwnProperty('sub') == true && $rootScope.answer.qP3.sub.hasOwnProperty('province') == false){
+                    Toast.show("Please fill up all fields . . .","short","center");
+                }
+                else if($rootScope.answer.hasOwnProperty('qP3') == true && $rootScope.answer.qP3.hasOwnProperty('sub') == true && $rootScope.answer.qP3.sub.hasOwnProperty('city') == false){
+                    Toast.show("Please fill up all fields . . .","short","center");
+                }
+                else if($rootScope.answer.hasOwnProperty('qP3') == true && $rootScope.answer.qP3.hasOwnProperty('sub') == true && $rootScope.answer.qP3.sub.hasOwnProperty('brgy') == false){
+                    Toast.show("Please fill up all fields . . .","short","center");
+                }
+                else if($rootScope.answer.hasOwnProperty('qP5') == true && $rootScope.answer.qP5.hasOwnProperty('ans1') == true && $rootScope.answer.qP5.ans1.active == true && $rootScope.answer.qP5.ans1.hasOwnProperty('total') == false ){
+                    Toast.show("Please fill up all fields . . .","short","center");
+                }
+                else if($rootScope.answer.hasOwnProperty('qP5') == true && $rootScope.answer.qP5.hasOwnProperty('ans1') == true && $rootScope.answer.qP5.ans1.active == true && $rootScope.answer.qP5.ans1.hasOwnProperty('total') == true && $rootScope.answer.qP5.ans1.total == ""){
+                    Toast.show("Please fill up all fields . . .","short","center");
+                }
+                else if($rootScope.answer.hasOwnProperty('qP5') == true && $rootScope.answer.qP5.hasOwnProperty('ans2') == true && $rootScope.answer.qP5.ans2.active == true && $rootScope.answer.qP5.ans2.hasOwnProperty('total') == false ){
+                    Toast.show("Please fill up all fields . . .","short","center");
+                }
+                else if($rootScope.answer.hasOwnProperty('qP5') == true && $rootScope.answer.qP5.hasOwnProperty('ans2') == true && $rootScope.answer.qP5.ans2.active == true && $rootScope.answer.qP5.ans2.hasOwnProperty('total') == true && $rootScope.answer.qP5.ans2.total == ""){
+                    Toast.show("Please fill up all fields . . .","short","center");
+                }
+                else if($rootScope.answer.hasOwnProperty('qP5') == true && $rootScope.answer.qP5.hasOwnProperty('ans3') == true && $rootScope.answer.qP5.ans3.active == true && $rootScope.answer.qP5.ans3.hasOwnProperty('total') == false ){
+                    Toast.show("Please fill up all fields . . .","short","center");
+                }
+                else if($rootScope.answer.hasOwnProperty('qP5') == true && $rootScope.answer.qP5.hasOwnProperty('ans3') == true && $rootScope.answer.qP5.ans3.active == true && $rootScope.answer.qP5.ans3.hasOwnProperty('total') == true && $rootScope.answer.qP5.ans3.total == ""){
+                    Toast.show("Please fill up all fields . . .","short","center");
+                }
+                else if($rootScope.answer.hasOwnProperty('qP5') == true && $rootScope.answer.qP5.hasOwnProperty('ans4') == true && $rootScope.answer.qP5.ans4.active == true && $rootScope.answer.qP5.ans4.hasOwnProperty('total') == false ){
+                    Toast.show("Please fill up all fields . . .","short","center");
+                }
+                else if($rootScope.answer.hasOwnProperty('qP5') == true && $rootScope.answer.qP5.hasOwnProperty('ans4') == true && $rootScope.answer.qP5.ans4.active == true && $rootScope.answer.qP5.ans4.hasOwnProperty('total') == true && $rootScope.answer.qP5.ans4.total == ""){
+                    Toast.show("Please fill up all fields . . .","short","center");
+                }
+                else if($rootScope.answer.hasOwnProperty('qP5') == true && $rootScope.answer.qP5.hasOwnProperty('ans5') == true && $rootScope.answer.qP5.ans5.active == true && $rootScope.answer.qP5.ans5.hasOwnProperty('total') == false ){
+                    Toast.show("Please fill up all fields . . .","short","center");
+                }
+                else if($rootScope.answer.hasOwnProperty('qP5') == true && $rootScope.answer.qP5.hasOwnProperty('ans5') == true && $rootScope.answer.qP5.ans5.active == true && $rootScope.answer.qP5.ans5.hasOwnProperty('total') == true && $rootScope.answer.qP5.ans5.total == ""){
+                    Toast.show("Please fill up all fields . . .","short","center");
+                }
+                else if($rootScope.answer.hasOwnProperty('qP5') == true && $rootScope.answer.qP5.hasOwnProperty('ans6') == true && $rootScope.answer.qP5.ans6.active == true && $rootScope.answer.qP5.ans6.hasOwnProperty('total') == false ){
+                    Toast.show("Please fill up all fields . . .","short","center");
+                }
+                else if($rootScope.answer.hasOwnProperty('qP5') == true && $rootScope.answer.qP5.hasOwnProperty('ans6') == true && $rootScope.answer.qP5.ans6.active == true && $rootScope.answer.qP5.ans6.hasOwnProperty('total') == true && $rootScope.answer.qP5.ans6.total == ""){
+                    Toast.show("Please fill up all fields . . .","short","center");
+                }
+                else if($rootScope.answer.hasOwnProperty('qP5') == true && $rootScope.answer.qP5.hasOwnProperty('ans7') == true && $rootScope.answer.qP5.ans7.active == true && $rootScope.answer.qP5.ans7.hasOwnProperty('total') == false ){
+                    Toast.show("Please fill up all fields . . .","short","center");
+                }
+                else if($rootScope.answer.hasOwnProperty('qP5') == true && $rootScope.answer.qP5.hasOwnProperty('ans7') == true && $rootScope.answer.qP5.ans7.active == true && $rootScope.answer.qP5.ans7.hasOwnProperty('total') == true && $rootScope.answer.qP5.ans7.total == ""){
+                    Toast.show("Please fill up all fields . . .","short","center");
+                }
+                else if($rootScope.answer.hasOwnProperty('qP5') == true && $rootScope.answer.qP5.hasOwnProperty('ans1') == true && $rootScope.answer.qP5.ans1.active == true && $rootScope.answer.qP5.ans1.hasOwnProperty('total') == true && $rootScope.answer.qP5.ans1.total != "" && isNaN($rootScope.answer.qP5.ans1.total) == true){
+                    Toast.show("Please set correct field values . . .","short","center");
+                }
+                else if($rootScope.answer.hasOwnProperty('qP5') == true && $rootScope.answer.qP5.hasOwnProperty('ans2') == true && $rootScope.answer.qP5.ans2.active == true && $rootScope.answer.qP5.ans2.hasOwnProperty('total') == true && $rootScope.answer.qP5.ans2.total != "" && isNaN($rootScope.answer.qP5.ans2.total) == true){
+                    Toast.show("Please set correct field values . . .","short","center");
+                }
+                else if($rootScope.answer.hasOwnProperty('qP5') == true && $rootScope.answer.qP5.hasOwnProperty('ans3') == true && $rootScope.answer.qP5.ans3.active == true && $rootScope.answer.qP5.ans3.hasOwnProperty('total') == true && $rootScope.answer.qP5.ans3.total != "" && isNaN($rootScope.answer.qP5.ans3.total) == true ){
+                    Toast.show("Please set correct field values . . .","short","center");
+                }
+                else if($rootScope.answer.hasOwnProperty('qP5') == true && $rootScope.answer.qP5.hasOwnProperty('ans4') == true && $rootScope.answer.qP5.ans4.active == true && $rootScope.answer.qP5.ans4.hasOwnProperty('total') == true && $rootScope.answer.qP5.ans4.total != "" && isNaN($rootScope.answer.qP5.ans4.total) == true){
+                    Toast.show("Please set correct field values . . .","short","center");
+                }
+                else if($rootScope.answer.hasOwnProperty('qP5') == true && $rootScope.answer.qP5.hasOwnProperty('ans5') == true && $rootScope.answer.qP5.ans5.active == true && $rootScope.answer.qP5.ans5.hasOwnProperty('total') == true && $rootScope.answer.qP5.ans5.total != "" && isNaN($rootScope.answer.qP5.ans5.total) == true){
+                    Toast.show("Please set correct field values . . .","short","center");
+                }
+                else if($rootScope.answer.hasOwnProperty('qP5') == true && $rootScope.answer.qP5.hasOwnProperty('ans6') == true && $rootScope.answer.qP5.ans6.active == true && $rootScope.answer.qP5.ans6.hasOwnProperty('total') == true && $rootScope.answer.qP5.ans6.total != "" && isNaN($rootScope.answer.qP5.ans6.total) == true){
+                    Toast.show("Please set correct field values . . .","short","center");
+                }
+                else if($rootScope.answer.hasOwnProperty('qP5') == true && $rootScope.answer.qP5.hasOwnProperty('ans7') == true && $rootScope.answer.qP5.ans7.active == true && $rootScope.answer.qP5.ans7.hasOwnProperty('total') == true && $rootScope.answer.qP5.ans7.total != "" && isNaN($rootScope.answer.qP5.ans7.total) == true ){
+                    Toast.show("Please set correct field values . . .","short","center");
+                }
+                else if($rootScope.answer.hasOwnProperty('qP5') == true && $rootScope.answer.qP5.hasOwnProperty('ans1') == true && $rootScope.answer.qP5.ans1.active == true && $rootScope.answer.qP5.ans1.hasOwnProperty('total') == true && $rootScope.answer.qP5.ans1.total != "" && isNaN($rootScope.answer.qP5.ans1.total) == false && $rootScope.answer.qP5.ans1.total <=0){
+                    Toast.show("Please set correct field values . . .","short","center");
+                }
+                else if($rootScope.answer.hasOwnProperty('qP5') == true && $rootScope.answer.qP5.hasOwnProperty('ans2') == true && $rootScope.answer.qP5.ans2.active == true && $rootScope.answer.qP5.ans2.hasOwnProperty('total') == true && $rootScope.answer.qP5.ans2.total != "" && isNaN($rootScope.answer.qP5.ans2.total) == false && $rootScope.answer.qP5.ans2.total <=0){
+                    Toast.show("Please set correct field values . . .","short","center");
+                }
+                else if($rootScope.answer.hasOwnProperty('qP5') == true && $rootScope.answer.qP5.hasOwnProperty('ans3') == true && $rootScope.answer.qP5.ans3.active == true && $rootScope.answer.qP5.ans3.hasOwnProperty('total') == true && $rootScope.answer.qP5.ans3.total != "" && isNaN($rootScope.answer.qP5.ans3.total) == false && $rootScope.answer.qP5.ans3.total <=0){
+                    Toast.show("Please set correct field values . . .","short","center");
+                }
+                else if($rootScope.answer.hasOwnProperty('qP5') == true && $rootScope.answer.qP5.hasOwnProperty('ans4') == true && $rootScope.answer.qP5.ans4.active == true && $rootScope.answer.qP5.ans4.hasOwnProperty('total') == true && $rootScope.answer.qP5.ans4.total != "" && isNaN($rootScope.answer.qP5.ans4.total) == false && $rootScope.answer.qP5.ans4.total <=0){
+                    Toast.show("Please set correct field values . . .","short","center");
+                }
+                else if($rootScope.answer.hasOwnProperty('qP5') == true && $rootScope.answer.qP5.hasOwnProperty('ans5') == true && $rootScope.answer.qP5.ans5.active == true && $rootScope.answer.qP5.ans5.hasOwnProperty('total') == true && $rootScope.answer.qP5.ans5.total != "" && isNaN($rootScope.answer.qP5.ans5.total) == false && $rootScope.answer.qP5.ans5.total <=0){
+                    Toast.show("Please set correct field values . . .","short","center");
+                }
+                else if($rootScope.answer.hasOwnProperty('qP5') == true && $rootScope.answer.qP5.hasOwnProperty('ans6') == true && $rootScope.answer.qP5.ans6.active == true && $rootScope.answer.qP5.ans6.hasOwnProperty('total') == true && $rootScope.answer.qP5.ans6.total != "" && isNaN($rootScope.answer.qP5.ans6.total) == false && $rootScope.answer.qP5.ans6.total <=0){
+                    Toast.show("Please set correct field values . . .","short","center");
+                }
+                else if($rootScope.answer.hasOwnProperty('qP5') == true && $rootScope.answer.qP5.hasOwnProperty('ans7') == true && $rootScope.answer.qP5.ans7.active == true && $rootScope.answer.qP5.ans7.hasOwnProperty('total') == true && $rootScope.answer.qP5.ans7.total != "" && isNaN($rootScope.answer.qP5.ans7.total) == false && $rootScope.answer.qP5.ans7.total <=0 ){
+                    Toast.show("Please set correct field values . . .","short","center");
+                }
+                else{
+                    // Code Save here
+                }
+                
+            }
+            else{
+
+                if($rootScope.answer.hasOwnProperty('qP1') == false || $rootScope.answer.hasOwnProperty('qP2') == false || $rootScope.answer.hasOwnProperty('qP4') == false || $rootScope.answer.hasOwnProperty('qP3') == false ){
+                    Toast.show("Please fill up all fields . . .","short","center");
+                }
+                else if($rootScope.answer.hasOwnProperty('qP3') == true && $rootScope.answer.qP3.hasOwnProperty('sub') == false){
+                    Toast.show("Please fill up all fields . . .","short","center");
+                }
+                else if($rootScope.answer.hasOwnProperty('qP3') == true && $rootScope.answer.qP3.hasOwnProperty('sub') == true && $rootScope.answer.qP3.sub.hasOwnProperty('est_name') == false){
+                    Toast.show("Please fill up all fields . . .","short","center");
+                }
+                else if($rootScope.answer.hasOwnProperty('qP3') == true && $rootScope.answer.qP3.hasOwnProperty('sub') == true && $rootScope.answer.qP3.sub.hasOwnProperty('est_name') == true && $rootScope.answer.qP3.sub.est_name == "" ){
+                    Toast.show("Please fill up all fields . . .","short","center");
+                }
+                else if($rootScope.answer.hasOwnProperty('qP3') == true && $rootScope.answer.qP3.hasOwnProperty('sub') == true && $rootScope.answer.qP3.sub.hasOwnProperty('est_name') == true && $rootScope.answer.qP3.sub.est_name == null ){
+                    Toast.show("Please fill up all fields . . .","short","center");
+                }
+                else if($rootScope.answer.hasOwnProperty('qP3') == true && $rootScope.answer.qP3.hasOwnProperty('sub') == true && $rootScope.answer.qP3.sub.hasOwnProperty('region') == true && $rootScope.answer.qP3.sub.region == "" ){
+                    Toast.show("Please fill up all fields . . .","short","center");
+                }
+                else if($rootScope.answer.hasOwnProperty('qP3') == true && $rootScope.answer.qP3.hasOwnProperty('sub') == true && $rootScope.answer.qP3.sub.hasOwnProperty('region') == true && $rootScope.answer.qP3.sub.region == null ){
+                    Toast.show("Please fill up all fields . . .","short","center");
+                }
+
+                else if($rootScope.answer.hasOwnProperty('qP3') == true && $rootScope.answer.qP3.hasOwnProperty('sub') == true && $rootScope.answer.qP3.sub.hasOwnProperty('province') == true && $rootScope.answer.qP3.sub.province == "" ){
+                    Toast.show("Please fill up all fields . . .","short","center");
+                }
+                else if($rootScope.answer.hasOwnProperty('qP3') == true && $rootScope.answer.qP3.hasOwnProperty('sub') == true && $rootScope.answer.qP3.sub.hasOwnProperty('province') == true && $rootScope.answer.qP3.sub.province == null ){
+                    Toast.show("Please fill up all fields . . .","short","center");
+                }
+
+                else if($rootScope.answer.hasOwnProperty('qP3') == true && $rootScope.answer.qP3.hasOwnProperty('sub') == true && $rootScope.answer.qP3.sub.hasOwnProperty('city') == true && $rootScope.answer.qP3.sub.city == "" ){
+                    Toast.show("Please fill up all fields . . .","short","center");
+                }
+                else if($rootScope.answer.hasOwnProperty('qP3') == true && $rootScope.answer.qP3.hasOwnProperty('sub') == true && $rootScope.answer.qP3.sub.hasOwnProperty('city') == true && $rootScope.answer.qP3.sub.province == null ){
+                    Toast.show("Please fill up all fields . . .","short","center");
+                }
+
+                else if($rootScope.answer.hasOwnProperty('qP3') == true && $rootScope.answer.qP3.hasOwnProperty('sub') == true && $rootScope.answer.qP3.sub.hasOwnProperty('brgy') == true && $rootScope.answer.qP3.sub.brgy == "" ){
+                    Toast.show("Please fill up all fields . . .","short","center");
+                }
+                else if($rootScope.answer.hasOwnProperty('qP3') == true && $rootScope.answer.qP3.hasOwnProperty('sub') == true && $rootScope.answer.qP3.sub.hasOwnProperty('brgy') == true && $rootScope.answer.qP3.sub.brgy == null ){
+                    Toast.show("Please fill up all fields . . .","short","center");
+                }
+
+                else if($rootScope.answer.hasOwnProperty('qP3') == true && $rootScope.answer.qP3.hasOwnProperty('sub') == true && $rootScope.answer.qP3.sub.hasOwnProperty('region') == false){
+                    Toast.show("Please fill up all fields . . .","short","center");
+                }
+                else if($rootScope.answer.hasOwnProperty('qP3') == true && $rootScope.answer.qP3.hasOwnProperty('sub') == true && $rootScope.answer.qP3.sub.hasOwnProperty('province') == false){
+                    Toast.show("Please fill up all fields . . .","short","center");
+                }
+                else if($rootScope.answer.hasOwnProperty('qP3') == true && $rootScope.answer.qP3.hasOwnProperty('sub') == true && $rootScope.answer.qP3.sub.hasOwnProperty('city') == false){
+                    Toast.show("Please fill up all fields . . .","short","center");
+                }
+                else if($rootScope.answer.hasOwnProperty('qP3') == true && $rootScope.answer.qP3.hasOwnProperty('sub') == true && $rootScope.answer.qP3.sub.hasOwnProperty('brgy') == false){
+                    Toast.show("Please fill up all fields . . .","short","center");
+                }
+                else{
+                    // Code save here
+                }
+            }
+            
+
+            $scope.debug();
         },
     	backState: function(page){
     		var data = JSON.stringify($rootScope.answer);
