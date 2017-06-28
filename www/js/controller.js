@@ -29,6 +29,7 @@ app.controller('settingsLoadCtrl',function($scope, $cordovaSQLite, $ionicPlatfor
 				$window.localStorage.setItem('store_code',res.rows.item(0).store_code);
 				$window.localStorage.setItem('store_type',res.rows.item(0).store_type);
 				$window.localStorage.setItem('store_manager',res.rows.item(0).store_manager);
+				$window.localStorage.setItem('store_address',res.rows.item(0).store_address);
 			}
 		});
 
