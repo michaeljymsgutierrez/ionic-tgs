@@ -15,3 +15,11 @@ app.directive('lineBreaker2',function(){
 		template: "<br/><br/>"
 	}
 });
+
+// Three breaks Directive
+app.directive('lineBreaker3',function(){
+	return {
+		restrict: 'E',
+		template: "<br/><br/><br/>"
+	}
+});
