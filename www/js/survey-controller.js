@@ -408,6 +408,9 @@ app.controller('surveyCtrl',function($ionicSideMenuDelegate, $scope, $ionicHisto
                 if($rootScope.answer.hasOwnProperty('qP1') == false || $rootScope.answer.hasOwnProperty('qP2') == false || $rootScope.answer.hasOwnProperty('qP4') == false || $rootScope.answer.hasOwnProperty('qP3') == false || $rootScope.answer.hasOwnProperty('qP5') == false){
                     Toast.show("Please fill up all fields . . .","short","center");
                 }
+                else if(angular.equals({}, $rootScope.answer.qP5) == true ){
+                    Toast.show("Please fill up all fields . . .","short","center");
+                }
                 else if($rootScope.answer.hasOwnProperty('qP3') == true && $rootScope.answer.qP3.hasOwnProperty('sub') == false){
                     Toast.show("Please fill up all fields . . .","short","center");
                 }
