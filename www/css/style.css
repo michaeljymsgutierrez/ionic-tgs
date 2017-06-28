@@ -446,3 +446,32 @@ div.sub-2-column {
 select.borderless-top{
 	border-top: 2px solid #FFFFFF; 
 }
+
+/* Standard styling for select with bottom liner */
+
+div.wrapper-one {
+	border-bottom: 2px solid #E6E6E6; 
+	float: left;
+}
+
+div.wrapper-two {
+	border-bottom: 2px solid #E6E6E6; 
+	position: absolute; 
+	margin-left: 239px;
+    float: right;
+}
+
+select.borderless-one {
+	border: none; 
+	background-color: white; 
+	height: 25px;
+	width: 200px;
+}
+
+
+select.borderless-two{
+	background: #FFFFFF; 
+	height: 25px; 
+	width: 200px; 
+	border: none;
+}
