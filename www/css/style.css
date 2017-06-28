@@ -481,3 +481,7 @@ input[type="checkbox"]{
   width: 20px; 
   height: 20px; 
 }
+
+div.tab-age {
+	margin-left: 60px;
+}
