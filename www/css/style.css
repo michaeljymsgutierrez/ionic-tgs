@@ -469,7 +469,6 @@ select.borderless-one {
 	white-space: nowrap;
 }
 
-
 select.borderless-two{
 	background: #FFFFFF; 
 	height: 25px; 
@@ -484,4 +483,13 @@ input[type="checkbox"]{
 
 div.tab-age {
 	margin-left: 60px;
+}
+
+.middle-text {
+	position: relative; 
+	bottom: 7px;
+}
+
+.icon-footer {
+	font-size: 32px;
 }
