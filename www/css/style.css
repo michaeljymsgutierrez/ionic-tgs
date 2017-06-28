@@ -478,23 +478,6 @@ select.borderless-two{
 }
 
 input[type="checkbox"]{
-   outline: 1px solid black;
-   margin: 0;
-   -webkit-appearance: none;
-   background-color: white;
-   border: 1.5px solid black;
-   cursor: pointer;
-   padding: 9px;
-   border-radius: 0px;
-   display: inline-block;
-   position: relative;
-}
-
-input[type="checkbox"]:checked:after {
-	content: '\2714';
-    font-size: 17px;
-    position: absolute;
-    top: -2px;
-    left: 1px;
-    color: red;
+  width: 20px; 
+  height: 20px; 
 }
