@@ -36,6 +36,7 @@ app.controller('settingsCtrl',function($scope, $ionicPopup, $rootScope, $cordova
 					$rootScope.store_form.store_branch = data.store_branch;
 					$rootScope.store_form.store_address = data.store_address;
 					$rootScope.store_form.store_type = data.store_type;
+					$scope.store_type = data.store_type;
 					$rootScope.store_form.store_manager = data.store_manager;
 				}
 			},function(err){
