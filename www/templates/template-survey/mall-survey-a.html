@@ -93,8 +93,8 @@
 					  <!-- Sub content of addresses -->
 					  <div ng-if="answer.qA.ans == 'Others'">
 						  <div class="sub-2-column">
-						  		<input id="multi-liner" type="text" placeholder="Shop Names" class="column-one" ng-model="answer.qA.sub.shop_name"/>  
-						  		<input id="multi-liner" type="text" placeholder="Floor Number" class="column-two" ng-model="answer.qA.sub.shop_floor"/>
+						  		<input ng-disabled="qAsection1" id="multi-liner" type="text" placeholder="Shop Names" class="column-one" ng-model="answer.qA.sub.shop_name"/>  
+						  		<input ng-disabled="qAsection1" id="multi-liner" type="text" placeholder="Floor Number" class="column-two" ng-model="answer.qA.sub.shop_floor"/>
 						  </div>
 						  
 						  <line-breaker></line-breaker>
@@ -106,18 +106,18 @@
 						  <line-breaker></line-breaker>			
 
 	  					  <div class="sub-2-column">
-						  		<input id="multi-liner" type="text" placeholder="Name of Establishment" class="column-one" ng-model="answer.qA.sub.est_name"/>  
+						  		<input ng-disabled="qAsection2" id="multi-liner" type="text" placeholder="Name of Establishment" class="column-one" ng-model="answer.qA.sub.est_name"/>  
 						  </div>		  
 
 						  <line-breaker></line-breaker>		
 
 						  <div class="sub-2-column">
                                 
-                               <select id="multi-liner" class="option-column-one" ng-model="answer.qA.sub.region" ng-change="QAFilter.region(answer.qA.sub.region.regCode)" ng-options="a.regDesc for a in qa_regions">
+                               <select ng-disabled="qAsection2" id="multi-liner" class="option-column-one" ng-model="answer.qA.sub.region" ng-change="QAFilter.region(answer.qA.sub.region.regCode)" ng-options="a.regDesc for a in qa_regions">
                                           <option value="">Select Region</option>
                                 </select>  
 
-						  		<select id="multi-liner" class="option-column-two" ng-model="answer.qA.sub.province" ng-change="QAFilter.province(answer.qA.sub.province.provCode)" ng-options="b.provDesc for b in qa_provinces">
+						  		<select ng-disabled="qAsection2" id="multi-liner" class="option-column-two" ng-model="answer.qA.sub.province" ng-change="QAFilter.province(answer.qA.sub.province.provCode)" ng-options="b.provDesc for b in qa_provinces">
 						  				  <option value="">Select Province</option>
 						  		</select>  
 						  		
@@ -127,11 +127,11 @@
 
 						  <div class="sub-2-column">
 						  		
-						  		<select id="multi-liner" class="option-column-one" ng-model="answer.qA.sub.city" ng-change="QAFilter.city(answer.qA.sub.city.citymunCode)" ng-options="c.citymunDesc for c in qa_city">
+						  		<select ng-disabled="qAsection2" id="multi-liner" class="option-column-one" ng-model="answer.qA.sub.city" ng-change="QAFilter.city(answer.qA.sub.city.citymunCode)" ng-options="c.citymunDesc for c in qa_city">
 						  				  <option value="">Select City</option>
 						  		</select>  
 
-						  		<select id="multi-liner" class="option-column-two" ng-model="answer.qA.sub.brgy" ng-options="d.brgyDesc for d in qa_brgy">
+						  		<select ng-disabled="qAsection2" id="multi-liner" class="option-column-two" ng-model="answer.qA.sub.brgy" ng-options="d.brgyDesc for d in qa_brgy">
 						  				  <option value="">Select Barangay</option>
 						  		</select>  
 						  		
@@ -140,8 +140,8 @@
 						  <line-breaker></line-breaker>	
 
 						  <div class="sub-2-column">
-						  		<input id="multi-liner" type="text" placeholder="Street Name" class="column-one" ng-model="answer.qA.sub.street_name"/>  
-						  		<input id="multi-liner" type="text" placeholder="Houe No./Ltd No./Building No." class="column-two" ng-model="answer.qA.sub.building_no"/>
+						  		<input ng-disabled="qAsection2" id="multi-liner" type="text" placeholder="Street Name" class="column-one" ng-model="answer.qA.sub.street_name"/>  
+						  		<input ng-disabled="qAsection2" id="multi-liner" type="text" placeholder="Houe No./Ltd No./Building No." class="column-two" ng-model="answer.qA.sub.building_no"/>
 						  </div>
 
 						  <line-breaker></line-breaker>	
@@ -258,8 +258,8 @@
 					  <!-- Sub content of addresses -->
 					  <div ng-if="answer.qA.ans == 'Others'">
 						  <div class="sub-2-column">
-						  		<input id="multi-liner" type="text" placeholder="Pangalan ng Shop" class="column-one" ng-model="answer.qA.sub.shop_name"/>  
-						  		<input id="multi-liner" type="text" placeholder="Palapag" class="column-two" ng-model="answer.qA.sub.shop_floor"/>
+						  		<input ng-disabled="qAsection1" id="multi-liner" type="text" placeholder="Pangalan ng Shop" class="column-one" ng-model="answer.qA.sub.shop_name"/>  
+						  		<input ng-disabled="qAsection1" id="multi-liner" type="text" placeholder="Palapag" class="column-two" ng-model="answer.qA.sub.shop_floor"/>
 						  </div>
 						  
 						  <line-breaker></line-breaker>
@@ -271,18 +271,18 @@
 						  <line-breaker></line-breaker>			
 
 	  					  <div class="sub-2-column">
-						  		<input id="multi-liner" type="text" placeholder="Pangalan ng Establisyemento" class="column-one" ng-model="answer.qA.sub.est_name"/>  
+						  		<input ng-disabled="qAsection2" id="multi-liner" type="text" placeholder="Pangalan ng Establisyemento" class="column-one" ng-model="answer.qA.sub.est_name"/>  
 						  </div>		  
 
 						  <line-breaker></line-breaker>		
 
 						  <div class="sub-2-column">
                                 
-                               <select id="multi-liner" class="option-column-one" ng-model="answer.qA.sub.region" ng-change="QAFilter.region(answer.qA.sub.region.regCode)" ng-options="a.regDesc for a in qa_regions">
+                               <select ng-disabled="qAsection2" id="multi-liner" class="option-column-one" ng-model="answer.qA.sub.region" ng-change="QAFilter.region(answer.qA.sub.region.regCode)" ng-options="a.regDesc for a in qa_regions">
                                           <option value="">Rehiyon</option>
                                 </select>  
 
-						  		<select id="multi-liner" class="option-column-two" ng-model="answer.qA.sub.province" ng-change="QAFilter.province(answer.qA.sub.province.provCode)" ng-options="b.provDesc for b in qa_provinces">
+						  		<select ng-disabled="qAsection2" id="multi-liner" class="option-column-two" ng-model="answer.qA.sub.province" ng-change="QAFilter.province(answer.qA.sub.province.provCode)" ng-options="b.provDesc for b in qa_provinces">
 						  				  <option value="">Probinsya</option>
 						  		</select>  
 						  		
@@ -292,11 +292,11 @@
 
 						  <div class="sub-2-column">
 						  		
-						  		<select id="multi-liner" class="option-column-one borderless-top" ng-model="answer.qA.sub.city" ng-change="QAFilter.city(answer.qA.sub.city.citymunCode)" ng-options="c.citymunDesc for c in qa_city">
+						  		<select ng-disabled="qAsection2" id="multi-liner" class="option-column-one borderless-top" ng-model="answer.qA.sub.city" ng-change="QAFilter.city(answer.qA.sub.city.citymunCode)" ng-options="c.citymunDesc for c in qa_city">
 						  				  <option value="">Siyudad/Munisipalidad </option>
 						  		</select>  
 
-						  		<select id="multi-liner" class="option-column-two borderless-top" ng-model="answer.qA.sub.brgy" ng-options="d.brgyDesc for d in qa_brgy">
+						  		<select ng-disabled="qAsection2" id="multi-liner" class="option-column-two borderless-top" ng-model="answer.qA.sub.brgy" ng-options="d.brgyDesc for d in qa_brgy">
 						  				  <option value="">Barangay</option>
 						  		</select>  
 						  		
@@ -305,8 +305,8 @@
 						  <line-breaker></line-breaker>	
 
 						  <div class="sub-2-column">
-						  		<input id="multi-liner" type="text" placeholder="Pangalan ng kalye" class="column-one" ng-model="answer.qA.sub.street_name"/>  
-						  		<input id="multi-liner" type="text" placeholder="Houe No./Ltd No./Building No." class="column-two" ng-model="answer.qA.sub.building_no"/>
+						  		<input ng-disabled="qAsection2" id="multi-liner" type="text" placeholder="Pangalan ng kalye" class="column-one" ng-model="answer.qA.sub.street_name"/>  
+						  		<input ng-disabled="qAsection2" id="multi-liner" type="text" placeholder="Houe No./Ltd No./Building No." class="column-two" ng-model="answer.qA.sub.building_no"/>
 						  </div>
 
 						  <line-breaker></line-breaker>	
