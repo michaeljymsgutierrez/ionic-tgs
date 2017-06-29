@@ -380,7 +380,7 @@ app.controller('settingsCtrl',function($scope, $ionicPopup, $rootScope, $cordova
 		else if(schedule.pwe == schedule.pwd || schedule.pwe == schedule.npwd || schedule.pwe == schedule.npwe){
 			Toast.show("Please choose another schedule . . .","long","center");
 		}
-		else if(schedule.day != 0 || schedule.day == 6){
+		else if(schedule.day != 0 && schedule.day != 6){
 			Toast.show("Please choose weekends schedule only . . .","long","center");
 		}
 		else{
@@ -431,8 +431,23 @@ app.controller('settingsCtrl',function($scope, $ionicPopup, $rootScope, $cordova
 
 	// Non Payday weekend function
 	$scope.save_nonpayday_weekend = function(){
+
+		var schedule = {
+			pwd: dateFormatter.toDate($scope.payday_weekday.date),
+			npwd: dateFormatter.toDate($scope.nonpayday_weekday.date),
+			pwe: dateFormatter.toDate($scope.payday_weekend.date),
+			npwe: dateFormatter.toDate($scope.nonpayday_weekend.date),
+			day: new Date($scope.nonpayday_weekend.date).getDay()
+		}
+
 		if($scope.nonpayday_weekend.date == "" || $scope.nonpayday_weekend.date == undefined || $scope.nonpayday_weekend.start == "" || $scope.nonpayday_weekend.start == undefined || $scope.nonpayday_weekend.end == "" || $scope.nonpayday_weekend.end == undefined ){
 			Toast.show("Please set all fields before saving . . .","long","center");
+		}
+		else if(schedule.npwe == schedule.pwd || schedule.npwe == schedule.npwd || schedule.npwe == schedule.pwe){
+			Toast.show("Please choose another schedule . . .","long","center");
+		}
+		else if(schedule.day != 0 && schedule.day != 6){
+			Toast.show("Please choose weekends schedule only . . .","long","center");
 		}
 		else{
 			// Validate if starts time > ends time
