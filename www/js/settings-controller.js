@@ -365,8 +365,23 @@ app.controller('settingsCtrl',function($scope, $ionicPopup, $rootScope, $cordova
 
 	// Payday weekend function
 	$scope.save_payday_weekend = function(){
+
+		var schedule = {
+			pwd: dateFormatter.toDate($scope.payday_weekday.date),
+			npwd: dateFormatter.toDate($scope.nonpayday_weekday.date),
+			pwe: dateFormatter.toDate($scope.payday_weekend.date),
+			npwe: dateFormatter.toDate($scope.nonpayday_weekend.date),
+			day: new Date($scope.payday_weekend.date).getDay()
+		}
+
 		if($scope.payday_weekend.date == "" || $scope.payday_weekend.date == undefined || $scope.payday_weekend.start == "" || $scope.payday_weekend.start == undefined || $scope.payday_weekend.end == "" || $scope.payday_weekend.end == undefined ){
 			Toast.show("Please set all fields before saving . . .","long","center");
+		}
+		else if(schedule.pwe == schedule.pwd || schedule.pwe == schedule.npwd || schedule.pwe == schedule.npwe){
+			Toast.show("Please choose another schedule . . .","long","center");
+		}
+		else if(schedule.day != 0 || schedule.day == 6){
+			Toast.show("Please choose weekends schedule only . . .","long","center");
 		}
 		else{
 			// Validate if starts time > ends time
