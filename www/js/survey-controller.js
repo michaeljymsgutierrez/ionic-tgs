@@ -33,6 +33,10 @@ app.controller('surveyCtrl',function($ionicSideMenuDelegate, $scope, $ionicHisto
     $scope.qAsection1 = false;
     $scope.qAsection2 = false
 
+    // Scope for disabling Question A section
+    $scope.qBsection1 = false;
+    $scope.qBsection2 = false
+
     //Section2  QA Disable 
     $interval(function(){    
         try{
@@ -53,7 +57,6 @@ app.controller('surveyCtrl',function($ionicSideMenuDelegate, $scope, $ionicHisto
         }catch(err) {}
     },1000);
 
-
     //Section1 QA Disable 
     $interval(function(){    
         try{
@@ -65,6 +68,42 @@ app.controller('surveyCtrl',function($ionicSideMenuDelegate, $scope, $ionicHisto
             }
             else{
                 $scope.qAsection1 = false;
+            }
+        }catch(err) {}
+    },1000);
+
+
+    //Section2  QB Disable 
+    $interval(function(){    
+        try{
+            if($rootScope.answer.qB.sub.shop_name || $rootScope.answer.qB.sub.shop_floor){
+                $scope.qBsection2 = true;
+                // Delete this object if the section one has value
+                delete $rootScope.answer.qB.sub.brgy;
+                delete $rootScope.answer.qB.sub.est_name;
+                delete $rootScope.answer.qB.sub.city;
+                delete $rootScope.answer.qB.sub.region;
+                delete $rootScope.answer.qB.sub.province;
+                delete $rootScope.answer.qB.sub.street_name; 
+                delete $rootScope.answer.qB.sub.building_no;
+            }
+            else{
+                $scope.qBsection2 = false;
+            }
+        }catch(err) {}
+    },1000);
+    
+    //Section1 QB Disable 
+    $interval(function(){    
+        try{
+            if($rootScope.answer.qB.sub.brgy|| $rootScope.answer.qB.sub.city || $rootScope.answer.qB.sub.region || $rootScope.answer.qB.sub.province || $rootScope.answer.qB.sub.street_name || $rootScope.answer.qB.sub.building_no || $rootScope.answer.qB.sub.est_name){
+                $scope.qBsection1 = true;
+                 // Delete this object if the section two has value
+                delete $rootScope.answer.qB.sub.shop_name;
+                delete $rootScope.answer.qB.sub.shop_floor;
+            }
+            else{
+                $scope.qBsection1 = false;
             }
         }catch(err) {}
     },1000);
@@ -425,60 +464,78 @@ app.controller('surveyCtrl',function($ionicSideMenuDelegate, $scope, $ionicHisto
         },
         pageQB: function(){
             // Validation for QB Mall - Foodcourt
-            if($rootScope.answer.hasOwnProperty('qB') == false){
-                Toast.show("Please fill up all fields . . .","short","center");
-            }
-            else if($rootScope.answer.hasOwnProperty('qB') == true && $rootScope.answer.qB.ans == 'Others' && $rootScope.answer.qB.hasOwnProperty('sub') == false){
-                Toast.show("Please fill up all fields . . .","short","center");
-            }
-            else if($rootScope.answer.hasOwnProperty('qB') == true && $rootScope.answer.qB.ans == 'Others' && $rootScope.answer.qB.hasOwnProperty('sub') == true && $rootScope.answer.qB.sub.hasOwnProperty('shop_name') == false){
-                Toast.show("Please fill up all fields . . .","short","center");
-            }
-            else if($rootScope.answer.hasOwnProperty('qB') == true && $rootScope.answer.qB.ans == 'Others' && $rootScope.answer.qB.hasOwnProperty('sub') == true && $rootScope.answer.qB.sub.hasOwnProperty('est_name') == false){
-                Toast.show("Please fill up all fields . . .","short","center");
-            }
-            else if($rootScope.answer.hasOwnProperty('qB') == true && $rootScope.answer.qB.ans == 'Others' && $rootScope.answer.qB.hasOwnProperty('sub') == true && $rootScope.answer.qB.sub.hasOwnProperty('shop_floor') == false){
-                Toast.show("Please fill up all fields . . .","short","center");
-            }
-            else if($rootScope.answer.hasOwnProperty('qB') == true && $rootScope.answer.qB.ans == 'Others' && $rootScope.answer.qB.hasOwnProperty('sub') == true && $rootScope.answer.qB.sub.hasOwnProperty('region') == false){
-                Toast.show("Please fill up all fields . . .","short","center");
-            }
-            else if($rootScope.answer.hasOwnProperty('qB') == true && $rootScope.answer.qB.ans == 'Others' && $rootScope.answer.qB.hasOwnProperty('sub') == true && $rootScope.answer.qB.sub.hasOwnProperty('province') == false){
-                Toast.show("Please fill up all fields . . .","short","center");
-            }
-            else if($rootScope.answer.hasOwnProperty('qB') == true && $rootScope.answer.qB.ans == 'Others' && $rootScope.answer.qB.hasOwnProperty('sub') == true && $rootScope.answer.qB.sub.hasOwnProperty('city') == false){
-                Toast.show("Please fill up all fields . . .","short","center");
-            }
-            else if($rootScope.answer.hasOwnProperty('qB') == true && $rootScope.answer.qB.ans == 'Others' && $rootScope.answer.qB.hasOwnProperty('sub') == true && $rootScope.answer.qB.sub.hasOwnProperty('brgy') == false){
-                Toast.show("Please fill up all fields . . .","short","center");
-            }
+            if($scope.qBsection1 == false){
+                if($rootScope.answer.hasOwnProperty('qB') == false){
+                    Toast.show("Please fill up all fields . . .","short","center");
+                }
+                else if($rootScope.answer.hasOwnProperty('qB') == true && $rootScope.answer.qB.ans == 'Others' && $rootScope.answer.qB.hasOwnProperty('sub') == false){
+                    Toast.show("Please fill up all fields . . .","short","center");
+                }
+                else if($rootScope.answer.hasOwnProperty('qB') == true && $rootScope.answer.qB.ans == 'Others' && $rootScope.answer.qB.hasOwnProperty('sub') == true && $rootScope.answer.qB.sub.hasOwnProperty('shop_name') == false){
+                    Toast.show("Please fill up all fields . . .","short","center");
+                }
+                else if($rootScope.answer.hasOwnProperty('qB') == true && $rootScope.answer.qB.ans == 'Others' && $rootScope.answer.qB.hasOwnProperty('sub') == true && $rootScope.answer.qB.sub.hasOwnProperty('shop_floor') == false){
+                    Toast.show("Please fill up all fields . . .","short","center");
+                }
+                else if($rootScope.answer.hasOwnProperty('qB') == true && $rootScope.answer.qB.ans == 'Others' && $rootScope.answer.qB.hasOwnProperty('sub') == true && $rootScope.answer.qB.sub.hasOwnProperty('shop_name') == true && $rootScope.answer.qB.sub.shop_name == ""){
+                    Toast.show("Please fill up all fields . . .","short","center");
+                }
+                else if($rootScope.answer.hasOwnProperty('qB') == true && $rootScope.answer.qB.ans == 'Others' && $rootScope.answer.qB.hasOwnProperty('sub') == true && $rootScope.answer.qB.sub.hasOwnProperty('shop_floor') == true && $rootScope.answer.qB.sub.shop_floor == ""){
+                    Toast.show("Please fill up all fields . . .","short","center");
+                }
+                else{
+                    var data = JSON.stringify($rootScope.answer); 
+                    $window.localStorage.setItem('survey_answers',data);
+                    if($rootScope.store_type == 'Mall' || $rootScope.store_type == 'Food Court'){
+                        $state.go('personal-info');
+                    }
+                }
 
-            else if($rootScope.answer.hasOwnProperty('qB') == true && $rootScope.answer.qB.ans == 'Others' && $rootScope.answer.qB.hasOwnProperty('sub') == true && $rootScope.answer.qB.sub.hasOwnProperty('est_name') == true && $rootScope.answer.qB.sub.est_name == ""){
-                Toast.show("Please fill up all fields . . .","short","center");
             }
-            else if($rootScope.answer.hasOwnProperty('qB') == true && $rootScope.answer.qB.ans == 'Others' && $rootScope.answer.qB.hasOwnProperty('sub') == true && $rootScope.answer.qB.sub.hasOwnProperty('shop_name') == true && $rootScope.answer.qB.sub.shop_name == ""){
-                Toast.show("Please fill up all fields . . .","short","center");
-            }
-            else if($rootScope.answer.hasOwnProperty('qB') == true && $rootScope.answer.qB.ans == 'Others' && $rootScope.answer.qB.hasOwnProperty('sub') == true && $rootScope.answer.qB.sub.hasOwnProperty('shop_floor') == true && $rootScope.answer.qB.sub.shop_floor == ""){
-                Toast.show("Please fill up all fields . . .","short","center");
-            }
-            else if($rootScope.answer.hasOwnProperty('qB') == true && $rootScope.answer.qB.ans == 'Others' && $rootScope.answer.qB.hasOwnProperty('sub') == true && $rootScope.answer.qB.sub.hasOwnProperty('region') == true && $rootScope.answer.qB.sub.region == null){
-                Toast.show("Please fill up all fields . . .","short","center");
-            }
-            else if($rootScope.answer.hasOwnProperty('qB') == true && $rootScope.answer.qB.ans == 'Others' && $rootScope.answer.qB.hasOwnProperty('sub') == true && $rootScope.answer.qB.sub.hasOwnProperty('province') == true && $rootScope.answer.qB.sub.province == null){
-                Toast.show("Please fill up all fields . . .","short","center");
-            }
-            else if($rootScope.answer.hasOwnProperty('qB') == true && $rootScope.answer.qB.ans == 'Others' && $rootScope.answer.qB.hasOwnProperty('sub') == true && $rootScope.answer.qB.sub.hasOwnProperty('city') == true && $rootScope.answer.qB.sub.city == null){
-                Toast.show("Please fill up all fields . . .","short","center");
-            }
-            else if($rootScope.answer.hasOwnProperty('qB') == true && $rootScope.answer.qB.ans == 'Others' && $rootScope.answer.qB.hasOwnProperty('sub') == true && $rootScope.answer.qB.sub.hasOwnProperty('brgy') == true && $rootScope.answer.qB.sub.brgy == null){
-                Toast.show("Please fill up all fields . . .","short","center");
-            }
-            else{
-                var data = JSON.stringify($rootScope.answer); 
-                $window.localStorage.setItem('survey_answers',data);
-                if($rootScope.store_type == 'Mall' || $rootScope.store_type == 'Food Court'){
-                    $state.go('personal-info');
+            else if($scope.qBsection2 == false){
+
+                if($rootScope.answer.hasOwnProperty('qB') == false){
+                    Toast.show("Please fill up all fields . . .","short","center");
+                }
+                else if($rootScope.answer.hasOwnProperty('qB') == true && $rootScope.answer.qB.ans == 'Others' && $rootScope.answer.qB.hasOwnProperty('sub') == false){
+                    Toast.show("Please fill up all fields . . .","short","center");
+                }
+                else if($rootScope.answer.hasOwnProperty('qB') == true && $rootScope.answer.qB.ans == 'Others' && $rootScope.answer.qB.hasOwnProperty('sub') == true && $rootScope.answer.qB.sub.hasOwnProperty('est_name') == false){
+                    Toast.show("Please fill up all fields . . .","short","center");
+                }
+                else if($rootScope.answer.hasOwnProperty('qB') == true && $rootScope.answer.qB.ans == 'Others' && $rootScope.answer.qB.hasOwnProperty('sub') == true && $rootScope.answer.qB.sub.hasOwnProperty('region') == false){
+                    Toast.show("Please fill up all fields . . .","short","center");
+                }
+                else if($rootScope.answer.hasOwnProperty('qB') == true && $rootScope.answer.qB.ans == 'Others' && $rootScope.answer.qB.hasOwnProperty('sub') == true && $rootScope.answer.qB.sub.hasOwnProperty('province') == false){
+                    Toast.show("Please fill up all fields . . .","short","center");
+                }
+                else if($rootScope.answer.hasOwnProperty('qB') == true && $rootScope.answer.qB.ans == 'Others' && $rootScope.answer.qB.hasOwnProperty('sub') == true && $rootScope.answer.qB.sub.hasOwnProperty('city') == false){
+                    Toast.show("Please fill up all fields . . .","short","center");
+                }
+                else if($rootScope.answer.hasOwnProperty('qB') == true && $rootScope.answer.qB.ans == 'Others' && $rootScope.answer.qB.hasOwnProperty('sub') == true && $rootScope.answer.qB.sub.hasOwnProperty('brgy') == false){
+                    Toast.show("Please fill up all fields . . .","short","center");
+                }
+                else if($rootScope.answer.hasOwnProperty('qB') == true && $rootScope.answer.qB.ans == 'Others' && $rootScope.answer.qB.hasOwnProperty('sub') == true && $rootScope.answer.qB.sub.hasOwnProperty('est_name') == true && $rootScope.answer.qB.sub.est_name == ""){
+                    Toast.show("Please fill up all fields . . .","short","center");
+                }
+                else if($rootScope.answer.hasOwnProperty('qB') == true && $rootScope.answer.qB.ans == 'Others' && $rootScope.answer.qB.hasOwnProperty('sub') == true && $rootScope.answer.qB.sub.hasOwnProperty('region') == true && $rootScope.answer.qB.sub.region == null){
+                    Toast.show("Please fill up all fields . . .","short","center");
+                }
+                else if($rootScope.answer.hasOwnProperty('qB') == true && $rootScope.answer.qB.ans == 'Others' && $rootScope.answer.qB.hasOwnProperty('sub') == true && $rootScope.answer.qB.sub.hasOwnProperty('province') == true && $rootScope.answer.qB.sub.province == null){
+                    Toast.show("Please fill up all fields . . .","short","center");
+                }
+                else if($rootScope.answer.hasOwnProperty('qB') == true && $rootScope.answer.qB.ans == 'Others' && $rootScope.answer.qB.hasOwnProperty('sub') == true && $rootScope.answer.qB.sub.hasOwnProperty('city') == true && $rootScope.answer.qB.sub.city == null){
+                    Toast.show("Please fill up all fields . . .","short","center");
+                }
+                else if($rootScope.answer.hasOwnProperty('qB') == true && $rootScope.answer.qB.ans == 'Others' && $rootScope.answer.qB.hasOwnProperty('sub') == true && $rootScope.answer.qB.sub.hasOwnProperty('brgy') == true && $rootScope.answer.qB.sub.brgy == null){
+                    Toast.show("Please fill up all fields . . .","short","center");
+                }
+                else{
+                    var data = JSON.stringify($rootScope.answer); 
+                    $window.localStorage.setItem('survey_answers',data);
+                    if($rootScope.store_type == 'Mall' || $rootScope.store_type == 'Food Court'){
+                        $state.go('personal-info');
+                    }
                 }
             }
             
