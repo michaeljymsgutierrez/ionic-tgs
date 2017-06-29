@@ -235,7 +235,7 @@ app.controller('settingsCtrl',function($scope, $ionicPopup, $rootScope, $cordova
 
 	// Payday weekday function
 	$scope.save_payday_weekday = function(){
-		
+
 		var schedule = {
 			pwd: dateFormatter.toDate($scope.payday_weekday.date),
 			npwd: dateFormatter.toDate($scope.nonpayday_weekday.date),
@@ -300,8 +300,23 @@ app.controller('settingsCtrl',function($scope, $ionicPopup, $rootScope, $cordova
 
 	// Non Payday weekday function
 	$scope.save_nonpayday_weekday = function(){
+
+		var schedule = {
+			pwd: dateFormatter.toDate($scope.payday_weekday.date),
+			npwd: dateFormatter.toDate($scope.nonpayday_weekday.date),
+			pwe: dateFormatter.toDate($scope.payday_weekend.date),
+			npwe: dateFormatter.toDate($scope.nonpayday_weekend.date),
+			day: new Date($scope.nonpayday_weekday.date).getDay()
+		}
+
 		if($scope.nonpayday_weekday.date == "" || $scope.nonpayday_weekday.date == undefined || $scope.nonpayday_weekday.start == "" || $scope.nonpayday_weekday.start == undefined || $scope.nonpayday_weekday.end == "" || $scope.nonpayday_weekday.end == undefined ){
 			Toast.show("Please set all fields before saving . . .","long","center");
+		}
+		else if(schedule.npwd == schedule.pwd || schedule.npwd == schedule.pwe || schedule.npwd == schedule.npwe){
+			Toast.show("Please choose another schedule . . .","long","center");
+		}
+		else if(schedule.day < 1 || schedule.day > 5){
+			Toast.show("Please choose weekdays schedule only . . .","long","center");
 		}
 		else{
 			// Validate if starts time > ends time
