@@ -25,7 +25,7 @@ app.run(function($ionicPlatform, $cordovaSQLite, $ionicPickerI18n) {
        // Initialize table for store settings
        $cordovaSQLite.execute(db,'CREATE TABLE IF NOT EXISTS store_settings(id integer primary key, store_code text, store_branch text, store_address text, store_type text, store_manager)')
        .then(function(res){ 
-          console.log(res);
+          console.info("Initialized store_settings");
        },function(err){
        		console.log(err);
        });
@@ -33,7 +33,7 @@ app.run(function($ionicPlatform, $cordovaSQLite, $ionicPickerI18n) {
        // Initialize table for survey language
        $cordovaSQLite.execute(db,'CREATE TABLE IF NOT EXISTS survey_language (id integer primary key, language text)')
        .then(function(res){
-          console.log(res);
+          console.info("Initialized survey_language");
        },function(err){
           console.log(err);
        });
@@ -41,7 +41,7 @@ app.run(function($ionicPlatform, $cordovaSQLite, $ionicPickerI18n) {
        // Initialize table for payday weekday schedule
        $cordovaSQLite.execute(db,'CREATE TABLE IF NOT EXISTS payday_weekday (id integer primary key, payday_weekday_date text, payday_weekday_start text, payday_weekday_end text)')
        .then(function(res){
-          console.log(res);
+          console.info("Initialized payday_weekday");
        },function(err){
           console.log(err);
        });
@@ -50,7 +50,7 @@ app.run(function($ionicPlatform, $cordovaSQLite, $ionicPickerI18n) {
       // Initialize table for non payday weekday schedule
        $cordovaSQLite.execute(db,'CREATE TABLE IF NOT EXISTS non_payday_weekday (id integer primary key, non_payday_weekday_date text, non_payday_weekday_start text, non_payday_weekday_end text)')
        .then(function(res){
-          console.log(res);
+          console.info("Initialized non_payday_weekday");
        },function(err){
           console.log(err);
        });
@@ -59,7 +59,7 @@ app.run(function($ionicPlatform, $cordovaSQLite, $ionicPickerI18n) {
         // Initialize table for payday weekend schedule
        $cordovaSQLite.execute(db,'CREATE TABLE IF NOT EXISTS payday_weekend (id integer primary key, payday_weekend_date text, payday_weekend_start text, payday_weekend_end text)')
        .then(function(res){
-          console.log(res);
+          console.info("Initialized payday_weekend");
        },function(err){
           console.log(err);
        });
@@ -68,7 +68,15 @@ app.run(function($ionicPlatform, $cordovaSQLite, $ionicPickerI18n) {
         // Initialize table for non payday weekday schedule
        $cordovaSQLite.execute(db,'CREATE TABLE IF NOT EXISTS non_payday_weekend (id integer primary key, non_payday_weekend_date text, non_payday_weekend_start text, non_payday_weekend_end text)')
        .then(function(res){
-          console.log(res);
+          console.info("Initialized non_payday_weekend");
+       },function(err){
+          console.log(err);
+       });
+
+       // Initialize table for main data
+       $cordovaSQLite.execute(db,'CREATE TABLE IF NOT EXISTS survey_data (id integer primary key, survey_answers text, store_code text, store_type text, store_manager text, store_branch text, language_type text, survey_schedule text, schedule_type text, created text, is_synced text)')
+       .then(function(res){
+          console.info("Initialized survey_data");
        },function(err){
           console.log(err);
        });
