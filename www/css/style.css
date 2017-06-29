@@ -493,3 +493,7 @@ div.tab-age {
 .icon-footer {
 	font-size: 32px;
 }
+
+input:disabled {
+	background: #FFFFFF;
+}
