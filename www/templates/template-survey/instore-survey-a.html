@@ -640,8 +640,73 @@
 					    <span class="option-text">Others</span>
 					  </label>			
 
+							  <div ng-if="answer.qA.ans == 'Others'">	
+			  					  <div class="sub-2-column">
+								  		<input id="multi-liner" type="text" placeholder="Name of Establishment" class="column-one" ng-model="answer.qA.sub.est_name"/>  
+								  </div>	
+								 
+								 <line-breaker></line-breaker>
+
+								  <div class="sub-2-column">
+								  		<span class="question-2">Please indicate the complete address of the place where </span> <br/>
+								  		<span class="question-2">you intend to go.</span>
+								  </div>
+								
+								  <line-breaker></line-breaker>	
+								  
+								  <div class="sub-2-column">	  
+								  		<div class="sub-label">Address</div>
+								  </div>
+
+								  <line-breaker2></line-breaker2>		
+
+								  <div class="sub-2-column">
+		                                
+		                                <div class="wrapper-one">
+		                                	<select class="borderless-one" ng-model="answer.qA.sub.region" ng-change="QAFilter.region(answer.qA.sub.region.regCode)" ng-options="a.regDesc for a in qa_regions">
+		                                     	     <option value="">Select Region</option>
+		                                	</select>  
+		                                </div>
+
+		                                <div class="wrapper-two">
+									  		<select class="borderless-two" ng-model="answer.qA.sub.province" ng-change="QAFilter.province(answer.qA.sub.province.provCode)" ng-options="b.provDesc for b in qa_provinces">
+									  				  <option value="">Select Province</option>
+									  		</select>  
+									  	</div>
+								  		
+								  </div>
+
+								  <line-breaker></line-breaker>	
+
+								  <div class="sub-2-column">
+								  		
+								  		<div class="wrapper-one">
+									  		<select  class="borderless-one" ng-model="answer.qA.sub.city" ng-change="QAFilter.city(answer.qA.sub.city.citymunCode)" ng-options="c.citymunDesc for c in qa_city">
+									  				  <option value="">Select City</option>
+									  		</select>  
+									  	</div>
+
+									  	<div class="wrapper-two">
+									  		<select class="borderless-two" ng-model="answer.qA.sub.brgy" ng-options="d.brgyDesc for d in qa_brgy">
+									  				  <option value="">Select Barangay</option>
+									  		</select>  
+									  	</div>
+								  		
+								  </div>
+
+								  <line-breaker></line-breaker>	
+
+								  <div class="sub-2-column">
+								  		<input id="multi-liner" type="text" placeholder="Street Name" class="column-one" ng-model="answer.qA.sub.street_name"/>  
+								  		<input id="multi-liner" type="text" placeholder="Houe No./Ltd No./Building No." class="column-two" ng-model="answer.qA.sub.building_no"/>
+								  </div>
+
+								  <line-breaker></line-breaker>	
+							 </div>
+
 					  <!-- Sub content of addresses ng-if="answer.qA.ans == 'Others'" -->
-<!-- 					  <div>
+					   <!-- 					  
+						 <div>
 
 						  <div class="sub-2-column">
 						  		<span class="question-2">If from outside the mall, please write the complete address of the place where you came from.</span>
@@ -689,9 +754,11 @@
 						  </div>
 
 						  <line-breaker></line-breaker>	
-					 </div> -->
+					 </div> 
+					 -->
 
-<!-- 					 <line-breaker></line-breaker>	
+					<!-- 					 
+					<line-breaker></line-breaker>	
 
 					 <label class="item item-icon-left borderless">
 					    <span class="icon" id="question-tab">How  did you get to this Mall? </span>
@@ -710,7 +777,8 @@
 					 <label class="item item-icon-left borderless">
 					    <i class="icon" id="red-radio"><input type='radio' name="qA2" ng-model="answer.qA.ans2" value="On Foot"/></i>
 					    <span class="option-text">On Foot</span>
-					 </label> -->
+					 </label> 
+					 -->
 
 					 <line-breaker></line-breaker>
 
