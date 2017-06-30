@@ -113,9 +113,15 @@ app.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider){
 		url: '/instore-survey-b',
 		templateUrl: 'templates/template-survey/instore-survey-b.html',
 		controller: 'surveyCtrl'
+	})
+	.state('sync',{
+		cache: false,
+		url: '/sync',
+		templateUrl: 'templates/template-sync/sync.html',
+		controller: ''
 	});
 
-	$urlRouterProvider.otherwise('/instore-survey-b');
+	$urlRouterProvider.otherwise('/personal-info');
 
 	
 });
