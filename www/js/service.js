@@ -44,12 +44,12 @@ app.service('schedule',function($window){
 
 	// Set localStorage schedule start
 	this.setStart = function(sched_start){
-		$widow.localStorage.setItem('start',sched_start);
+		$window.localStorage.setItem('start',sched_start);
 	}
 
 	// Set localStorage schedule end
 	this.setEnd = function(sched_end){
-		$widow.localStorage.setItem('start',sched_start);
+		$window.localStorage.setItem('start',sched_start);
 	}
 
 });
