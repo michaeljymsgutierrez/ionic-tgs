@@ -370,12 +370,15 @@ app.controller('surveyCtrl',function($ionicSideMenuDelegate, $scope, $ionicHisto
     		else if($rootScope.answer.hasOwnProperty('q6') == true && isNaN($rootScope.answer.q6.ans) == true){
     			Toast.show("Please set correct field values . . .","short","center");
     		}
-    		else{ 
+    		else{
     			$rootScope.answer.q6.ans = parseFloat($rootScope.answer.q6.ans).toFixed(2);
     			var data = JSON.stringify($rootScope.answer);
     			$window.localStorage.setItem('survey_answers',data);
                 if($rootScope.store_type == 'Mall' || $rootScope.store_type == 'Food Court'){
                     $state.go('mall-survey-a');
+                }
+                else if($rootScope.store_type == 'Instore' || $rootScope.store_type == 'Free Stand'){
+                    $state.go('instore-survey-a');
                 }
     		}
     	},
@@ -687,6 +690,9 @@ app.controller('surveyCtrl',function($ionicSideMenuDelegate, $scope, $ionicHisto
                 }
                 else{
                     // Code Save here
+                    var data = JSON.stringify($rootScope.answer);
+                    $window.localStorage.setItem('survey_answers',data);
+                    Toast.show("Ready to save . . .","long","center");
                 }
                 
             }
@@ -749,11 +755,64 @@ app.controller('surveyCtrl',function($ionicSideMenuDelegate, $scope, $ionicHisto
                 }
                 else{
                     // Code save here
+                    var data = JSON.stringify($rootScope.answer);
+                    $window.localStorage.setItem('survey_answers',data);
+                    Toast.show("Yay Ready to save . . .","long","center");
+
                 }
             }
             
 
             $scope.debug();
+        },
+        pageQAI: function(){
+                // Validation for QA - Instore - Free Stand
+                if($rootScope.answer.hasOwnProperty('qA') == false){
+                    Toast.show("Please fill up all fields . . .","short","center");
+                }
+                else if($rootScope.answer.hasOwnProperty('qA') == true && $rootScope.answer.qA.hasOwnProperty('sub') == false){
+                    Toast.show("Please fill up all fields . . .","short","center");
+                }
+                else if($rootScope.answer.hasOwnProperty('qA') == true && $rootScope.answer.qA.hasOwnProperty('ans2')  == false){
+                    Toast.show("Please fill up all fields . . .","short","center");
+                }
+                else if($rootScope.answer.hasOwnProperty('qA') == true && $rootScope.answer.qA.ans != 'Home' && $rootScope.answer.qA.hasOwnProperty('sub') == true && $rootScope.answer.qA.sub.hasOwnProperty('est_name') == false){
+                    Toast.show("Please fill up all fields . . .","short","center");
+                }
+                else if($rootScope.answer.hasOwnProperty('qA') == true && $rootScope.answer.qA.hasOwnProperty('sub') == true && $rootScope.answer.qA.sub.hasOwnProperty('region') == false){
+                    Toast.show("Please fill up all fields . . .","short","center");
+                }
+                else if($rootScope.answer.hasOwnProperty('qA') == true && $rootScope.answer.qA.hasOwnProperty('sub') == true && $rootScope.answer.qA.sub.hasOwnProperty('province') == false){
+                    Toast.show("Please fill up all fields . . .","short","center");
+                }
+                else if($rootScope.answer.hasOwnProperty('qA') == true && $rootScope.answer.qA.hasOwnProperty('sub') == true && $rootScope.answer.qA.sub.hasOwnProperty('city') == false){
+                    Toast.show("Please fill up all fields . . .","short","center");
+                }
+                else if($rootScope.answer.hasOwnProperty('qA') == true && $rootScope.answer.qA.hasOwnProperty('sub') == true && $rootScope.answer.qA.sub.hasOwnProperty('brgy') == false){
+                    Toast.show("Please fill up all fields . . .","short","center");
+                }
+                else if($rootScope.answer.hasOwnProperty('qA') == true && $rootScope.answer.qA.ans != 'Home' && $rootScope.answer.qA.hasOwnProperty('sub') == true && $rootScope.answer.qA.sub.hasOwnProperty('est_name') == true && $rootScope.answer.qA.sub.est_name == ""){
+                    Toast.show("Please fill up all fields . . .","short","center");
+                }
+                else if($rootScope.answer.hasOwnProperty('qA') == true && $rootScope.answer.qA.hasOwnProperty('sub') == true && $rootScope.answer.qA.sub.hasOwnProperty('region') == true && $rootScope.answer.qA.sub.region == null){
+                    Toast.show("Please fill up all fields . . .","short","center");
+                }
+                else if($rootScope.answer.hasOwnProperty('qA') == true && $rootScope.answer.qA.hasOwnProperty('sub') == true && $rootScope.answer.qA.sub.hasOwnProperty('province') == true && $rootScope.answer.qA.sub.province == null){
+                    Toast.show("Please fill up all fields . . .","short","center");
+                }
+                else if($rootScope.answer.hasOwnProperty('qA') == true && $rootScope.answer.qA.hasOwnProperty('sub') == true && $rootScope.answer.qA.sub.hasOwnProperty('city') == true && $rootScope.answer.qA.sub.city == null){
+                    Toast.show("Please fill up all fields . . .","short","center");
+                }
+                else if($rootScope.answer.hasOwnProperty('qA') == true &&  $rootScope.answer.qA.hasOwnProperty('sub') == true && $rootScope.answer.qA.sub.hasOwnProperty('brgy') == true && $rootScope.answer.qA.sub.brgy == null){
+                    Toast.show("Please fill up all fields . . .","short","center");
+                }
+                else{
+                    var data = JSON.stringify($rootScope.answer); 
+                    $window.localStorage.setItem('survey_answers',data);
+                    if($rootScope.store_type == 'Instore' || $rootScope.store_type == 'Free Stand'){
+                        // $state.go('mall-survey-b');
+                    }
+                }
         },
     	backState: function(page){
     		var data = JSON.stringify($rootScope.answer);
