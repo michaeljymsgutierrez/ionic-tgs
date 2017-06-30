@@ -1,5 +1,79 @@
 // Survey Controller
-app.controller('surveyCtrl',function($ionicSideMenuDelegate, $scope, $ionicHistory, $rootScope, $window, Toast, $state, $location, Location, $interval, $timeout, $ionicPlatform){
+app.controller('surveyCtrl',function($ionicSideMenuDelegate, $scope, $ionicHistory, $rootScope, $window, Toast, $state, $location, Location, $interval, $timeout, $ionicPlatform, $cordovaSQLite, dateFormatter, schedule){
+
+    // Execute process needed platform ready
+    $ionicPlatform.ready(function(){
+
+        // Load Store settings from  data base
+        $cordovaSQLite.execute(db,'SELECT * FROM store_settings').then(function(res){
+            if(res.rows.length != 0){
+                $window.localStorage.setItem('store_name',res.rows.item(0).store_branch);
+                $window.localStorage.setItem('store_code',res.rows.item(0).store_code);
+                $window.localStorage.setItem('store_type',res.rows.item(0).store_type);
+                $window.localStorage.setItem('store_manager',res.rows.item(0).store_manager);
+                $window.localStorage.setItem('store_address',res.rows.item(0).store_address);
+            }
+        });
+
+        // Determine schedule type, start , end for saving dat to database
+        var dateNow = new Date().getDay();
+        if(dateNow == 0 || dateNow == 6){
+
+            $cordovaSQLite.execute(db,"SELECT * FROM payday_weekend").then(function(res){
+                if(res.rows.length != 0){
+                    var d1 =  dateFormatter.toDate(new Date());
+                    var d2 = dateFormatter.toDate(new Date(res.rows.item(0).payday_weekend_date));
+                    if(d1 == d2){
+                        schedule.setType("Payday Weekend");
+                        schedule.setStart(dateFormatter.toDate(new Date(res.rows.item(0).payday_weekend_date)) + " " + dateFormatter.toTimeSec(new Date(res.rows.item(0).payday_weekend_start)));
+                        schedule.setEnd(dateFormatter.toDate(new Date(res.rows.item(0).payday_weekend_date)) + " " + dateFormatter.toTimeSec(new Date(res.rows.item(0).payday_weekend_end)));
+                    }
+                }
+            });
+
+            $cordovaSQLite.execute(db,"SELECT * FROM non_payday_weekend").then(function(res){
+                if(res.rows.length != 0){
+                    var d1 =  dateFormatter.toDate(new Date());
+                    var d2 = dateFormatter.toDate(new Date(res.rows.item(0).non_payday_weekend_date));
+                    if(d1 == d2){
+                        schedule.setType("Non Payday Weekend");
+                        schedule.setStart(dateFormatter.toDate(new Date(res.rows.item(0).non_payday_weekend_date)) + " " + dateFormatter.toTimeSec(new Date(res.rows.item(0).non_payday_weekend_start)));
+                        schedule.setEnd(dateFormatter.toDate(new Date(res.rows.item(0).non_payday_weekend_date)) + " " + dateFormatter.toTimeSec(new Date(res.rows.item(0).non_payday_weekend_end)));
+                    }
+                }
+
+            });
+
+        }
+        else{
+
+            $cordovaSQLite.execute(db,"SELECT * FROM payday_weekday").then(function(res){
+                if(res.rows.length != 0){
+                    var d1 =  dateFormatter.toDate(new Date());
+                    var d2 = dateFormatter.toDate(new Date(res.rows.item(0).payday_weekday_date));
+                    if(d1 == d2){
+                        schedule.setType("Payday Weekday");
+                        schedule.setStart(dateFormatter.toDate(new Date(res.rows.item(0).payday_weekday_date)) + " " + dateFormatter.toTimeSec(new Date(res.rows.item(0).payday_weekday_start)));
+                        schedule.setEnd(dateFormatter.toDate(new Date(res.rows.item(0).payday_weekday_date)) + " " + dateFormatter.toTimeSec(new Date(res.rows.item(0).payday_weekday_end)));
+                    }
+                }
+            });
+
+            $cordovaSQLite.execute(db,"SELECT * FROM non_payday_weekday").then(function(res){
+                if(res.rows.length != 0){
+                    var d1 =  dateFormatter.toDate(new Date());
+                    var d2 = dateFormatter.toDate(new Date(res.rows.item(0).non_payday_weekday_date));
+                    if(d1 == d2){
+                        schedule.setType("Non Payday Weekday");
+                        schedule.setStart(dateFormatter.toDate(new Date(res.rows.item(0).non_payday_weekday_date)) + " " + dateFormatter.toTimeSec(new Date(res.rows.item(0).non_payday_weekday_start)));
+                        schedule.setEnd(dateFormatter.toDate(new Date(res.rows.item(0).non_payday_weekday_date)) + " " + dateFormatter.toTimeSec(new Date(res.rows.item(0).non_payday_weekday_end)));
+                    }
+                }
+
+            });
+        }
+
+    });
 
 	// Toggle Sidemenu on survey controller
 	$rootScope.toggleLeft = function(){
@@ -758,7 +832,7 @@ app.controller('surveyCtrl',function($ionicSideMenuDelegate, $scope, $ionicHisto
                     var data = JSON.stringify($rootScope.answer);
                     $window.localStorage.setItem('survey_answers',data);
                     Toast.show("Yay Ready to save . . .","long","center");
-
+                    console.log( $window.localStorage.getItem('survey_answers'));
                 }
             }
         },
