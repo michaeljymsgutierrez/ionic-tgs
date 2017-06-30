@@ -24,6 +24,11 @@ app.service('dateFormatter',function($filter){
 	   return $filter('date')(dt,'HH:mm');
 	}
 
+	// Convert ISO to 24 Hr format with secs
+	this.toTimeSec = function(dt){
+		return $filter('date')(dt,'HH:mm:ss');
+	}
+
 	// Format scheds for display
 	this.summarize = function(dt,ts,te){
 		return $filter('date')(dt,'MMM dd, y') + "; " + $filter('date')(ts,'HH:mm') + " - " + $filter('date')(te,'HH:mm'); 
