@@ -34,3 +34,22 @@ app.service('dateFormatter',function($filter){
 		return Math.floor(new Date(dt).getTime()/1000);
 	}
 });
+
+// Service for writing  schedule properties on localStorage
+app.service('schedule',function($window){
+	// Set localStorage schedule type
+	this.setType = function(sched_type){
+		$window.localStorage.setItem('type',sched_type);
+	}
+
+	// Set localStorage schedule start
+	this.setStart = function(sched_start){
+		$widow.localStorage.setItem('start',sched_start);
+	}
+
+	// Set localStorage schedule end
+	this.setEnd = function(sched_end){
+		$widow.localStorage.setItem('start',sched_start);
+	}
+
+});
