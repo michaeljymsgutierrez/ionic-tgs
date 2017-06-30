@@ -54,7 +54,7 @@ app.service('schedule',function($window){
 
 	// Set localStorage schedule end
 	this.setEnd = function(sched_end){
-		$window.localStorage.setItem('start',sched_start);
+		$window.localStorage.setItem('end',sched_end);
 	}
 
 });
