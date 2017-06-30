@@ -107,9 +107,15 @@ app.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider){
 		url: '/instore-survey-a',
 		templateUrl: 'templates/template-survey/instore-survey-a.html',
 		controller: 'surveyCtrl'
+	})
+	.state('instore-survey-b',{
+		cache: false,
+		url: '/instore-survey-a',
+		templateUrl: 'templates/template-survey/instore-survey-b.html',
+		controller: 'surveyCtrl'
 	});
 
-	$urlRouterProvider.otherwise('/instore-survey-a');
+	$urlRouterProvider.otherwise('/instore-survey-b');
 
 	
 });
