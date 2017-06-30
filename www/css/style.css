@@ -501,3 +501,7 @@ input:disabled {
 select {
 	white-space: nowrap;
 }
+
+.question-tab-2 {
+	margin-top:-10px;;
+}
