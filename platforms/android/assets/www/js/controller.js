@@ -29,6 +29,7 @@ app.controller('settingsLoadCtrl',function($scope, $cordovaSQLite, $ionicPlatfor
 				$window.localStorage.setItem('store_code',res.rows.item(0).store_code);
 				$window.localStorage.setItem('store_type',res.rows.item(0).store_type);
 				$window.localStorage.setItem('store_manager',res.rows.item(0).store_manager);
+				$window.localStorage.setItem('store_address',res.rows.item(0).store_address);
 			}
 		});
 
@@ -41,18 +42,34 @@ app.controller('settingsLoadCtrl',function($scope, $cordovaSQLite, $ionicPlatfor
 
 		$cordovaSQLite.execute(db,'SELECT * FROM payday_weekday').then(function(res){
 			$scope.status_settings.payday_weekday = res.rows.length; 
+			if(res.rows.length != 0){
+				data = JSON.stringify(res.rows.item(0));
+				$window.localStorage.setItem('pwd',data);
+			}
 		});
 
 		$cordovaSQLite.execute(db,'SELECT * FROM non_payday_weekday').then(function(res){
 			$scope.status_settings.nonpayday_weekday = res.rows.length; 
+			if(res.rows.length != 0){
+				data = JSON.stringify(res.rows.item(0));
+				$window.localStorage.setItem('npwd',data);
+			}
 		});
 
 		$cordovaSQLite.execute(db,'SELECT * FROM payday_weekend').then(function(res){
 			$scope.status_settings.payday_weekend = res.rows.length;  
+			if(res.rows.length != 0){
+				data = JSON.stringify(res.rows.item(0));
+				$window.localStorage.setItem('pwe',data);
+			}
 		});
 
 		$cordovaSQLite.execute(db,'SELECT * FROM non_payday_weekend').then(function(res){
 			$scope.status_settings.nonpayday_weekend = res.rows.length; 
+			if(res.rows.length != 0){
+				data = JSON.stringify(res.rows.item(0));
+				$window.localStorage.setItem('npwe',data);
+			}
 		});
 
 		$timeout(function(){

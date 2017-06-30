@@ -300,6 +300,18 @@ div.time-value-end {
 	vertical-align:middle;
 }
 
+.label-bold {
+	color: black;
+	font-size: 26px;
+	font-weight: 	bold;
+	vertical-align:middle;
+}
+
+.sub-label {
+	font-size: 18px; 
+	font-weight: normal;
+}
+
 .question {
 	font-size: 16.5px;
 }
@@ -308,7 +320,7 @@ div.time-value-end {
     -webkit-appearance: none;
     width: 25px;
     height: 25px;
-    border: 2px solid red !important;
+    border: 2px solid #666666 !important;
     border-radius: 50%;
     outline: none;
 }
@@ -324,6 +336,10 @@ div.time-value-end {
 
 #red-radio input[type='radio']:checked:before {
     background: red;
+}
+
+#red-radio input[type='radio']:checked {
+    border: 2px solid red !important;
 }
 
 .option-text {
@@ -373,4 +389,119 @@ div.time-value-end {
 
 .currency-input {
 	margin-left: 30px;
+}
+
+#multi-liner {
+	border-bottom: 2px solid #E6E6E6;
+}
+
+/* Two column Text */
+input.column-one {
+    float:left;
+    width: 230px;
+}
+
+input.column-two {
+	width: 230px;
+	float: right;
+	position: absolute; 
+	margin-left: 240px;
+}
+
+/* Two column Select */
+select.option-column-one {
+    float:left;
+    width: 200px;
+    height: 25px;
+    background-color: #FFFFFF;
+    border: 1px solid #FFFFFF;
+   	border-bottom: 2px solid #E6E6E6 !important;
+}
+
+select.option-column-two {
+	width: 200px;
+    height: 25px;
+	float: right;
+	position: absolute; 
+	margin-left: 35px;
+	background-color: #FFFFFF;
+    border: 1px solid #FFFFFF;
+   	border-bottom: 2px solid #E6E6E6 !important;
+}
+
+div.sub-2-column {
+	margin-left: 40px !important; 
+	position: absolute;
+}
+
+.question-2 {
+	font-size: 16px;
+}
+
+#question-tab {
+	font-size: 16.5px;
+	color: black !important;
+}
+
+select.borderless-top{
+	border-top: 2px solid #FFFFFF; 
+}
+
+/* Standard styling for select with bottom liner */
+
+div.wrapper-one {
+	border-bottom: 2px solid #E6E6E6; 
+	float: left;
+}
+
+div.wrapper-two {
+	border-bottom: 2px solid #E6E6E6; 
+	position: absolute; 
+	margin-left: 239px;
+    float: right;
+}
+
+select.borderless-one {
+	border: none; 
+	background-color: white; 
+	height: 25px;
+	width: 200px;
+	white-space: nowrap;
+}
+
+select.borderless-two{
+	background: #FFFFFF; 
+	height: 25px; 
+	width: 200px; 
+	border: none;
+}
+
+input[type="checkbox"]{
+  width: 20px; 
+  height: 20px; 
+}
+
+div.tab-age {
+	margin-left: 60px;
+}
+
+.middle-text {
+	position: relative; 
+	bottom: 7px;
+}
+
+.icon-footer {
+	font-size: 32px;
+}
+
+input:disabled {
+	background: #FFFFFF;
+}
+
+select {
+	white-space: nowrap;
+}
+
+.question-tab-2 {
+	margin-top:-10px;;
 }
