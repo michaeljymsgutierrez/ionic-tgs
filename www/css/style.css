@@ -497,3 +497,7 @@ div.tab-age {
 input:disabled {
 	background: #FFFFFF;
 }
+
+select {
+	white-space: nowrap;
+}
