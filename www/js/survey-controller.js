@@ -91,22 +91,28 @@ app.controller('surveyCtrl',function($ionicSideMenuDelegate, $scope, $ionicHisto
         }
 
     });
-    
-    // Watcher for btn statuses via localStorages
-    $interval(function(){
+        
+     // Function for sa 
+    $scope.saveSurvey = function(){
+        var save = {
+            survey_answers: storage.read('survey_answers'),
+            store_type: storage.read('store_type'),
+            schedule_type: storage.read('type'),
+            date_start: storage.read('start'),
+            date_end: storage.read('end'),
+            created: dateFormatter.toStandard(new Date()),
+            is_synced: 0
 
-        // Function for lanching survey landing page
-        $rootScope.launch_survey = function(){
-            if(storage.read('surveyBtn') == "true"){
-                $rootScope.toggleLeft();
-                $state.go('survey-landing');
-            }
-            else{
-                 Toast.show("No survey schedule for Today","long","center");
-            }
         };
-    },1000);
-
+        
+        $cordovaSQLite.execute(db,"INSERT INTO survey_data (survey_answers, store_type, schedule_type, date_start, date_end, created, is_synced) VALUES(?,?,?,?,?,?,?)",
+        [save.survey_answers, save.store_type, save.schedule_type, save.date_start, save.date_end, save.created, save.is_synced])
+        .then(function(res){
+            Toast.show('Successfully save . . .','long','center');
+        },function(err){
+            Toast.show('Error saving . . .','long','center');
+        });
+    };
 
 	// Toggle Sidemenu on survey controller
 	$rootScope.toggleLeft = function(){
@@ -799,7 +805,7 @@ app.controller('surveyCtrl',function($ionicSideMenuDelegate, $scope, $ionicHisto
                     // Code Save here
                     var data = JSON.stringify($rootScope.answer);
                     $window.localStorage.setItem('survey_answers',data);
-                    Toast.show("Ready to save . . .","long","center");
+                    $scope.saveSurvey();
                 }
                 
             }
@@ -864,8 +870,7 @@ app.controller('surveyCtrl',function($ionicSideMenuDelegate, $scope, $ionicHisto
                     // Code save here
                     var data = JSON.stringify($rootScope.answer);
                     $window.localStorage.setItem('survey_answers',data);
-                    Toast.show("Yay Ready to save . . .","long","center");
-                    console.log( $window.localStorage.getItem('survey_answers'));
+                    $scope.saveSurvey();
                 }
             }
         },
