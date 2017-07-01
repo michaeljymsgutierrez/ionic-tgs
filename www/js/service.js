@@ -58,3 +58,16 @@ app.service('schedule',function($window){
 	}
 
 });
+
+// Service for READ and WRITE to localStorage
+app.service('storage',function($window){
+	// Write file to localStorage
+	this.write = function(key,val){
+		$window.localStorage.setItem(key,val);
+	};
+
+	// Read file to localStorage
+	this.read = function(key){
+		return $window.localStorage.getItem(key);
+	};
+});
