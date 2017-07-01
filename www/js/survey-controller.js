@@ -115,9 +115,10 @@ app.controller('surveyCtrl',function($ionicSideMenuDelegate, $scope, $ionicHisto
         $cordovaSQLite.execute(db,"INSERT INTO survey_data (survey_answers, store_type, schedule_type, date_start, date_end, created, is_synced) VALUES(?,?,?,?,?,?,?)",
         [save.survey_answers, save.store_type, save.schedule_type, save.date_start, save.date_end, save.created, save.is_synced])
         .then(function(res){
-            Toast.show('Successfully save . . .','long','center');
+            $state.go('survey-thankyou');
+            Toast.show('Survey form successfully submitted . . .','long','center');
         },function(err){
-            Toast.show('Error saving . . .','long','center');
+            Toast.show('Error submitting survey form . . .','long','center');
         });
     };
 
