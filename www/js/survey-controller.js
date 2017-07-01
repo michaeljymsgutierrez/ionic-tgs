@@ -91,6 +91,22 @@ app.controller('surveyCtrl',function($ionicSideMenuDelegate, $scope, $ionicHisto
         }
 
     });
+    
+    // Watcher for btn statuses via localStorages
+    $interval(function(){
+
+        // Function for lanching survey landing page
+        $rootScope.launch_survey = function(){
+            if(storage.read('surveyBtn') == "true"){
+                $rootScope.toggleLeft();
+                $state.go('survey-landing');
+            }
+            else{
+                 Toast.show("No survey schedule for Today","long","center");
+            }
+        };
+    },1000);
+
 
 	// Toggle Sidemenu on survey controller
 	$rootScope.toggleLeft = function(){
