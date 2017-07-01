@@ -519,3 +519,30 @@ select {
 .question-tab-2 {
 	margin-top:-10px;;
 }
+
+#tab-one {
+	float: left; 
+	width: 50%; 
+	height: 60px;
+	padding: 20px 0; 
+	font-size: 18px;
+	background: lightgray;
+	border: 1px solid gray;
+	border-top: none;
+}
+
+#tab-two {
+	float: right; 
+	width: 50%; 
+	height: 60px;
+	padding: 20px 0; 
+	font-size: 18px; 
+	background: lightgray;
+	border: 1px solid gray;
+	border-top: none;
+}
+
+.active {
+	border: none !important;
+	background-color: #FFFFFF !important;
+}
