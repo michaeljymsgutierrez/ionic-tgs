@@ -3,6 +3,12 @@ app.controller('surveyCtrl',function($ionicSideMenuDelegate, $scope, $ionicHisto
 
     // Execute process needed platform ready
     $ionicPlatform.ready(function(){
+        // Initialized unsynced number of data
+        $rootScope.unsynced_data = 0;
+        // Function for fetching unsynced data 
+        $cordovaSQLite.execute(db,"SELECT * FROM survey_data WHERE is_synced = 0").then(function(res){
+            $rootScope.unsynced_data = res.rows.length;
+        });
 
         // Load Store settings from  data base
         $cordovaSQLite.execute(db,'SELECT * FROM store_settings').then(function(res){
