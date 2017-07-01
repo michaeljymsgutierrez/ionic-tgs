@@ -994,5 +994,44 @@ app.controller('surveyCtrl',function($ionicSideMenuDelegate, $scope, $ionicHisto
 
     	}
     };
+
+    // Initialize active : inactive  class
+    $scope.activetabOne = true;
+    $scope.activetabTwo = false;
+    $rootScope.total_unsycned = 0;
+    $rootScope.total_sycned = 0;
+    $scope.sync_title = "Unsynced";
+
+    // Get count of unsynced data
+    $cordovaSQLite.execute(db,"SELECT * FROM survey_data WHERE is_synced = 0").then(function(res){
+       $rootScope.total_unsycned = res.rows.length;
+    });
+
+    // Get count of synced data 
+    $cordovaSQLite.execute(db,"SELECT * FROM survey_data WHERE is_synced = 1").then(function(res){
+       $rootScope.total_sycned = res.rows.length;
+    });
+
+
+    $scope.showSynced = function(){
+        // Set active class and title
+        $scope.activetabOne = false;
+        $scope.activetabTwo = true;
+        $scope.sync_title = "Synced";
+
+        $cordovaSQLite.execute(db,"SELECT * FROM survey_data WHERE is_synced = 1").then(function(res){
+           $rootScope.total_sycned = res.rows.length;
+        });    
+    };
+
+    $scope.showUnsynced = function(){
+        // Set active class and title
+        $scope.activetabOne = true;
+        $scope.activetabTwo = false;
+        $scope.sync_title = "Unsynced";
+        $cordovaSQLite.execute(db,"SELECT * FROM survey_data WHERE is_synced = 0").then(function(res){
+           $rootScope.total_unsycned = res.rows.length;
+        });
+    };
     
 });
