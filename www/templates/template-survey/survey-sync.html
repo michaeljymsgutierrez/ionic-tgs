@@ -3,7 +3,7 @@
 <ion-view id="settings-bg" hide-back-button="true">
 
 	<ion-nav-title>
-		<span id="view-title-color"> Unsynced </span>
+		<span id="view-title-color"> {{ sync_title }} </span>
 	</ion-nav-title>
 
 	<ion-nav-buttons side="left">
@@ -15,6 +15,21 @@
 	</ion-nav-buttons>
 
 	<ion-content scroll="false" id="survey-background">
+
+		<div id="tab-parent">
+			<div id="tab-one" ng-class="{ active: activetabOne }" ng-click="showUnsynced()">Unsynced</div>
+			<div id="tab-two" ng-class="{ active: activetabTwo}" ng-click="showSynced()">Synced</div>
+		</div>
+
+		<div id="sync-content" ng-if="activetabOne">
+			<div id="total-desc">Total Count</div>
+			<div id="total-count"> {{ total_unsycned }} </div>
+		</div>
+
+		<div id="sync-content" ng-if="activetabTwo">
+			<div id="total-desc">Total Count</div>
+			<div id="total-count"> {{ total_sycned }} </div>
+		</div>
 
 	</ion-content>
 	
