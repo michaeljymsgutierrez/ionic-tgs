@@ -3,6 +3,8 @@ app.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider){
 
 	// Center Nav Title
 	$ionicConfigProvider.navBar.alignTitle('center');
+	// Remove slide animation of views
+	$ionicConfigProvider.views.transition('none');
 
 	// Initialization of States
 	$stateProvider
