@@ -120,14 +120,14 @@ app.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider){
 		templateUrl: 'templates/template-survey/survey-thankyou.html',
 		controller: 'surveyCtrl'
 	})
-	.state('sync',{
+	.state('survey-sync',{
 		cache: false,
-		url: '/sync',
-		templateUrl: 'templates/template-sync/sync.html',
+		url: '/survey-sync',
+		templateUrl: 'templates/template-survey/survey-sync.html',
 		controller: 'surveyCtrl'
 	});
 
-	$urlRouterProvider.otherwise('/survey-thankyou');
+	$urlRouterProvider.otherwise('/survey-sync');
 
 	
 });
