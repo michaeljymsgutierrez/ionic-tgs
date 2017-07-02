@@ -17,8 +17,8 @@
 	<ion-content scroll="false" id="survey-background">
 
 		<div id="tab-parent">
-			<div id="tab-one" ng-class="{ active: activetabOne }" ng-click="showUnsynced()">Unsynced</div>
-			<div id="tab-two" ng-class="{ active: activetabTwo}" ng-click="showSynced()">Synced</div>
+			<div id="tab-one" ng-class="{ activeTab: activetabOne }" ng-click="showUnsynced()">Unsynced</div>
+			<div id="tab-two" ng-class="{ activeTab: activetabTwo}" ng-click="showSynced()">Synced</div>
 		</div>
 
 		<div id="sync-content" ng-if="activetabOne">
