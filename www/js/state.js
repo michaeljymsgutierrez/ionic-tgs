@@ -1,10 +1,16 @@
 // Configuration and States
-app.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider){
+app.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider, $httpProvider){
 
 	// Center Nav Title
 	$ionicConfigProvider.navBar.alignTitle('center');
 	// Remove slide animation of views
 	$ionicConfigProvider.views.transition('ios');
+
+	// Required headers for API
+	$httpProvider.defaults.headers.post['Content-Type'] = 'application/json';
+	$httpProvider.defaults.headers.post['Accept'] = 'application/json';
+	$httpProvider.defaults.headers.post['api-key'] = 'mang_inasal_auth_key';
+	delete $httpProvider.defaults.headers.common["X-Requested-With"];
 
 	// Initialization of States
 	$stateProvider
@@ -129,7 +135,7 @@ app.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider){
 		controller: 'surveyCtrl'
 	});
 
-	$urlRouterProvider.otherwise('/settings');
+	$urlRouterProvider.otherwise('/survey-sync');
 
 	
 });
