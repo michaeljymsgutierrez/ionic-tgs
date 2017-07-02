@@ -97,7 +97,20 @@ app.controller('surveyCtrl',function($ionicSideMenuDelegate, $scope, $ionicHisto
         }
 
     });
-        
+
+    // Function for disabling survey when no schedule is set on that day
+    $rootScope.clickSurvey = function(){
+            if(storage.read('surveyBtn') == "true"){
+                // If there is schedule within the range of survey settings with time
+                $rootScope.toggleLeft();
+                $state.go('survey-landing');                
+            }
+            else{
+                // Prompt to show there is no schedule
+                Toast.show("No survey schedule for today . . .","long","center");
+            }
+    };
+
      // Function for saving data
     $scope.saveSurvey = function(){
         // Form objects to  save
@@ -116,9 +129,9 @@ app.controller('surveyCtrl',function($ionicSideMenuDelegate, $scope, $ionicHisto
         [save.survey_answers, save.store_type, save.schedule_type, save.date_start, save.date_end, save.created, save.is_synced])
         .then(function(res){
             $state.go('survey-thankyou');
-            Toast.show('Survey form successfully submitted . . .','long','center');
+            Toast.show('Survey form successfully submitted . . .','short','bottom');
         },function(err){
-            Toast.show('Error submitting survey form . . .','long','center');
+            Toast.show('Error submitting survey form . . .','short','bottom');
         });
     };
 
