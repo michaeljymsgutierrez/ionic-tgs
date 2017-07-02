@@ -542,7 +542,7 @@ select {
 	border-top: none;
 }
 
-.active {
+.active-tab {
 	border: none !important;
 	background-color: #FFFFFF !important;
 }
