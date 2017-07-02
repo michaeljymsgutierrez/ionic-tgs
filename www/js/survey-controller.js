@@ -107,7 +107,7 @@ app.controller('surveyCtrl',function($ionicSideMenuDelegate, $scope, $ionicHisto
             }
             else{
                 // Prompt to show there is no schedule
-                Toast.show("No survey schedule for today . . .","long","center");
+                Toast.show("Sorry, you are not allowed to conduct survey today. Instead, you can access this feature on your next survey date. Thank you!","long","center");
             }
     };
 
