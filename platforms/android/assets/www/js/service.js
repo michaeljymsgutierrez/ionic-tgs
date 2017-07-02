@@ -24,6 +24,11 @@ app.service('dateFormatter',function($filter){
 	   return $filter('date')(dt,'HH:mm');
 	}
 
+	// Convert ISO to 24 Hr format with secs
+	this.toTimeSec = function(dt){
+		return $filter('date')(dt,'HH:mm:ss');
+	}
+
 	// Format scheds for display
 	this.summarize = function(dt,ts,te){
 		return $filter('date')(dt,'MMM dd, y') + "; " + $filter('date')(ts,'HH:mm') + " - " + $filter('date')(te,'HH:mm'); 
@@ -33,4 +38,36 @@ app.service('dateFormatter',function($filter){
 	this.toTimestamp = function(dt){
 		return Math.floor(new Date(dt).getTime()/1000);
 	}
+});
+
+// Service for writing  schedule properties on localStorage
+app.service('schedule',function($window){
+	// Set localStorage schedule type
+	this.setType = function(sched_type){
+		$window.localStorage.setItem('type',sched_type);
+	}
+
+	// Set localStorage schedule start
+	this.setStart = function(sched_start){
+		$window.localStorage.setItem('start',sched_start);
+	}
+
+	// Set localStorage schedule end
+	this.setEnd = function(sched_end){
+		$window.localStorage.setItem('end',sched_end);
+	}
+
+});
+
+// Service for READ and WRITE to localStorage
+app.service('storage',function($window){
+	// Write file to localStorage
+	this.write = function(key,val){
+		$window.localStorage.setItem(key,val);
+	};
+
+	// Read file to localStorage
+	this.read = function(key){
+		return $window.localStorage.getItem(key);
+	};
 });

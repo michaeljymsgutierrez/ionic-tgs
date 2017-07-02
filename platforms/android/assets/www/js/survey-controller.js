@@ -1,5 +1,139 @@
 // Survey Controller
-app.controller('surveyCtrl',function($ionicSideMenuDelegate, $scope, $ionicHistory, $rootScope, $window, Toast, $state, $location, Location, $interval, $timeout, $ionicPlatform){
+app.controller('surveyCtrl',function($ionicSideMenuDelegate, $scope, $ionicHistory, $rootScope, $window, Toast, $state, Location, $interval, $timeout, $ionicPlatform, $cordovaSQLite, dateFormatter, schedule, storage){
+
+    // Execute process needed platform ready
+    $ionicPlatform.ready(function(){
+        // Initialized unsynced number of data
+        $rootScope.unsynced_data = 0;
+        // Function for fetching unsynced data 
+        $cordovaSQLite.execute(db,"SELECT * FROM survey_data WHERE is_synced = 0").then(function(res){
+            $rootScope.unsynced_data = res.rows.length;
+        });
+
+        // Load Store settings from  data base
+        $cordovaSQLite.execute(db,'SELECT * FROM store_settings').then(function(res){
+            if(res.rows.length != 0){
+                $window.localStorage.setItem('store_name',res.rows.item(0).store_branch);
+                $window.localStorage.setItem('store_code',res.rows.item(0).store_code);
+                $window.localStorage.setItem('store_type',res.rows.item(0).store_type);
+                $window.localStorage.setItem('store_manager',res.rows.item(0).store_manager);
+                $window.localStorage.setItem('store_address',res.rows.item(0).store_address);
+            }
+        });
+
+        // Determine schedule type, start , end for saving dat to database
+        var dateNow = new Date().getDay();
+        storage.write('surveyBtn','false');
+        if(dateNow == 0 || dateNow == 6){
+
+            $cordovaSQLite.execute(db,"SELECT * FROM payday_weekend").then(function(res){
+                if(res.rows.length != 0){
+                    var d1 =  dateFormatter.toDate(new Date());
+                    var d2 = dateFormatter.toDate(new Date(res.rows.item(0).payday_weekend_date));
+                    var d3 = dateFormatter.toTimestamp(dateFormatter.toStandard(new Date()));
+                    var start = dateFormatter.toTimestamp(dateFormatter.toDate(new Date(res.rows.item(0).payday_weekend_date)) + " " + dateFormatter.toTimeSec(new Date(res.rows.item(0).payday_weekend_start)));
+                    var end = dateFormatter.toTimestamp(dateFormatter.toDate(new Date(res.rows.item(0).payday_weekend_date)) + " " + dateFormatter.toTimeSec(new Date(res.rows.item(0).payday_weekend_end)));
+                    if(d1 == d2 && (d3 >= start && d3 <= end)){
+                        schedule.setType("Payday Weekend");
+                        schedule.setStart(dateFormatter.toDate(new Date(res.rows.item(0).payday_weekend_date)) + " " + dateFormatter.toTimeSec(new Date(res.rows.item(0).payday_weekend_start)));
+                        schedule.setEnd(dateFormatter.toDate(new Date(res.rows.item(0).payday_weekend_date)) + " " + dateFormatter.toTimeSec(new Date(res.rows.item(0).payday_weekend_end)));
+                        storage.write('surveyBtn','true');
+                    }
+                }
+            });
+
+            $cordovaSQLite.execute(db,"SELECT * FROM non_payday_weekend").then(function(res){
+                if(res.rows.length != 0){
+                    var d1 =  dateFormatter.toDate(new Date());
+                    var d2 = dateFormatter.toDate(new Date(res.rows.item(0).non_payday_weekend_date));
+                    var d3 = dateFormatter.toTimestamp(dateFormatter.toStandard(new Date()));
+                    var start = dateFormatter.toTimestamp(dateFormatter.toDate(new Date(res.rows.item(0).non_payday_weekend_date)) + " " + dateFormatter.toTimeSec(new Date(res.rows.item(0).non_payday_weekend_start)));
+                    var end = dateFormatter.toTimestamp(dateFormatter.toDate(new Date(res.rows.item(0).non_payday_weekend_date)) + " " + dateFormatter.toTimeSec(new Date(res.rows.item(0).non_payday_weekend_end)));
+                    if(d1 == d2 && (d3 >= start && d3 <= end)){
+                        schedule.setType("Non Payday Weekend");
+                        schedule.setStart(dateFormatter.toDate(new Date(res.rows.item(0).non_payday_weekend_date)) + " " + dateFormatter.toTimeSec(new Date(res.rows.item(0).non_payday_weekend_start)));
+                        schedule.setEnd(dateFormatter.toDate(new Date(res.rows.item(0).non_payday_weekend_date)) + " " + dateFormatter.toTimeSec(new Date(res.rows.item(0).non_payday_weekend_end)));
+                        storage.write('surveyBtn','true');
+                    }
+                }
+
+            });
+
+        }
+        else{
+
+            $cordovaSQLite.execute(db,"SELECT * FROM payday_weekday").then(function(res){
+                if(res.rows.length != 0){
+                    var d1 =  dateFormatter.toDate(new Date());
+                    var d2 = dateFormatter.toDate(new Date(res.rows.item(0).payday_weekday_date));
+                    var d3 = dateFormatter.toTimestamp(dateFormatter.toStandard(new Date()));
+                    var start = dateFormatter.toTimestamp(dateFormatter.toDate(new Date(res.rows.item(0).payday_weekday_date)) + " " + dateFormatter.toTimeSec(new Date(res.rows.item(0).payday_weekday_start)));
+                    var end = dateFormatter.toTimestamp(dateFormatter.toDate(new Date(res.rows.item(0).payday_weekday_date)) + " " + dateFormatter.toTimeSec(new Date(res.rows.item(0).payday_weekday_end)));
+                    if(d1 == d2 && (d3 >= start && d3 <= end)){
+                        schedule.setType("Payday Weekday");
+                        schedule.setStart(dateFormatter.toDate(new Date(res.rows.item(0).payday_weekday_date)) + " " + dateFormatter.toTimeSec(new Date(res.rows.item(0).payday_weekday_start)));
+                        schedule.setEnd(dateFormatter.toDate(new Date(res.rows.item(0).payday_weekday_date)) + " " + dateFormatter.toTimeSec(new Date(res.rows.item(0).payday_weekday_end)));
+                        storage.write('surveyBtn','true');
+                    }
+                }
+            });
+
+            $cordovaSQLite.execute(db,"SELECT * FROM non_payday_weekday").then(function(res){
+                if(res.rows.length != 0){
+                    var d1 =  dateFormatter.toDate(new Date());
+                    var d2 = dateFormatter.toDate(new Date(res.rows.item(0).non_payday_weekday_date));
+                    var d3 = dateFormatter.toTimestamp(dateFormatter.toStandard(new Date()));
+                    var start = dateFormatter.toTimestamp(dateFormatter.toDate(new Date(res.rows.item(0).non_payday_weekday_date)) + " " + dateFormatter.toTimeSec(new Date(res.rows.item(0).non_payday_weekday_start)));
+                    var end = dateFormatter.toTimestamp(dateFormatter.toDate(new Date(res.rows.item(0).non_payday_weekday_date)) + " " + dateFormatter.toTimeSec(new Date(res.rows.item(0).non_payday_weekday_end)));
+                    if(d1 == d2 && (d3 >= start && d3 <= end)){
+                        schedule.setType("Non Payday Weekday");
+                        schedule.setStart(dateFormatter.toDate(new Date(res.rows.item(0).non_payday_weekday_date)) + " " + dateFormatter.toTimeSec(new Date(res.rows.item(0).non_payday_weekday_start)));
+                        schedule.setEnd(dateFormatter.toDate(new Date(res.rows.item(0).non_payday_weekday_date)) + " " + dateFormatter.toTimeSec(new Date(res.rows.item(0).non_payday_weekday_end)));
+                        storage.write('surveyBtn','true');
+                    }
+                }
+
+            });
+        }
+
+    });
+
+    // Function for disabling survey when no schedule is set on that day
+    $rootScope.clickSurvey = function(){
+            if(storage.read('surveyBtn') == "true"){
+                // If there is schedule within the range of survey settings with time
+                $rootScope.toggleLeft();
+                $state.go('survey-landing');                
+            }
+            else{
+                // Prompt to show there is no schedule
+                Toast.show("Sorry, you are not allowed to conduct survey today. Instead, you can access this feature on your next survey date. Thank you!","long","center");
+            }
+    };
+
+     // Function for saving data
+    $scope.saveSurvey = function(){
+        // Form objects to  save
+        var save = {
+            survey_answers: storage.read('survey_answers'),
+            store_type: storage.read('store_type'),
+            schedule_type: storage.read('type'),
+            date_start: storage.read('start'),
+            date_end: storage.read('end'),
+            created: dateFormatter.toStandard(new Date()),
+            is_synced: 0
+
+        };
+        // Function save survey data
+        $cordovaSQLite.execute(db,"INSERT INTO survey_data (survey_answers, store_type, schedule_type, date_start, date_end, created, is_synced) VALUES(?,?,?,?,?,?,?)",
+        [save.survey_answers, save.store_type, save.schedule_type, save.date_start, save.date_end, save.created, save.is_synced])
+        .then(function(res){
+            $state.go('survey-thankyou');
+            Toast.show('Survey form successfully submitted . . .','short','bottom');
+        },function(err){
+            Toast.show('Error submitting survey form . . .','short','bottom');
+        });
+    };
 
 	// Toggle Sidemenu on survey controller
 	$rootScope.toggleLeft = function(){
@@ -692,7 +826,7 @@ app.controller('surveyCtrl',function($ionicSideMenuDelegate, $scope, $ionicHisto
                     // Code Save here
                     var data = JSON.stringify($rootScope.answer);
                     $window.localStorage.setItem('survey_answers',data);
-                    Toast.show("Ready to save . . .","long","center");
+                    $scope.saveSurvey();
                 }
                 
             }
@@ -757,13 +891,9 @@ app.controller('surveyCtrl',function($ionicSideMenuDelegate, $scope, $ionicHisto
                     // Code save here
                     var data = JSON.stringify($rootScope.answer);
                     $window.localStorage.setItem('survey_answers',data);
-                    Toast.show("Yay Ready to save . . .","long","center");
-
+                    $scope.saveSurvey();
                 }
             }
-            
-
-            $scope.debug();
         },
         pageQAI: function(){
                 // Validation for QA - Instore - Free Stand
@@ -814,6 +944,62 @@ app.controller('surveyCtrl',function($ionicSideMenuDelegate, $scope, $ionicHisto
                     }
                 }
         },
+        pageQBI: function(){
+                // Validation for QB - Instore - Free Stand
+                if($rootScope.answer.hasOwnProperty('qB') == false){
+                    Toast.show("Please fill up all fields . . .","short","center");
+                }
+                else if($rootScope.answer.hasOwnProperty('qB') == true && $rootScope.answer.qB.hasOwnProperty('sub') == false){
+                    Toast.show("Please fill up all fields . . .","short","center");
+                }
+                else if($rootScope.answer.hasOwnProperty('qB') == true && $rootScope.answer.qB.ans != 'Home' && $rootScope.answer.qB.hasOwnProperty('sub') == true && $rootScope.answer.qA.sub.hasOwnProperty('est_name') == false){
+                    Toast.show("Please fill up all fields . . .","short","center");
+                }
+                else if($rootScope.answer.hasOwnProperty('qB') == true && $rootScope.answer.qB.hasOwnProperty('sub') == true && $rootScope.answer.qB.sub.hasOwnProperty('region') == false){
+                    Toast.show("Please fill up all fields . . .","short","center");
+                }
+                else if($rootScope.answer.hasOwnProperty('qB') == true && $rootScope.answer.qB.hasOwnProperty('sub') == true && $rootScope.answer.qB.sub.hasOwnProperty('province') == false){
+                    Toast.show("Please fill up all fields . . .","short","center");
+                }
+                else if($rootScope.answer.hasOwnProperty('qB') == true && $rootScope.answer.qB.hasOwnProperty('sub') == true && $rootScope.answer.qB.sub.hasOwnProperty('city') == false){
+                    Toast.show("Please fill up all fields . . .","short","center");
+                }
+                else if($rootScope.answer.hasOwnProperty('qB') == true && $rootScope.answer.qB.hasOwnProperty('sub') == true && $rootScope.answer.qB.sub.hasOwnProperty('brgy') == false){
+                    Toast.show("Please fill up all fields . . .","short","center");
+                }
+                else if($rootScope.answer.hasOwnProperty('qB') == true && $rootScope.answer.qB.ans != 'Home' && $rootScope.answer.qB.hasOwnProperty('sub') == true && $rootScope.answer.qB.sub.hasOwnProperty('est_name') == true && $rootScope.answer.qB.sub.est_name == ""){
+                    Toast.show("Please fill up all fields . . .","short","center");
+                }
+                else if($rootScope.answer.hasOwnProperty('qB') == true && $rootScope.answer.qB.hasOwnProperty('sub') == true && $rootScope.answer.qB.sub.hasOwnProperty('region') == true && $rootScope.answer.qB.sub.region == null){
+                    Toast.show("Please fill up all fields . . .","short","center");
+                }
+                else if($rootScope.answer.hasOwnProperty('qB') == true && $rootScope.answer.qB.hasOwnProperty('sub') == true && $rootScope.answer.qB.sub.hasOwnProperty('province') == true && $rootScope.answer.qB.sub.province == null){
+                    Toast.show("Please fill up all fields . . .","short","center");
+                }
+                else if($rootScope.answer.hasOwnProperty('qB') == true && $rootScope.answer.qB.hasOwnProperty('sub') == true && $rootScope.answer.qB.sub.hasOwnProperty('city') == true && $rootScope.answer.qB.sub.city == null){
+                    Toast.show("Please fill up all fields . . .","short","center");
+                }
+                else if($rootScope.answer.hasOwnProperty('qB') == true &&  $rootScope.answer.qB.hasOwnProperty('sub') == true && $rootScope.answer.qB.sub.hasOwnProperty('brgy') == true && $rootScope.answer.qB.sub.brgy == null){
+                    Toast.show("Please fill up all fields . . .","short","center");
+                }
+                else{
+                    var data = JSON.stringify($rootScope.answer); 
+                    $window.localStorage.setItem('survey_answers',data);
+                    if($rootScope.store_type == 'Instore' || $rootScope.store_type == 'Free Stand'){
+                        $state.go('personal-info');
+                    }
+                }
+        },
+        personalInfoBackState: function(){
+            var data = JSON.stringify($rootScope.answer);
+            $window.localStorage.setItem('survey_answers',data);
+            if($rootScope.store_type == 'Instore' || $rootScope.store_type == 'Free Stand'){
+                $state.go('instore-survey-b');
+            }
+            else if($rootScope.store_type == 'Mall' || $rootScope.store_type == 'Food Court'){
+                $state.go('mall-survey-b');
+            }
+        },
     	backState: function(page){
     		var data = JSON.stringify($rootScope.answer);
     		$window.localStorage.setItem('survey_answers',data);
@@ -821,5 +1007,53 @@ app.controller('surveyCtrl',function($ionicSideMenuDelegate, $scope, $ionicHisto
 
     	}
     };
+
+    // Platform ready for sync section template
+    $ionicPlatform.ready(function(){
+
+        // Initialize active : inactive  class
+        $scope.activetabOne = true;
+        $scope.activetabTwo = false;
+        $rootScope.total_unsycned = 0;
+        $rootScope.total_sycned = 0;
+        $scope.sync_title = "Unsynced";
+
+        // Get count of unsynced data
+        $cordovaSQLite.execute(db,"SELECT * FROM survey_data WHERE is_synced = 0").then(function(res){
+           $rootScope.total_unsycned = res.rows.length;
+        });
+
+        // Get count of synced data 
+        $cordovaSQLite.execute(db,"SELECT * FROM survey_data WHERE is_synced = 1").then(function(res){
+           $rootScope.total_sycned = res.rows.length;
+        });
+
+
+        $scope.showSynced = function(){
+            // Set active class and title
+            $scope.activetabOne = false;
+            $scope.activetabTwo = true;
+            $scope.sync_title = "Synced";
+
+            $cordovaSQLite.execute(db,"SELECT * FROM survey_data WHERE is_synced = 1").then(function(res){
+               $rootScope.total_sycned = res.rows.length;
+            });    
+        };
+
+        $scope.showUnsynced = function(){
+            // Set active class and title
+            $scope.activetabOne = true;
+            $scope.activetabTwo = false;
+            $scope.sync_title = "Unsynced";
+            $cordovaSQLite.execute(db,"SELECT * FROM survey_data WHERE is_synced = 0").then(function(res){
+               $rootScope.total_unsycned = res.rows.length;
+            });
+        };
+
+        $scope.syncAllData = function(){
+            console.log("SYNC NOW");
+        };
+
+    });
     
 });

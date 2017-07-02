@@ -74,7 +74,7 @@ app.run(function($ionicPlatform, $cordovaSQLite, $ionicPickerI18n) {
        });
 
        // Initialize table for main data
-       $cordovaSQLite.execute(db,'CREATE TABLE IF NOT EXISTS survey_data (id integer primary key, survey_answers text, store_code text, store_type text, store_manager text, store_branch text, language_type text, survey_schedule text, schedule_type text, created text, is_synced text)')
+       $cordovaSQLite.execute(db,'CREATE TABLE IF NOT EXISTS survey_data (id integer primary key, survey_answers text, store_type text, schedule_type text, created text, date_start text, date_end text, is_synced text)')
        .then(function(res){
           console.info("Initialized survey_data");
        },function(err){

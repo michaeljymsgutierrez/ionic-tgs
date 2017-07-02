@@ -91,11 +91,13 @@
             </ion-item>
 
             <ion-item id="side-list">
-              <a class="button button-clear item item-icon-left" ui-sref="survey-landing" ng-click="toggleLeft()">
+                <a class="button button-clear item item-icon-left" ng-click="clickSurvey()">
+                <!-- Uncomment this line below in case or for debug purpose -->
+                <!-- <a class="button button-clear item item-icon-left" ui-sref="survey-landing" ng-click="toggleLeft()"> -->
                 <i class="icon">
                   <i class="ion-ios-list-outline" id="side-menu-icons"></i>
                 </i>
-                <span id="side-menu-item-text"> {{ store_type }} Type </span>
+                <span id="side-menu-item-text"> {{ store_type }} Survey </span>
               </a>
             </ion-item>
 
@@ -109,11 +111,11 @@
             </ion-item>
 
             <ion-item id="side-list">
-              <a class="button button-clear item item-icon-left">
+              <a class="button button-clear item item-icon-left" ui-sref="survey-sync" ng-click="toggleLeft()">
                 <i class="icon">
                   <i class="ion-android-sync" id="side-menu-icons"></i>
                 </i>
-                <span id="side-menu-item-text"> Unsynced (100) </span>
+                <span id="side-menu-item-text"> Unsynced ( {{ unsynced_data }} ) </span>
               </a>
             </ion-item>
           </ion-list>

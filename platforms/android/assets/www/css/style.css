@@ -96,6 +96,11 @@ input[type='radio']:checked:before {
 
 /* General Classes */
 
+.landing-content {
+	padding: 80px 0; 
+	text-align: center;
+}
+
 .borderless {
 	border: none;
 }
@@ -288,7 +293,16 @@ div.time-value-end {
 #landing-button {
 	color: white; 
 	border-color: #FFFFFF;
-	 width: 200px;
+	font-size: 18px;
+	width: 200px;
+}
+
+/* Survey Thank You */
+
+#landing-page-icon-thank {
+	width: 60%; 
+	margin: auto; 
+	display: block;
 }
 
 /* Survey Form */
@@ -504,4 +518,56 @@ select {
 
 .question-tab-2 {
 	margin-top:-10px;;
+}
+
+#tab-one {
+	float: left; 
+	width: 50%; 
+	height: 60px;
+	padding: 20px 0; 
+	font-size: 18px;
+	background: lightgray;
+	border: 1px solid gray;
+	border-top: none;
+}
+
+#tab-two {
+	float: right; 
+	width: 50%; 
+	height: 60px;
+	padding: 20px 0; 
+	font-size: 18px; 
+	background: lightgray;
+	border: 1px solid gray;
+	border-top: none;
+}
+
+.activeTab {
+	border: none !important;
+	background-color: #FFFFFF !important;
+}
+
+#tab-parent {
+	text-align: center;
+}
+
+#sync-content {
+	width: 100%;
+	margin-top: 80px !important;
+}
+
+#total-desc {
+	float: left; 
+	width: 50%; 
+	text-align: left; 
+	padding-left: 20px; 
+	font-size: 18px;
+}
+
+#total-count {
+	float: right; 
+	width: 50%; 
+	text-align: right; 
+	padding-right: 20px; 
+	font-size: 18px;
 }

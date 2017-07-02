@@ -25,8 +25,8 @@
 					    <span class="option-text">School</span>
 					  </label> 
 
-					  		  <!-- Sub content Location ng-if="answer.qA.ans == 'School'"-->
-							  <div >	
+					  		  <!-- Sub content Location -->
+							  <div ng-if="answer.qB.ans == 'School'"->	
 			  					  <div class="sub-2-column">
 								  		<input id="multi-liner" type="text" placeholder="Name of Establishment" class="column-one" ng-model="answer.qB.sub.est_name"/>  
 								  </div>	
@@ -68,7 +68,7 @@
 									  	<div class="wrapper-two">
 									  		<select class="borderless-two" ng-model="answer.qB.sub.brgy" ng-options="d.brgyDesc for d in qb_brgy">
 									  				  <option value="">Select Barangay</option>
-									  				  
+
 									  		</select>  
 									  	</div>
 								  		
@@ -78,21 +78,21 @@
 
 								  <div class="sub-2-column">
 								  		<input id="multi-liner" type="text" placeholder="Street Name" class="column-one" ng-model="answer.qB.sub.street_name"/>  
-								  		<input id="multi-liner" type="text" placeholder="Houe No./Ltd No./Building No." class="column-two" ng-model="answer.qB.sub.building_no"/>
+								  		<input id="multi-liner" type="text" placeholder="House No./Ltd No./Building No." class="column-two" ng-model="answer.qB.sub.building_no"/>
 								  </div>
 
 								  <line-breaker></line-breaker>	
 							 </div>
 
 					  <label class="item item-icon-left borderless">
-					    <i class="icon" id="red-radio"><input type='radio' name="qA" ng-model="answer.qA.ans" value="Office" ng-change="deleteObj.dual('qA','sub')"/></i>
+					    <i class="icon" id="red-radio"><input type='radio' name="qB" ng-model="answer.qB.ans" value="Office" ng-change="deleteObj.dual('qB','sub')"/></i>
 					    <span class="option-text">Office</span>
 					  </label>
 
 					  		  <!-- Sub content Location -->
-							  <div ng-if="answer.qA.ans == 'Office'">	
+							  <div ng-if="answer.qB.ans == 'Office'">	
 			  					  <div class="sub-2-column">
-								  		<input id="multi-liner" type="text" placeholder="Name of Establishment" class="column-one" ng-model="answer.qA.sub.est_name"/>  
+								  		<input id="multi-liner" type="text" placeholder="Name of Establishment" class="column-one" ng-model="answer.qB.sub.est_name"/>  
 								  </div>	
 
 								  <line-breaker></line-breaker>	
@@ -106,13 +106,13 @@
 								  <div class="sub-2-column">
 		                                
 		                                <div class="wrapper-one">
-		                                	<select class="borderless-one" ng-model="answer.qA.sub.region" ng-change="QAFilter.region(answer.qA.sub.region.regCode)" ng-options="a.regDesc for a in qa_regions">
+		                                	<select class="borderless-one" ng-model="answer.qB.sub.region" ng-change="QBFilter.region(answer.qB.sub.region.regCode)" ng-options="a.regDesc for a in qb_regions">
 		                                     	     <option value="">Select Region</option>
 		                                	</select>  
 		                                </div>
 
 		                                <div class="wrapper-two">
-									  		<select class="borderless-two" ng-model="answer.qA.sub.province" ng-change="QAFilter.province(answer.qA.sub.province.provCode)" ng-options="b.provDesc for b in qa_provinces">
+									  		<select class="borderless-two" ng-model="answer.qB.sub.province" ng-change="QBFilter.province(answer.qB.sub.province.provCode)" ng-options="b.provDesc for b in qb_provinces">
 									  				  <option value="">Select Province</option>
 									  		</select>  
 									  	</div>
@@ -124,14 +124,15 @@
 								  <div class="sub-2-column">
 								  		
 								  		<div class="wrapper-one">
-									  		<select  class="borderless-one" ng-model="answer.qA.sub.city" ng-change="QAFilter.city(answer.qA.sub.city.citymunCode)" ng-options="c.citymunDesc for c in qa_city">
+									  		<select  class="borderless-one" ng-model="answer.qB.sub.city" ng-change="QBFilter.city(answer.qB.sub.city.citymunCode)" ng-options="c.citymunDesc for c in qb_city">
 									  				  <option value="">Select City</option>
 									  		</select>  
 									  	</div>
 
 									  	<div class="wrapper-two">
-									  		<select class="borderless-two" ng-model="answer.qA.sub.brgy" ng-options="d.brgyDesc for d in qa_brgy">
+									  		<select class="borderless-two" ng-model="answer.qB.sub.brgy" ng-options="d.brgyDesc for d in qb_brgy">
 									  				  <option value="">Select Barangay</option>
+
 									  		</select>  
 									  	</div>
 								  		
@@ -140,22 +141,23 @@
 								  <line-breaker></line-breaker>	
 
 								  <div class="sub-2-column">
-								  		<input id="multi-liner" type="text" placeholder="Street Name" class="column-one" ng-model="answer.qA.sub.street_name"/>  
-								  		<input id="multi-liner" type="text" placeholder="Houe No./Ltd No./Building No." class="column-two" ng-model="answer.qA.sub.building_no"/>
+								  		<input id="multi-liner" type="text" placeholder="Street Name" class="column-one" ng-model="answer.qB.sub.street_name"/>  
+								  		<input id="multi-liner" type="text" placeholder="House No./Ltd No./Building No." class="column-two" ng-model="answer.qB.sub.building_no"/>
 								  </div>
+
 
 								  <line-breaker></line-breaker>	
 							 </div>
 
 					  <label class="item item-icon-left borderless">
-					    <i class="icon" id="red-radio"><input type='radio' name="qA" ng-model="answer.qA.ans" value="Mall/Shop" ng-change="deleteObj.dual('qA','sub')"/></i>
+					    <i class="icon" id="red-radio"><input type='radio' name="qB" ng-model="answer.qB.ans" value="Mall/Shop" ng-change="deleteObj.dual('qB','sub')"/></i>
 					    <span class="option-text">Mall/Shop</span>
 					  </label>
 
 					  		  <!-- Sub content Location -->
-							  <div ng-if="answer.qA.ans == 'Mall/Shop'">	
+							  <div ng-if="answer.qB.ans == 'Mall/Shop'">	
 			  					  <div class="sub-2-column">
-								  		<input id="multi-liner" type="text" placeholder="Name of Establishment" class="column-one" ng-model="answer.qA.sub.est_name"/>  
+								  		<input id="multi-liner" type="text" placeholder="Name of Establishment" class="column-one" ng-model="answer.qB.sub.est_name"/>  
 								  </div>	
 
 								  <line-breaker></line-breaker>	
@@ -169,13 +171,13 @@
 								  <div class="sub-2-column">
 		                                
 		                                <div class="wrapper-one">
-		                                	<select class="borderless-one" ng-model="answer.qA.sub.region" ng-change="QAFilter.region(answer.qA.sub.region.regCode)" ng-options="a.regDesc for a in qa_regions">
+		                                	<select class="borderless-one" ng-model="answer.qB.sub.region" ng-change="QBFilter.region(answer.qB.sub.region.regCode)" ng-options="a.regDesc for a in qb_regions">
 		                                     	     <option value="">Select Region</option>
 		                                	</select>  
 		                                </div>
 
 		                                <div class="wrapper-two">
-									  		<select class="borderless-two" ng-model="answer.qA.sub.province" ng-change="QAFilter.province(answer.qA.sub.province.provCode)" ng-options="b.provDesc for b in qa_provinces">
+									  		<select class="borderless-two" ng-model="answer.qB.sub.province" ng-change="QBFilter.province(answer.qB.sub.province.provCode)" ng-options="b.provDesc for b in qb_provinces">
 									  				  <option value="">Select Province</option>
 									  		</select>  
 									  	</div>
@@ -187,14 +189,15 @@
 								  <div class="sub-2-column">
 								  		
 								  		<div class="wrapper-one">
-									  		<select  class="borderless-one" ng-model="answer.qA.sub.city" ng-change="QAFilter.city(answer.qA.sub.city.citymunCode)" ng-options="c.citymunDesc for c in qa_city">
+									  		<select  class="borderless-one" ng-model="answer.qB.sub.city" ng-change="QBFilter.city(answer.qB.sub.city.citymunCode)" ng-options="c.citymunDesc for c in qb_city">
 									  				  <option value="">Select City</option>
 									  		</select>  
 									  	</div>
 
 									  	<div class="wrapper-two">
-									  		<select class="borderless-two" ng-model="answer.qA.sub.brgy" ng-options="d.brgyDesc for d in qa_brgy">
+									  		<select class="borderless-two" ng-model="answer.qB.sub.brgy" ng-options="d.brgyDesc for d in qb_brgy">
 									  				  <option value="">Select Barangay</option>
+
 									  		</select>  
 									  	</div>
 								  		
@@ -203,20 +206,20 @@
 								  <line-breaker></line-breaker>	
 
 								  <div class="sub-2-column">
-								  		<input id="multi-liner" type="text" placeholder="Street Name" class="column-one" ng-model="answer.qA.sub.street_name"/>  
-								  		<input id="multi-liner" type="text" placeholder="Houe No./Ltd No./Building No." class="column-two" ng-model="answer.qA.sub.building_no"/>
+								  		<input id="multi-liner" type="text" placeholder="Street Name" class="column-one" ng-model="answer.qB.sub.street_name"/>  
+								  		<input id="multi-liner" type="text" placeholder="House No./Ltd No./Building No." class="column-two" ng-model="answer.qB.sub.building_no"/>
 								  </div>
 
 								  <line-breaker></line-breaker>	
 							 </div>
 
 					  <label class="item item-icon-left borderless">
-					    <i class="icon" id="red-radio"><input type='radio' name="qA" ng-model="answer.qA.ans" value="Home" ng-change="deleteObj.dual('qA','sub')"/></i>
+					    <i class="icon" id="red-radio"><input type='radio' name="qB" ng-model="answer.qB.ans" value="Home" ng-change="deleteObj.dual('qB','sub')"/></i>
 					    <span class="option-text">Home</span>
 					  </label>
 
 					  		  <!-- Sub content Location -->
-							  <div ng-if="answer.qA.ans == 'Home'"> <br/>
+							  <div ng-if="answer.qB.ans == 'Home'"> <br/>
 							
 								  <div class="sub-2-column">	  
 								  		<div class="sub-label">Address</div>
@@ -227,13 +230,13 @@
 								  <div class="sub-2-column">
 		                                
 		                                <div class="wrapper-one">
-		                                	<select class="borderless-one" ng-model="answer.qA.sub.region" ng-change="QAFilter.region(answer.qA.sub.region.regCode)" ng-options="a.regDesc for a in qa_regions">
+		                                	<select class="borderless-one" ng-model="answer.qB.sub.region" ng-change="QBFilter.region(answer.qB.sub.region.regCode)" ng-options="a.regDesc for a in qb_regions">
 		                                     	     <option value="">Select Region</option>
 		                                	</select>  
 		                                </div>
 
 		                                <div class="wrapper-two">
-									  		<select class="borderless-two" ng-model="answer.qA.sub.province" ng-change="QAFilter.province(answer.qA.sub.province.provCode)" ng-options="b.provDesc for b in qa_provinces">
+									  		<select class="borderless-two" ng-model="answer.qB.sub.province" ng-change="QBFilter.province(answer.qB.sub.province.provCode)" ng-options="b.provDesc for b in qb_provinces">
 									  				  <option value="">Select Province</option>
 									  		</select>  
 									  	</div>
@@ -245,13 +248,13 @@
 								  <div class="sub-2-column">
 								  		
 								  		<div class="wrapper-one">
-									  		<select  class="borderless-one" ng-model="answer.qA.sub.city" ng-change="QAFilter.city(answer.qA.sub.city.citymunCode)" ng-options="c.citymunDesc for c in qa_city">
+									  		<select  class="borderless-one" ng-model="answer.qB.sub.city" ng-change="QBFilter.city(answer.qB.sub.city.citymunCode)" ng-options="c.citymunDesc for c in qb_city">
 									  				  <option value="">Select City</option>
 									  		</select>  
 									  	</div>
 
 									  	<div class="wrapper-two">
-									  		<select class="borderless-two" ng-model="answer.qA.sub.brgy" ng-options="d.brgyDesc for d in qa_brgy">
+									  		<select class="borderless-two" ng-model="answer.qB.sub.brgy" ng-options="d.brgyDesc for d in qb_brgy">
 									  				  <option value="">Select Barangay</option>
 									  		</select>  
 									  	</div>
@@ -261,22 +264,22 @@
 								  <line-breaker></line-breaker>	
 
 								  <div class="sub-2-column">
-								  		<input id="multi-liner" type="text" placeholder="Street Name" class="column-one" ng-model="answer.qA.sub.street_name"/>  
-								  		<input id="multi-liner" type="text" placeholder="Houe No./Ltd No./Building No." class="column-two" ng-model="answer.qA.sub.building_no"/>
+								  		<input id="multi-liner" type="text" placeholder="Street Name" class="column-one" ng-model="answer.qB.sub.street_name"/>  
+								  		<input id="multi-liner" type="text" placeholder="House No./Ltd No./Building No." class="column-two" ng-model="answer.qB.sub.building_no"/>
 								  </div>
 
 								  <line-breaker></line-breaker>	
 							 </div>
 
 		  			  <label class="item item-icon-left borderless">
-					    <i class="icon" id="red-radio"><input type='radio' name="qA" ng-model="answer.qA.ans" value="Hospital" ng-change="deleteObj.dual('qA','sub')"/></i>
+					    <i class="icon" id="red-radio"><input type='radio' name="qB" ng-model="answer.qB.ans" value="Hospital" ng-change="deleteObj.dual('qB','sub')"/></i>
 					    <span class="option-text">Hospital</span>
 					  </label>
 
 					  		  <!-- Sub content Location -->
-							  <div ng-if="answer.qA.ans == 'Hospital'">	
+							  <div ng-if="answer.qB.ans == 'Hospital'">	
 			  					  <div class="sub-2-column">
-								  		<input id="multi-liner" type="text" placeholder="Name of Establishment" class="column-one" ng-model="answer.qA.sub.est_name"/>  
+								  		<input id="multi-liner" type="text" placeholder="Name of Establishment" class="column-one" ng-model="answer.qB.sub.est_name"/>  
 								  </div>	
 
 								  <line-breaker></line-breaker>	
@@ -290,13 +293,13 @@
 								  <div class="sub-2-column">
 		                                
 		                                <div class="wrapper-one">
-		                                	<select class="borderless-one" ng-model="answer.qA.sub.region" ng-change="QAFilter.region(answer.qA.sub.region.regCode)" ng-options="a.regDesc for a in qa_regions">
+		                                	<select class="borderless-one" ng-model="answer.qB.sub.region" ng-change="QBFilter.region(answer.qB.sub.region.regCode)" ng-options="a.regDesc for a in qb_regions">
 		                                     	     <option value="">Select Region</option>
 		                                	</select>  
 		                                </div>
 
 		                                <div class="wrapper-two">
-									  		<select class="borderless-two" ng-model="answer.qA.sub.province" ng-change="QAFilter.province(answer.qA.sub.province.provCode)" ng-options="b.provDesc for b in qa_provinces">
+									  		<select class="borderless-two" ng-model="answer.qB.sub.province" ng-change="QBFilter.province(answer.qB.sub.province.provCode)" ng-options="b.provDesc for b in qb_provinces">
 									  				  <option value="">Select Province</option>
 									  		</select>  
 									  	</div>
@@ -308,14 +311,15 @@
 								  <div class="sub-2-column">
 								  		
 								  		<div class="wrapper-one">
-									  		<select  class="borderless-one" ng-model="answer.qA.sub.city" ng-change="QAFilter.city(answer.qA.sub.city.citymunCode)" ng-options="c.citymunDesc for c in qa_city">
+									  		<select  class="borderless-one" ng-model="answer.qB.sub.city" ng-change="QBFilter.city(answer.qB.sub.city.citymunCode)" ng-options="c.citymunDesc for c in qb_city">
 									  				  <option value="">Select City</option>
 									  		</select>  
 									  	</div>
 
 									  	<div class="wrapper-two">
-									  		<select class="borderless-two" ng-model="answer.qA.sub.brgy" ng-options="d.brgyDesc for d in qa_brgy">
+									  		<select class="borderless-two" ng-model="answer.qB.sub.brgy" ng-options="d.brgyDesc for d in qb_brgy">
 									  				  <option value="">Select Barangay</option>
+
 									  		</select>  
 									  	</div>
 								  		
@@ -324,22 +328,23 @@
 								  <line-breaker></line-breaker>	
 
 								  <div class="sub-2-column">
-								  		<input id="multi-liner" type="text" placeholder="Street Name" class="column-one" ng-model="answer.qA.sub.street_name"/>  
-								  		<input id="multi-liner" type="text" placeholder="Houe No./Ltd No./Building No." class="column-two" ng-model="answer.qA.sub.building_no"/>
+								  		<input id="multi-liner" type="text" placeholder="Street Name" class="column-one" ng-model="answer.qB.sub.street_name"/>  
+								  		<input id="multi-liner" type="text" placeholder="House No./Ltd No./Building No." class="column-two" ng-model="answer.qB.sub.building_no"/>
 								  </div>
+
 
 								  <line-breaker></line-breaker>	
 							 </div>
 
 		  			  <label class="item item-icon-left borderless">
-					    <i class="icon" id="red-radio"><input type='radio' name="qA" ng-model="answer.qA.ans" value="Church" ng-change="deleteObj.dual('qA','sub')"/></i>
+					    <i class="icon" id="red-radio"><input type='radio' name="qB" ng-model="answer.qB.ans" value="Church" ng-change="deleteObj.dual('qB','sub')"/></i>
 					    <span class="option-text">Church</span>
 					  </label>
 
 					  		  <!-- Sub content Location -->
-							  <div ng-if="answer.qA.ans == 'Church'">	
+							  <div ng-if="answer.qB.ans == 'Church'">	
 			  					  <div class="sub-2-column">
-								  		<input id="multi-liner" type="text" placeholder="Name of Establishment" class="column-one" ng-model="answer.qA.sub.est_name"/>  
+								  		<input id="multi-liner" type="text" placeholder="Name of Establishment" class="column-one" ng-model="answer.qB.sub.est_name"/>  
 								  </div>	
 
 								  <line-breaker></line-breaker>	
@@ -353,13 +358,13 @@
 								  <div class="sub-2-column">
 		                                
 		                                <div class="wrapper-one">
-		                                	<select class="borderless-one" ng-model="answer.qA.sub.region" ng-change="QAFilter.region(answer.qA.sub.region.regCode)" ng-options="a.regDesc for a in qa_regions">
+		                                	<select class="borderless-one" ng-model="answer.qB.sub.region" ng-change="QBFilter.region(answer.qB.sub.region.regCode)" ng-options="a.regDesc for a in qb_regions">
 		                                     	     <option value="">Select Region</option>
 		                                	</select>  
 		                                </div>
 
 		                                <div class="wrapper-two">
-									  		<select class="borderless-two" ng-model="answer.qA.sub.province" ng-change="QAFilter.province(answer.qA.sub.province.provCode)" ng-options="b.provDesc for b in qa_provinces">
+									  		<select class="borderless-two" ng-model="answer.qB.sub.province" ng-change="QBFilter.province(answer.qB.sub.province.provCode)" ng-options="b.provDesc for b in qb_provinces">
 									  				  <option value="">Select Province</option>
 									  		</select>  
 									  	</div>
@@ -371,14 +376,15 @@
 								  <div class="sub-2-column">
 								  		
 								  		<div class="wrapper-one">
-									  		<select  class="borderless-one" ng-model="answer.qA.sub.city" ng-change="QAFilter.city(answer.qA.sub.city.citymunCode)" ng-options="c.citymunDesc for c in qa_city">
+									  		<select  class="borderless-one" ng-model="answer.qB.sub.city" ng-change="QBFilter.city(answer.qB.sub.city.citymunCode)" ng-options="c.citymunDesc for c in qb_city">
 									  				  <option value="">Select City</option>
 									  		</select>  
 									  	</div>
 
 									  	<div class="wrapper-two">
-									  		<select class="borderless-two" ng-model="answer.qA.sub.brgy" ng-options="d.brgyDesc for d in qa_brgy">
+									  		<select class="borderless-two" ng-model="answer.qB.sub.brgy" ng-options="d.brgyDesc for d in qb_brgy">
 									  				  <option value="">Select Barangay</option>
+
 									  		</select>  
 									  	</div>
 								  		
@@ -387,23 +393,24 @@
 								  <line-breaker></line-breaker>	
 
 								  <div class="sub-2-column">
-								  		<input id="multi-liner" type="text" placeholder="Street Name" class="column-one" ng-model="answer.qA.sub.street_name"/>  
-								  		<input id="multi-liner" type="text" placeholder="Houe No./Ltd No./Building No." class="column-two" ng-model="answer.qA.sub.building_no"/>
+								  		<input id="multi-liner" type="text" placeholder="Street Name" class="column-one" ng-model="answer.qB.sub.street_name"/>  
+								  		<input id="multi-liner" type="text" placeholder="House No./Ltd No./Building No." class="column-two" ng-model="answer.qB.sub.building_no"/>
 								  </div>
+
 
 								  <line-breaker></line-breaker>	
 							 </div>
 
 		  			  <label class="item item-icon-left borderless">
-					    <i class="icon" id="red-radio"><input type='radio' name="qA" ng-model="answer.qA.ans" value="Gasoline Station" ng-change="deleteObj.dual('qA','sub')"/></i>
+					    <i class="icon" id="red-radio"><input type='radio' name="qB" ng-model="answer.qB.ans" value="Gasoline Station" ng-change="deleteObj.dual('qB','sub')"/></i>
 					    <span class="option-text">Gasoline Station</span>
 					  </label>
 
 
 					  		  <!-- Sub content Location -->
-							  <div ng-if="answer.qA.ans == 'Gasoline Station'">	
+							  <div ng-if="answer.qB.ans == 'Gasoline Station'">	
 			  					  <div class="sub-2-column">
-								  		<input id="multi-liner" type="text" placeholder="Name of Establishment" class="column-one" ng-model="answer.qA.sub.est_name"/>  
+								  		<input id="multi-liner" type="text" placeholder="Name of Establishment" class="column-one" ng-model="answer.qB.sub.est_name"/>  
 								  </div>	
 
 								  <line-breaker></line-breaker>	
@@ -417,13 +424,13 @@
 								  <div class="sub-2-column">
 		                                
 		                                <div class="wrapper-one">
-		                                	<select class="borderless-one" ng-model="answer.qA.sub.region" ng-change="QAFilter.region(answer.qA.sub.region.regCode)" ng-options="a.regDesc for a in qa_regions">
+		                                	<select class="borderless-one" ng-model="answer.qB.sub.region" ng-change="QBFilter.region(answer.qB.sub.region.regCode)" ng-options="a.regDesc for a in qb_regions">
 		                                     	     <option value="">Select Region</option>
 		                                	</select>  
 		                                </div>
 
 		                                <div class="wrapper-two">
-									  		<select class="borderless-two" ng-model="answer.qA.sub.province" ng-change="QAFilter.province(answer.qA.sub.province.provCode)" ng-options="b.provDesc for b in qa_provinces">
+									  		<select class="borderless-two" ng-model="answer.qB.sub.province" ng-change="QBFilter.province(answer.qB.sub.province.provCode)" ng-options="b.provDesc for b in qb_provinces">
 									  				  <option value="">Select Province</option>
 									  		</select>  
 									  	</div>
@@ -435,14 +442,15 @@
 								  <div class="sub-2-column">
 								  		
 								  		<div class="wrapper-one">
-									  		<select  class="borderless-one" ng-model="answer.qA.sub.city" ng-change="QAFilter.city(answer.qA.sub.city.citymunCode)" ng-options="c.citymunDesc for c in qa_city">
+									  		<select  class="borderless-one" ng-model="answer.qB.sub.city" ng-change="QBFilter.city(answer.qB.sub.city.citymunCode)" ng-options="c.citymunDesc for c in qb_city">
 									  				  <option value="">Select City</option>
 									  		</select>  
 									  	</div>
 
 									  	<div class="wrapper-two">
-									  		<select class="borderless-two" ng-model="answer.qA.sub.brgy" ng-options="d.brgyDesc for d in qa_brgy">
+									  		<select class="borderless-two" ng-model="answer.qB.sub.brgy" ng-options="d.brgyDesc for d in qb_brgy">
 									  				  <option value="">Select Barangay</option>
+
 									  		</select>  
 									  	</div>
 								  		
@@ -451,22 +459,23 @@
 								  <line-breaker></line-breaker>	
 
 								  <div class="sub-2-column">
-								  		<input id="multi-liner" type="text" placeholder="Street Name" class="column-one" ng-model="answer.qA.sub.street_name"/>  
-								  		<input id="multi-liner" type="text" placeholder="Houe No./Ltd No./Building No." class="column-two" ng-model="answer.qA.sub.building_no"/>
+								  		<input id="multi-liner" type="text" placeholder="Street Name" class="column-one" ng-model="answer.qB.sub.street_name"/>  
+								  		<input id="multi-liner" type="text" placeholder="House No./Ltd No./Building No." class="column-two" ng-model="answer.qB.sub.building_no"/>
 								  </div>
+
 
 								  <line-breaker></line-breaker>	
 							 </div>
 
 		  			  <label class="item item-icon-left borderless">
-					    <i class="icon" id="red-radio"><input type='radio' name="qA" ng-model="answer.qA.ans" value="Supermarket" ng-change="deleteObj.dual('qA','sub')"/></i>
+					    <i class="icon" id="red-radio"><input type='radio' name="qB" ng-model="answer.qB.ans" value="Supermarket" ng-change="deleteObj.dual('qB','sub')"/></i>
 					    <span class="option-text">Supermarket</span>
 					  </label>
 
 					  		   <!-- Sub content Location -->
-							  <div ng-if="answer.qA.ans == 'Supermarket'">	
+							  <div ng-if="answer.qB.ans == 'Supermarket'">	
 			  					  <div class="sub-2-column">
-								  		<input id="multi-liner" type="text" placeholder="Name of Establishment" class="column-one" ng-model="answer.qA.sub.est_name"/>  
+								  		<input id="multi-liner" type="text" placeholder="Name of Establishment" class="column-one" ng-model="answer.qB.sub.est_name"/>  
 								  </div>	
 
 								  <line-breaker></line-breaker>	
@@ -480,13 +489,13 @@
 								  <div class="sub-2-column">
 		                                
 		                                <div class="wrapper-one">
-		                                	<select class="borderless-one" ng-model="answer.qA.sub.region" ng-change="QAFilter.region(answer.qA.sub.region.regCode)" ng-options="a.regDesc for a in qa_regions">
+		                                	<select class="borderless-one" ng-model="answer.qB.sub.region" ng-change="QBFilter.region(answer.qB.sub.region.regCode)" ng-options="a.regDesc for a in qb_regions">
 		                                     	     <option value="">Select Region</option>
 		                                	</select>  
 		                                </div>
 
 		                                <div class="wrapper-two">
-									  		<select class="borderless-two" ng-model="answer.qA.sub.province" ng-change="QAFilter.province(answer.qA.sub.province.provCode)" ng-options="b.provDesc for b in qa_provinces">
+									  		<select class="borderless-two" ng-model="answer.qB.sub.province" ng-change="QBFilter.province(answer.qB.sub.province.provCode)" ng-options="b.provDesc for b in qb_provinces">
 									  				  <option value="">Select Province</option>
 									  		</select>  
 									  	</div>
@@ -498,14 +507,15 @@
 								  <div class="sub-2-column">
 								  		
 								  		<div class="wrapper-one">
-									  		<select  class="borderless-one" ng-model="answer.qA.sub.city" ng-change="QAFilter.city(answer.qA.sub.city.citymunCode)" ng-options="c.citymunDesc for c in qa_city">
+									  		<select  class="borderless-one" ng-model="answer.qB.sub.city" ng-change="QBFilter.city(answer.qB.sub.city.citymunCode)" ng-options="c.citymunDesc for c in qb_city">
 									  				  <option value="">Select City</option>
 									  		</select>  
 									  	</div>
 
 									  	<div class="wrapper-two">
-									  		<select class="borderless-two" ng-model="answer.qA.sub.brgy" ng-options="d.brgyDesc for d in qa_brgy">
+									  		<select class="borderless-two" ng-model="answer.qB.sub.brgy" ng-options="d.brgyDesc for d in qb_brgy">
 									  				  <option value="">Select Barangay</option>
+
 									  		</select>  
 									  	</div>
 								  		
@@ -514,22 +524,23 @@
 								  <line-breaker></line-breaker>	
 
 								  <div class="sub-2-column">
-								  		<input id="multi-liner" type="text" placeholder="Street Name" class="column-one" ng-model="answer.qA.sub.street_name"/>  
-								  		<input id="multi-liner" type="text" placeholder="Houe No./Ltd No./Building No." class="column-two" ng-model="answer.qA.sub.building_no"/>
+								  		<input id="multi-liner" type="text" placeholder="Street Name" class="column-one" ng-model="answer.qB.sub.street_name"/>  
+								  		<input id="multi-liner" type="text" placeholder="House No./Ltd No./Building No." class="column-two" ng-model="answer.qB.sub.building_no"/>
 								  </div>
+
 
 								  <line-breaker></line-breaker>	
 							 </div>
 
 		  			  <label class="item item-icon-left borderless">
-					    <i class="icon" id="red-radio"><input type='radio' name="qA" ng-model="answer.qA.ans" value="Public Market" ng-change="deleteObj.dual('qA','sub')"/></i>
+					    <i class="icon" id="red-radio"><input type='radio' name="qB" ng-model="answer.qB.ans" value="Public Market" ng-change="deleteObj.dual('qB','sub')"/></i>
 					    <span class="option-text">Public Market</span>
 					  </label>		
 
 					  		  <!-- Sub content Location -->
-							  <div ng-if="answer.qA.ans == 'Public Market'">	
+							  <div ng-if="answer.qB.ans == 'Public Market'">	
 			  					  <div class="sub-2-column">
-								  		<input id="multi-liner" type="text" placeholder="Name of Establishment" class="column-one" ng-model="answer.qA.sub.est_name"/>  
+								  		<input id="multi-liner" type="text" placeholder="Name of Establishment" class="column-one" ng-model="answer.qB.sub.est_name"/>  
 								  </div>	
 
 								  <line-breaker></line-breaker>	
@@ -543,13 +554,13 @@
 								  <div class="sub-2-column">
 		                                
 		                                <div class="wrapper-one">
-		                                	<select class="borderless-one" ng-model="answer.qA.sub.region" ng-change="QAFilter.region(answer.qA.sub.region.regCode)" ng-options="a.regDesc for a in qa_regions">
+		                                	<select class="borderless-one" ng-model="answer.qB.sub.region" ng-change="QBFilter.region(answer.qB.sub.region.regCode)" ng-options="a.regDesc for a in qb_regions">
 		                                     	     <option value="">Select Region</option>
 		                                	</select>  
 		                                </div>
 
 		                                <div class="wrapper-two">
-									  		<select class="borderless-two" ng-model="answer.qA.sub.province" ng-change="QAFilter.province(answer.qA.sub.province.provCode)" ng-options="b.provDesc for b in qa_provinces">
+									  		<select class="borderless-two" ng-model="answer.qB.sub.province" ng-change="QBFilter.province(answer.qB.sub.province.provCode)" ng-options="b.provDesc for b in qb_provinces">
 									  				  <option value="">Select Province</option>
 									  		</select>  
 									  	</div>
@@ -561,14 +572,15 @@
 								  <div class="sub-2-column">
 								  		
 								  		<div class="wrapper-one">
-									  		<select  class="borderless-one" ng-model="answer.qA.sub.city" ng-change="QAFilter.city(answer.qA.sub.city.citymunCode)" ng-options="c.citymunDesc for c in qa_city">
+									  		<select  class="borderless-one" ng-model="answer.qB.sub.city" ng-change="QBFilter.city(answer.qB.sub.city.citymunCode)" ng-options="c.citymunDesc for c in qb_city">
 									  				  <option value="">Select City</option>
 									  		</select>  
 									  	</div>
 
 									  	<div class="wrapper-two">
-									  		<select class="borderless-two" ng-model="answer.qA.sub.brgy" ng-options="d.brgyDesc for d in qa_brgy">
+									  		<select class="borderless-two" ng-model="answer.qB.sub.brgy" ng-options="d.brgyDesc for d in qb_brgy">
 									  				  <option value="">Select Barangay</option>
+
 									  		</select>  
 									  	</div>
 								  		
@@ -577,22 +589,23 @@
 								  <line-breaker></line-breaker>	
 
 								  <div class="sub-2-column">
-								  		<input id="multi-liner" type="text" placeholder="Street Name" class="column-one" ng-model="answer.qA.sub.street_name"/>  
-								  		<input id="multi-liner" type="text" placeholder="Houe No./Ltd No./Building No." class="column-two" ng-model="answer.qA.sub.building_no"/>
+								  		<input id="multi-liner" type="text" placeholder="Street Name" class="column-one" ng-model="answer.qB.sub.street_name"/>  
+								  		<input id="multi-liner" type="text" placeholder="House No./Ltd No./Building No." class="column-two" ng-model="answer.qB.sub.building_no"/>
 								  </div>
+
 
 								  <line-breaker></line-breaker>	
 							 </div>
 
 		  			  <label class="item item-icon-left borderless">
-					    <i class="icon" id="red-radio"><input type='radio' name="qA" ng-model="answer.qA.ans" value="Jeep/Bus Station" ng-change="deleteObj.dual('qA','sub')"/></i>
+					    <i class="icon" id="red-radio"><input type='radio' name="qB" ng-model="answer.qB.ans" value="Jeep/Bus Station" ng-change="deleteObj.dual('qB','sub')"/></i>
 					    <span class="option-text">Jeep/Bus Station</span>
 					  </label>
 
 					  		  <!-- Sub content Location -->
-							  <div ng-if="answer.qA.ans == 'Jeep/Bus Station'">	
+							  <div ng-if="answer.qB.ans == 'Jeep/Bus Station'">	
 			  					  <div class="sub-2-column">
-								  		<input id="multi-liner" type="text" placeholder="Name of Establishment" class="column-one" ng-model="answer.qA.sub.est_name"/>  
+								  		<input id="multi-liner" type="text" placeholder="Name of Establishment" class="column-one" ng-model="answer.qB.sub.est_name"/>  
 								  </div>	
 
 								  <line-breaker></line-breaker>	
@@ -606,13 +619,13 @@
 								  <div class="sub-2-column">
 		                                
 		                                <div class="wrapper-one">
-		                                	<select class="borderless-one" ng-model="answer.qA.sub.region" ng-change="QAFilter.region(answer.qA.sub.region.regCode)" ng-options="a.regDesc for a in qa_regions">
+		                                	<select class="borderless-one" ng-model="answer.qB.sub.region" ng-change="QBFilter.region(answer.qB.sub.region.regCode)" ng-options="a.regDesc for a in qb_regions">
 		                                     	     <option value="">Select Region</option>
 		                                	</select>  
 		                                </div>
 
 		                                <div class="wrapper-two">
-									  		<select class="borderless-two" ng-model="answer.qA.sub.province" ng-change="QAFilter.province(answer.qA.sub.province.provCode)" ng-options="b.provDesc for b in qa_provinces">
+									  		<select class="borderless-two" ng-model="answer.qB.sub.province" ng-change="QBFilter.province(answer.qB.sub.province.provCode)" ng-options="b.provDesc for b in qb_provinces">
 									  				  <option value="">Select Province</option>
 									  		</select>  
 									  	</div>
@@ -624,14 +637,15 @@
 								  <div class="sub-2-column">
 								  		
 								  		<div class="wrapper-one">
-									  		<select  class="borderless-one" ng-model="answer.qA.sub.city" ng-change="QAFilter.city(answer.qA.sub.city.citymunCode)" ng-options="c.citymunDesc for c in qa_city">
+									  		<select  class="borderless-one" ng-model="answer.qB.sub.city" ng-change="QBFilter.city(answer.qB.sub.city.citymunCode)" ng-options="c.citymunDesc for c in qb_city">
 									  				  <option value="">Select City</option>
 									  		</select>  
 									  	</div>
 
 									  	<div class="wrapper-two">
-									  		<select class="borderless-two" ng-model="answer.qA.sub.brgy" ng-options="d.brgyDesc for d in qa_brgy">
+									  		<select class="borderless-two" ng-model="answer.qB.sub.brgy" ng-options="d.brgyDesc for d in qb_brgy">
 									  				  <option value="">Select Barangay</option>
+
 									  		</select>  
 									  	</div>
 								  		
@@ -640,22 +654,23 @@
 								  <line-breaker></line-breaker>	
 
 								  <div class="sub-2-column">
-								  		<input id="multi-liner" type="text" placeholder="Street Name" class="column-one" ng-model="answer.qA.sub.street_name"/>  
-								  		<input id="multi-liner" type="text" placeholder="Houe No./Ltd No./Building No." class="column-two" ng-model="answer.qA.sub.building_no"/>
+								  		<input id="multi-liner" type="text" placeholder="Street Name" class="column-one" ng-model="answer.qB.sub.street_name"/>  
+								  		<input id="multi-liner" type="text" placeholder="House No./Ltd No./Building No." class="column-two" ng-model="answer.qB.sub.building_no"/>
 								  </div>
+
 
 								  <line-breaker></line-breaker>	
 							 </div>
 
 		  			  <label class="item item-icon-left borderless">
-					    <i class="icon" id="red-radio"><input type='radio' name="qA" ng-model="answer.qA.ans" value="Others" ng-change="deleteObj.dual('qA','sub')"/></i>
+					    <i class="icon" id="red-radio"><input type='radio' name="qB" ng-model="answer.qB.ans" value="Others" ng-change="deleteObj.dual('qB','sub')"/></i>
 					    <span class="option-text">Others</span>
 					  </label>			
 
    							  <!-- Sub content Location -->
-							  <div ng-if="answer.qA.ans == 'Others'">	
+							  <div ng-if="answer.qB.ans == 'Others'">	
 			  					  <div class="sub-2-column">
-								  		<input id="multi-liner" type="text" placeholder="Name of Establishment" class="column-one" ng-model="answer.qA.sub.est_name"/>  
+								  		<input id="multi-liner" type="text" placeholder="Name of Establishment" class="column-one" ng-model="answer.qB.sub.est_name"/>  
 								  </div>	
 								 
 								 <line-breaker></line-breaker>
@@ -676,13 +691,13 @@
 								  <div class="sub-2-column">
 		                                
 		                                <div class="wrapper-one">
-		                                	<select class="borderless-one" ng-model="answer.qA.sub.region" ng-change="QAFilter.region(answer.qA.sub.region.regCode)" ng-options="a.regDesc for a in qa_regions">
+		                                	<select class="borderless-one" ng-model="answer.qB.sub.region" ng-change="QBFilter.region(answer.qB.sub.region.regCode)" ng-options="a.regDesc for a in qb_regions">
 		                                     	     <option value="">Select Region</option>
 		                                	</select>  
 		                                </div>
 
 		                                <div class="wrapper-two">
-									  		<select class="borderless-two" ng-model="answer.qA.sub.province" ng-change="QAFilter.province(answer.qA.sub.province.provCode)" ng-options="b.provDesc for b in qa_provinces">
+									  		<select class="borderless-two" ng-model="answer.qB.sub.province" ng-change="QBFilter.province(answer.qB.sub.province.provCode)" ng-options="b.provDesc for b in qb_provinces">
 									  				  <option value="">Select Province</option>
 									  		</select>  
 									  	</div>
@@ -694,13 +709,13 @@
 								  <div class="sub-2-column">
 								  		
 								  		<div class="wrapper-one">
-									  		<select  class="borderless-one" ng-model="answer.qA.sub.city" ng-change="QAFilter.city(answer.qA.sub.city.citymunCode)" ng-options="c.citymunDesc for c in qa_city">
+									  		<select  class="borderless-one" ng-model="answer.qB.sub.city" ng-change="QBFilter.city(answer.qB.sub.city.citymunCode)" ng-options="c.citymunDesc for c in qb_city">
 									  				  <option value="">Select City</option>
 									  		</select>  
 									  	</div>
 
 									  	<div class="wrapper-two">
-									  		<select class="borderless-two" ng-model="answer.qA.sub.brgy" ng-options="d.brgyDesc for d in qa_brgy">
+									  		<select class="borderless-two" ng-model="answer.qB.sub.brgy" ng-options="d.brgyDesc for d in qb_brgy">
 									  				  <option value="">Select Barangay</option>
 									  		</select>  
 									  	</div>
@@ -710,8 +725,8 @@
 								  <line-breaker></line-breaker>	
 
 								  <div class="sub-2-column">
-								  		<input id="multi-liner" type="text" placeholder="Street Name" class="column-one" ng-model="answer.qA.sub.street_name"/>  
-								  		<input id="multi-liner" type="text" placeholder="Houe No./Ltd No./Building No." class="column-two" ng-model="answer.qA.sub.building_no"/>
+								  		<input id="multi-liner" type="text" placeholder="Street Name" class="column-one" ng-model="answer.qB.sub.street_name"/>  
+								  		<input id="multi-liner" type="text" placeholder="House No./Ltd No./Building No." class="column-two" ng-model="answer.qB.sub.building_no"/>
 								  </div>
 
 								  <line-breaker></line-breaker>	
@@ -722,13 +737,731 @@
 			 	</div>
 			</p>
 		</div>
+
+
+
+
+		<!-- Laguage Tagalog -->
+		<div ng-if="(language == 'Tagalog' && store_type == 'Instore') || (language == 'Tagalog' && store_type == 'Free Stand')" id="survey-margin">
+			<p>
+				<span class="number"> B. </span> 
+				<span class="question"> Pagkagaling po ninyo sa Mang Inasal store na ito, saan po kayo</span>
+				<span class="question" id="line-break">kaagad pupunta? (Maaaring pumili ng isang sagot)<span>
+				<div class="list tab-option">
+
+					  <label class="item item-icon-left borderless">
+					    <i class="icon" id="red-radio"><input type='radio' name="qB" ng-model="answer.qB.ans" value="School" ng-change="deleteObj.dual('qB','sub')"/></i>
+					    <span class="option-text">Eskwelahan</span>
+					  </label> 
+
+					  		  <!-- Sub content Location -->
+							  <div ng-if="answer.qB.ans == 'School'"->	
+			  					  <div class="sub-2-column">
+								  		<input id="multi-liner" type="text" placeholder="Pangalan ng Establisyemento" class="column-one" ng-model="answer.qB.sub.est_name"/>  
+								  </div>	
+
+								  <line-breaker></line-breaker>	
+								  
+								  <div class="sub-2-column">	  
+								  		<div class="sub-label">Address</div>
+								  </div>
+
+								  <line-breaker2></line-breaker2>		
+
+								  <div class="sub-2-column">
+		                                
+		                                <div class="wrapper-one">
+		                                	<select class="borderless-one" ng-model="answer.qB.sub.region" ng-change="QBFilter.region(answer.qB.sub.region.regCode)" ng-options="a.regDesc for a in qb_regions">
+		                                     	     <option value="">Rehiyon</option>
+		                                	</select>  
+		                                </div>
+
+		                                <div class="wrapper-two">
+									  		<select class="borderless-two" ng-model="answer.qB.sub.province" ng-change="QBFilter.province(answer.qB.sub.province.provCode)" ng-options="b.provDesc for b in qb_provinces">
+									  				  <option value="">Probinsya</option>
+									  		</select>  
+									  	</div>
+								  		
+								  </div>
+
+								  <line-breaker></line-breaker>	
+
+								  <div class="sub-2-column">
+								  		
+								  		<div class="wrapper-one">
+									  		<select  class="borderless-one" ng-model="answer.qB.sub.city" ng-change="QBFilter.city(answer.qB.sub.city.citymunCode)" ng-options="c.citymunDesc for c in qb_city">
+									  				  <option value="">Siyudad/Munisipalidad</option>
+									  		</select>  
+									  	</div>
+
+									  	<div class="wrapper-two">
+									  		<select class="borderless-two" ng-model="answer.qB.sub.brgy" ng-options="d.brgyDesc for d in qb_brgy">
+									  				  <option value="">Barangay </option>
+
+									  		</select>  
+									  	</div>
+								  		
+								  </div>
+
+								  <line-breaker></line-breaker>	
+
+								  <div class="sub-2-column">
+								  		<input id="multi-liner" type="text" placeholder="Pangalan ng kalye" class="column-one" ng-model="answer.qB.sub.street_name"/>  
+								  		<input id="multi-liner" type="text" placeholder="House No./Ltd No./Building No." class="column-two" ng-model="answer.qB.sub.building_no"/>
+								  </div>
+
+								  <line-breaker></line-breaker>	
+							 </div>
+
+					  <label class="item item-icon-left borderless">
+					    <i class="icon" id="red-radio"><input type='radio' name="qB" ng-model="answer.qB.ans" value="Office" ng-change="deleteObj.dual('qB','sub')"/></i>
+					    <span class="option-text">Opisina</span>
+					  </label>
+
+					  		  <!-- Sub content Location -->
+							  <div ng-if="answer.qB.ans == 'Office'">	
+			  					  <div class="sub-2-column">
+								  		<input id="multi-liner" type="text" placeholder="Pangalan ng Establisyemento" class="column-one" ng-model="answer.qB.sub.est_name"/>  
+								  </div>	
+
+								  <line-breaker></line-breaker>	
+								  
+								  <div class="sub-2-column">	  
+								  		<div class="sub-label">Address</div>
+								  </div>
+
+								  <line-breaker2></line-breaker2>		
+
+								  <div class="sub-2-column">
+		                                
+		                                <div class="wrapper-one">
+		                                	<select class="borderless-one" ng-model="answer.qB.sub.region" ng-change="QBFilter.region(answer.qB.sub.region.regCode)" ng-options="a.regDesc for a in qb_regions">
+		                                     	     <option value="">Rehiyon</option>
+		                                	</select>  
+		                                </div>
+
+		                                <div class="wrapper-two">
+									  		<select class="borderless-two" ng-model="answer.qB.sub.province" ng-change="QBFilter.province(answer.qB.sub.province.provCode)" ng-options="b.provDesc for b in qb_provinces">
+									  				  <option value="">Probinsya</option>
+									  		</select>  
+									  	</div>
+								  		
+								  </div>
+
+								  <line-breaker></line-breaker>	
+
+								  <div class="sub-2-column">
+								  		
+								  		<div class="wrapper-one">
+									  		<select  class="borderless-one" ng-model="answer.qB.sub.city" ng-change="QBFilter.city(answer.qB.sub.city.citymunCode)" ng-options="c.citymunDesc for c in qb_city">
+									  				  <option value="">Siyudad/Munisipalidad</option>
+									  		</select>  
+									  	</div>
+
+									  	<div class="wrapper-two">
+									  		<select class="borderless-two" ng-model="answer.qB.sub.brgy" ng-options="d.brgyDesc for d in qb_brgy">
+									  				  <option value="">Barangay </option>
+
+									  		</select>  
+									  	</div>
+								  		
+								  </div>
+
+								  <line-breaker></line-breaker>	
+
+								  <div class="sub-2-column">
+								  		<input id="multi-liner" type="text" placeholder="Pangalan ng kalye" class="column-one" ng-model="answer.qB.sub.street_name"/>  
+								  		<input id="multi-liner" type="text" placeholder="House No./Ltd No./Building No." class="column-two" ng-model="answer.qB.sub.building_no"/>
+								  </div>
+
+								  <line-breaker></line-breaker>	
+							 </div>
+
+					  <label class="item item-icon-left borderless">
+					    <i class="icon" id="red-radio"><input type='radio' name="qB" ng-model="answer.qB.ans" value="Mall/Shop" ng-change="deleteObj.dual('qB','sub')"/></i>
+					    <span class="option-text">Mall/Shop</span>
+					  </label>
+
+					  		  <!-- Sub content Location -->
+							  <div ng-if="answer.qB.ans == 'Mall/Shop'">	
+			  					  <div class="sub-2-column">
+								  		<input id="multi-liner" type="text" placeholder="Pangalan ng Establisyemento" class="column-one" ng-model="answer.qB.sub.est_name"/>  
+								  </div>	
+
+								  <line-breaker></line-breaker>	
+								  
+								  <div class="sub-2-column">	  
+								  		<div class="sub-label">Address</div>
+								  </div>
+
+								  <line-breaker2></line-breaker2>		
+
+								  <div class="sub-2-column">
+		                                
+		                                <div class="wrapper-one">
+		                                	<select class="borderless-one" ng-model="answer.qB.sub.region" ng-change="QBFilter.region(answer.qB.sub.region.regCode)" ng-options="a.regDesc for a in qb_regions">
+		                                     	     <option value="">Rehiyon</option>
+		                                	</select>  
+		                                </div>
+
+		                                <div class="wrapper-two">
+									  		<select class="borderless-two" ng-model="answer.qB.sub.province" ng-change="QBFilter.province(answer.qB.sub.province.provCode)" ng-options="b.provDesc for b in qb_provinces">
+									  				  <option value="">Probinsya</option>
+									  		</select>  
+									  	</div>
+								  		
+								  </div>
+
+								  <line-breaker></line-breaker>	
+
+								  <div class="sub-2-column">
+								  		
+								  		<div class="wrapper-one">
+									  		<select  class="borderless-one" ng-model="answer.qB.sub.city" ng-change="QBFilter.city(answer.qB.sub.city.citymunCode)" ng-options="c.citymunDesc for c in qb_city">
+									  				  <option value="">Siyudad/Munisipalidad</option>
+									  		</select>  
+									  	</div>
+
+									  	<div class="wrapper-two">
+									  		<select class="borderless-two" ng-model="answer.qB.sub.brgy" ng-options="d.brgyDesc for d in qb_brgy">
+									  				  <option value="">Barangay </option>
+
+									  		</select>  
+									  	</div>
+								  		
+								  </div>
+
+								  <line-breaker></line-breaker>	
+
+								  <div class="sub-2-column">
+								  		<input id="multi-liner" type="text" placeholder="Pangalan ng kalye" class="column-one" ng-model="answer.qB.sub.street_name"/>  
+								  		<input id="multi-liner" type="text" placeholder="House No./Ltd No./Building No." class="column-two" ng-model="answer.qB.sub.building_no"/>
+								  </div>
+
+								  <line-breaker></line-breaker>	
+							 </div>
+
+					  <label class="item item-icon-left borderless">
+					    <i class="icon" id="red-radio"><input type='radio' name="qB" ng-model="answer.qB.ans" value="Home" ng-change="deleteObj.dual('qB','sub')"/></i>
+					    <span class="option-text">Tirahan</span>
+					  </label>
+
+					  		  <!-- Sub content Location -->
+							  <div ng-if="answer.qB.ans == 'Home'"> <br/>
+							
+								  <div class="sub-2-column">	  
+								  		<div class="sub-label">Address</div>
+								  </div>
+
+								  <line-breaker2></line-breaker2>		
+
+								  <div class="sub-2-column">
+		                                
+		                                <div class="wrapper-one">
+		                                	<select class="borderless-one" ng-model="answer.qB.sub.region" ng-change="QBFilter.region(answer.qB.sub.region.regCode)" ng-options="a.regDesc for a in qb_regions">
+		                                     	     <option value="">Rehiyon</option>
+		                                	</select>  
+		                                </div>
+
+		                                <div class="wrapper-two">
+									  		<select class="borderless-two" ng-model="answer.qB.sub.province" ng-change="QBFilter.province(answer.qB.sub.province.provCode)" ng-options="b.provDesc for b in qb_provinces">
+									  				  <option value="">Probinsya </option>
+									  		</select>  
+									  	</div>
+								  		
+								  </div>
+
+								  <line-breaker></line-breaker>	
+
+								  <div class="sub-2-column">
+								  		
+								  		<div class="wrapper-one">
+									  		<select  class="borderless-one" ng-model="answer.qB.sub.city" ng-change="QBFilter.city(answer.qB.sub.city.citymunCode)" ng-options="c.citymunDesc for c in qb_city">
+									  				  <option value="">Siyudad/Munisipalidad</option>
+									  		</select>  
+									  	</div>
+
+									  	<div class="wrapper-two">
+									  		<select class="borderless-two" ng-model="answer.qB.sub.brgy" ng-options="d.brgyDesc for d in qb_brgy">
+									  				  <option value="">Barangay</option>
+									  		</select>  
+									  	</div>
+								  		
+								  </div>
+
+								  <line-breaker></line-breaker>	
+
+								  <div class="sub-2-column">
+								  		<input id="multi-liner" type="text" placeholder="Pangalan ng kalye" class="column-one" ng-model="answer.qB.sub.street_name"/>  
+								  		<input id="multi-liner" type="text" placeholder="House No./Ltd No./Building No." class="column-two" ng-model="answer.qB.sub.building_no"/>
+								  </div>
+
+								  <line-breaker></line-breaker>	
+							 </div>
+
+		  			  <label class="item item-icon-left borderless">
+					    <i class="icon" id="red-radio"><input type='radio' name="qB" ng-model="answer.qB.ans" value="Hospital" ng-change="deleteObj.dual('qB','sub')"/></i>
+					    <span class="option-text">Ospital</span>
+					  </label>
+
+					  		  <!-- Sub content Location -->
+							  <div ng-if="answer.qB.ans == 'Hospital'">	
+			  					  <div class="sub-2-column">
+								  		<input id="multi-liner" type="text" placeholder="Pangalan ng Establisyemento" class="column-one" ng-model="answer.qB.sub.est_name"/>  
+								  </div>	
+
+								  <line-breaker></line-breaker>	
+								  
+								  <div class="sub-2-column">	  
+								  		<div class="sub-label">Address</div>
+								  </div>
+
+								  <line-breaker2></line-breaker2>		
+
+								  <div class="sub-2-column">
+		                                
+		                                <div class="wrapper-one">
+		                                	<select class="borderless-one" ng-model="answer.qB.sub.region" ng-change="QBFilter.region(answer.qB.sub.region.regCode)" ng-options="a.regDesc for a in qb_regions">
+		                                     	     <option value="">Rehiyon</option>
+		                                	</select>  
+		                                </div>
+
+		                                <div class="wrapper-two">
+									  		<select class="borderless-two" ng-model="answer.qB.sub.province" ng-change="QBFilter.province(answer.qB.sub.province.provCode)" ng-options="b.provDesc for b in qb_provinces">
+									  				  <option value="">Probinsya</option>
+									  		</select>  
+									  	</div>
+								  		
+								  </div>
+
+								  <line-breaker></line-breaker>	
+
+								  <div class="sub-2-column">
+								  		
+								  		<div class="wrapper-one">
+									  		<select  class="borderless-one" ng-model="answer.qB.sub.city" ng-change="QBFilter.city(answer.qB.sub.city.citymunCode)" ng-options="c.citymunDesc for c in qb_city">
+									  				  <option value="">Siyudad/Munisipalidad</option>
+									  		</select>  
+									  	</div>
+
+									  	<div class="wrapper-two">
+									  		<select class="borderless-two" ng-model="answer.qB.sub.brgy" ng-options="d.brgyDesc for d in qb_brgy">
+									  				  <option value="">Barangay </option>
+
+									  		</select>  
+									  	</div>
+								  		
+								  </div>
+
+								  <line-breaker></line-breaker>	
+
+								  <div class="sub-2-column">
+								  		<input id="multi-liner" type="text" placeholder="Pangalan ng kalye" class="column-one" ng-model="answer.qB.sub.street_name"/>  
+								  		<input id="multi-liner" type="text" placeholder="House No./Ltd No./Building No." class="column-two" ng-model="answer.qB.sub.building_no"/>
+								  </div>
+
+								  <line-breaker></line-breaker>	
+							 </div>
+
+		  			  <label class="item item-icon-left borderless">
+					    <i class="icon" id="red-radio"><input type='radio' name="qB" ng-model="answer.qB.ans" value="Church" ng-change="deleteObj.dual('qB','sub')"/></i>
+					    <span class="option-text">Simbahan</span>
+					  </label>
+
+					  		  <!-- Sub content Location -->
+							  <div ng-if="answer.qB.ans == 'Church'">	
+			  					  <div class="sub-2-column">
+								  		<input id="multi-liner" type="text" placeholder="Pangalan ng Establisyemento" class="column-one" ng-model="answer.qB.sub.est_name"/>  
+								  </div>	
+
+								  <line-breaker></line-breaker>	
+								  
+								  <div class="sub-2-column">	  
+								  		<div class="sub-label">Address</div>
+								  </div>
+
+								  <line-breaker2></line-breaker2>		
+
+								  <div class="sub-2-column">
+		                                
+		                                <div class="wrapper-one">
+		                                	<select class="borderless-one" ng-model="answer.qB.sub.region" ng-change="QBFilter.region(answer.qB.sub.region.regCode)" ng-options="a.regDesc for a in qb_regions">
+		                                     	     <option value="">Rehiyon</option>
+		                                	</select>  
+		                                </div>
+
+		                                <div class="wrapper-two">
+									  		<select class="borderless-two" ng-model="answer.qB.sub.province" ng-change="QBFilter.province(answer.qB.sub.province.provCode)" ng-options="b.provDesc for b in qb_provinces">
+									  				  <option value="">Probinsya</option>
+									  		</select>  
+									  	</div>
+								  		
+								  </div>
+
+								  <line-breaker></line-breaker>	
+
+								  <div class="sub-2-column">
+								  		
+								  		<div class="wrapper-one">
+									  		<select  class="borderless-one" ng-model="answer.qB.sub.city" ng-change="QBFilter.city(answer.qB.sub.city.citymunCode)" ng-options="c.citymunDesc for c in qb_city">
+									  				  <option value="">Siyudad/Munisipalidad</option>
+									  		</select>  
+									  	</div>
+
+									  	<div class="wrapper-two">
+									  		<select class="borderless-two" ng-model="answer.qB.sub.brgy" ng-options="d.brgyDesc for d in qb_brgy">
+									  				  <option value="">Barangay </option>
+
+									  		</select>  
+									  	</div>
+								  		
+								  </div>
+
+								  <line-breaker></line-breaker>	
+
+								  <div class="sub-2-column">
+								  		<input id="multi-liner" type="text" placeholder="Pangalan ng kalye" class="column-one" ng-model="answer.qB.sub.street_name"/>  
+								  		<input id="multi-liner" type="text" placeholder="House No./Ltd No./Building No." class="column-two" ng-model="answer.qB.sub.building_no"/>
+								  </div>
+
+								  <line-breaker></line-breaker>	
+							 </div>
+
+		  			  <label class="item item-icon-left borderless">
+					    <i class="icon" id="red-radio"><input type='radio' name="qB" ng-model="answer.qB.ans" value="Gasoline Station" ng-change="deleteObj.dual('qB','sub')"/></i>
+					    <span class="option-text">Gasoline Station</span>
+					  </label>
+
+
+					  		  <!-- Sub content Location -->
+							  <div ng-if="answer.qB.ans == 'Gasoline Station'">	
+			  					  <div class="sub-2-column">
+								  		<input id="multi-liner" type="text" placeholder="Pangalan ng Establisyemento" class="column-one" ng-model="answer.qB.sub.est_name"/>  
+								  </div>	
+
+								  <line-breaker></line-breaker>	
+								  
+								  <div class="sub-2-column">	  
+								  		<div class="sub-label">Address</div>
+								  </div>
+
+								  <line-breaker2></line-breaker2>		
+
+								  <div class="sub-2-column">
+		                                
+		                                <div class="wrapper-one">
+		                                	<select class="borderless-one" ng-model="answer.qB.sub.region" ng-change="QBFilter.region(answer.qB.sub.region.regCode)" ng-options="a.regDesc for a in qb_regions">
+		                                     	     <option value="">Rehiyon</option>
+		                                	</select>  
+		                                </div>
+
+		                                <div class="wrapper-two">
+									  		<select class="borderless-two" ng-model="answer.qB.sub.province" ng-change="QBFilter.province(answer.qB.sub.province.provCode)" ng-options="b.provDesc for b in qb_provinces">
+									  				  <option value="">Probinsya</option>
+									  		</select>  
+									  	</div>
+								  		
+								  </div>
+
+								  <line-breaker></line-breaker>	
+
+								  <div class="sub-2-column">
+								  		
+								  		<div class="wrapper-one">
+									  		<select  class="borderless-one" ng-model="answer.qB.sub.city" ng-change="QBFilter.city(answer.qB.sub.city.citymunCode)" ng-options="c.citymunDesc for c in qb_city">
+									  				  <option value="">Siyudad/Munisipalidad</option>
+									  		</select>  
+									  	</div>
+
+									  	<div class="wrapper-two">
+									  		<select class="borderless-two" ng-model="answer.qB.sub.brgy" ng-options="d.brgyDesc for d in qb_brgy">
+									  				  <option value="">Barangay </option>
+
+									  		</select>  
+									  	</div>
+								  		
+								  </div>
+
+								  <line-breaker></line-breaker>	
+
+								  <div class="sub-2-column">
+								  		<input id="multi-liner" type="text" placeholder="Pangalan ng kalye" class="column-one" ng-model="answer.qB.sub.street_name"/>  
+								  		<input id="multi-liner" type="text" placeholder="House No./Ltd No./Building No." class="column-two" ng-model="answer.qB.sub.building_no"/>
+								  </div>
+
+								  <line-breaker></line-breaker>	
+							 </div>
+
+		  			  <label class="item item-icon-left borderless">
+					    <i class="icon" id="red-radio"><input type='radio' name="qB" ng-model="answer.qB.ans" value="Supermarket" ng-change="deleteObj.dual('qB','sub')"/></i>
+					    <span class="option-text">Supermarket</span>
+					  </label>
+
+					  		   <!-- Sub content Location -->
+							  <div ng-if="answer.qB.ans == 'Supermarket'">	
+			  					  <div class="sub-2-column">
+								  		<input id="multi-liner" type="text" placeholder="Pangalan ng Establisyemento" class="column-one" ng-model="answer.qB.sub.est_name"/>  
+								  </div>	
+
+								  <line-breaker></line-breaker>	
+								  
+								  <div class="sub-2-column">	  
+								  		<div class="sub-label">Address</div>
+								  </div>
+
+								  <line-breaker2></line-breaker2>		
+
+								  <div class="sub-2-column">
+		                                
+		                                <div class="wrapper-one">
+		                                	<select class="borderless-one" ng-model="answer.qB.sub.region" ng-change="QBFilter.region(answer.qB.sub.region.regCode)" ng-options="a.regDesc for a in qb_regions">
+		                                     	     <option value="">Rehiyon</option>
+		                                	</select>  
+		                                </div>
+
+		                                <div class="wrapper-two">
+									  		<select class="borderless-two" ng-model="answer.qB.sub.province" ng-change="QBFilter.province(answer.qB.sub.province.provCode)" ng-options="b.provDesc for b in qb_provinces">
+									  				  <option value="">Probinsya</option>
+									  		</select>  
+									  	</div>
+								  		
+								  </div>
+
+								  <line-breaker></line-breaker>	
+
+								  <div class="sub-2-column">
+								  		
+								  		<div class="wrapper-one">
+									  		<select  class="borderless-one" ng-model="answer.qB.sub.city" ng-change="QBFilter.city(answer.qB.sub.city.citymunCode)" ng-options="c.citymunDesc for c in qb_city">
+									  				  <option value="">Siyudad/Munisipalidad</option>
+									  		</select>  
+									  	</div>
+
+									  	<div class="wrapper-two">
+									  		<select class="borderless-two" ng-model="answer.qB.sub.brgy" ng-options="d.brgyDesc for d in qb_brgy">
+									  				  <option value="">Barangay </option>
+
+									  		</select>  
+									  	</div>
+								  		
+								  </div>
+
+								  <line-breaker></line-breaker>	
+
+								  <div class="sub-2-column">
+								  		<input id="multi-liner" type="text" placeholder="Pangalan ng kalye" class="column-one" ng-model="answer.qB.sub.street_name"/>  
+								  		<input id="multi-liner" type="text" placeholder="House No./Ltd No./Building No." class="column-two" ng-model="answer.qB.sub.building_no"/>
+								  </div>
+
+								  <line-breaker></line-breaker>	
+							 </div>
+
+		  			  <label class="item item-icon-left borderless">
+					    <i class="icon" id="red-radio"><input type='radio' name="qB" ng-model="answer.qB.ans" value="Public Market" ng-change="deleteObj.dual('qB','sub')"/></i>
+					    <span class="option-text">Palengke</span>
+					  </label>		
+
+					  		  <!-- Sub content Location -->
+							  <div ng-if="answer.qB.ans == 'Public Market'">	
+			  					  <div class="sub-2-column">
+								  		<input id="multi-liner" type="text" placeholder="Pangalan ng Establisyemento" class="column-one" ng-model="answer.qB.sub.est_name"/>  
+								  </div>	
+
+								  <line-breaker></line-breaker>	
+								  
+								  <div class="sub-2-column">	  
+								  		<div class="sub-label">Address</div>
+								  </div>
+
+								  <line-breaker2></line-breaker2>		
+
+								  <div class="sub-2-column">
+		                                
+		                                <div class="wrapper-one">
+		                                	<select class="borderless-one" ng-model="answer.qB.sub.region" ng-change="QBFilter.region(answer.qB.sub.region.regCode)" ng-options="a.regDesc for a in qb_regions">
+		                                     	     <option value="">Rehiyon</option>
+		                                	</select>  
+		                                </div>
+
+		                                <div class="wrapper-two">
+									  		<select class="borderless-two" ng-model="answer.qB.sub.province" ng-change="QBFilter.province(answer.qB.sub.province.provCode)" ng-options="b.provDesc for b in qb_provinces">
+									  				  <option value="">Probinsya</option>
+									  		</select>  
+									  	</div>
+								  		
+								  </div>
+
+								  <line-breaker></line-breaker>	
+
+								  <div class="sub-2-column">
+								  		
+								  		<div class="wrapper-one">
+									  		<select  class="borderless-one" ng-model="answer.qB.sub.city" ng-change="QBFilter.city(answer.qB.sub.city.citymunCode)" ng-options="c.citymunDesc for c in qb_city">
+									  				  <option value="">Siyudad/Munisipalidad</option>
+									  		</select>  
+									  	</div>
+
+									  	<div class="wrapper-two">
+									  		<select class="borderless-two" ng-model="answer.qB.sub.brgy" ng-options="d.brgyDesc for d in qb_brgy">
+									  				  <option value="">Barangay </option>
+
+									  		</select>  
+									  	</div>
+								  		
+								  </div>
+
+								  <line-breaker></line-breaker>	
+
+								  <div class="sub-2-column">
+								  		<input id="multi-liner" type="text" placeholder="Pangalan ng kalye" class="column-one" ng-model="answer.qB.sub.street_name"/>  
+								  		<input id="multi-liner" type="text" placeholder="House No./Ltd No./Building No." class="column-two" ng-model="answer.qB.sub.building_no"/>
+								  </div>
+
+								  <line-breaker></line-breaker>	
+							 </div>
+
+		  			  <label class="item item-icon-left borderless">
+					    <i class="icon" id="red-radio"><input type='radio' name="qB" ng-model="answer.qB.ans" value="Jeep/Bus Station" ng-change="deleteObj.dual('qB','sub')"/></i>
+					    <span class="option-text">Sakayan</span>
+					  </label>
+
+					  		  <!-- Sub content Location -->
+							  <div ng-if="answer.qB.ans == 'Jeep/Bus Station'">	
+			  					  <div class="sub-2-column">
+								  		<input id="multi-liner" type="text" placeholder="Pangalan ng Establisyemento" class="column-one" ng-model="answer.qB.sub.est_name"/>  
+								  </div>	
+
+								  <line-breaker></line-breaker>	
+								  
+								  <div class="sub-2-column">	  
+								  		<div class="sub-label">Address</div>
+								  </div>
+
+								  <line-breaker2></line-breaker2>		
+
+								  <div class="sub-2-column">
+		                                
+		                                <div class="wrapper-one">
+		                                	<select class="borderless-one" ng-model="answer.qB.sub.region" ng-change="QBFilter.region(answer.qB.sub.region.regCode)" ng-options="a.regDesc for a in qb_regions">
+		                                     	     <option value="">Rehiyon</option>
+		                                	</select>  
+		                                </div>
+
+		                                <div class="wrapper-two">
+									  		<select class="borderless-two" ng-model="answer.qB.sub.province" ng-change="QBFilter.province(answer.qB.sub.province.provCode)" ng-options="b.provDesc for b in qb_provinces">
+									  				  <option value="">Probinsya</option>
+									  		</select>  
+									  	</div>
+								  		
+								  </div>
+
+								  <line-breaker></line-breaker>	
+
+								  <div class="sub-2-column">
+								  		
+								  		<div class="wrapper-one">
+									  		<select  class="borderless-one" ng-model="answer.qB.sub.city" ng-change="QBFilter.city(answer.qB.sub.city.citymunCode)" ng-options="c.citymunDesc for c in qb_city">
+									  				  <option value="">Siyudad/Munisipalidad</option>
+									  		</select>  
+									  	</div>
+
+									  	<div class="wrapper-two">
+									  		<select class="borderless-two" ng-model="answer.qB.sub.brgy" ng-options="d.brgyDesc for d in qb_brgy">
+									  				  <option value="">Barangay </option>
+
+									  		</select>  
+									  	</div>
+								  		
+								  </div>
+
+								  <line-breaker></line-breaker>	
+
+								  <div class="sub-2-column">
+								  		<input id="multi-liner" type="text" placeholder="Pangalan ng kalye" class="column-one" ng-model="answer.qB.sub.street_name"/>  
+								  		<input id="multi-liner" type="text" placeholder="House No./Ltd No./Building No." class="column-two" ng-model="answer.qB.sub.building_no"/>
+								  </div>
+
+								  <line-breaker></line-breaker>	
+							 </div>
+
+		  			  <label class="item item-icon-left borderless">
+					    <i class="icon" id="red-radio"><input type='radio' name="qB" ng-model="answer.qB.ans" value="Others" ng-change="deleteObj.dual('qB','sub')"/></i>
+					    <span class="option-text">Ibang lugar</span>
+					  </label>			
+
+   							  <!-- Sub content Location -->
+							  <div ng-if="answer.qB.ans == 'Others'">	
+			  					  <div class="sub-2-column">
+								  		<input id="multi-liner" type="text" placeholder="Pangalan ng Establisyemento" class="column-one" ng-model="answer.qB.sub.est_name"/>  
+								  </div>	
+
+								  <line-breaker></line-breaker>	
+								  
+								  <div class="sub-2-column">	  
+								  		<div class="sub-label">Address</div>
+								  </div>
+
+								  <line-breaker2></line-breaker2>		
+
+								  <div class="sub-2-column">
+		                                
+		                                <div class="wrapper-one">
+		                                	<select class="borderless-one" ng-model="answer.qB.sub.region" ng-change="QBFilter.region(answer.qB.sub.region.regCode)" ng-options="a.regDesc for a in qb_regions">
+		                                     	     <option value="">Rehiyon</option>
+		                                	</select>  
+		                                </div>
+
+		                                <div class="wrapper-two">
+									  		<select class="borderless-two" ng-model="answer.qB.sub.province" ng-change="QBFilter.province(answer.qB.sub.province.provCode)" ng-options="b.provDesc for b in qb_provinces">
+									  				  <option value="">Probinsya</option>
+									  		</select>  
+									  	</div>
+								  		
+								  </div>
+
+								  <line-breaker></line-breaker>	
+
+								  <div class="sub-2-column">
+								  		
+								  		<div class="wrapper-one">
+									  		<select  class="borderless-one" ng-model="answer.qB.sub.city" ng-change="QBFilter.city(answer.qB.sub.city.citymunCode)" ng-options="c.citymunDesc for c in qb_city">
+									  				  <option value="">Siyudad/Munisipalidad</option>
+									  		</select>  
+									  	</div>
+
+									  	<div class="wrapper-two">
+									  		<select class="borderless-two" ng-model="answer.qB.sub.brgy" ng-options="d.brgyDesc for d in qb_brgy">
+									  				  <option value="">Barangay </option>
+
+									  		</select>  
+									  	</div>
+								  		
+								  </div>
+
+								  <line-breaker></line-breaker>	
+
+								  <div class="sub-2-column">
+								  		<input id="multi-liner" type="text" placeholder="Pangalan ng kalye" class="column-one" ng-model="answer.qB.sub.street_name"/>  
+								  		<input id="multi-liner" type="text" placeholder="House No./Ltd No./Building No." class="column-two" ng-model="answer.qB.sub.building_no"/>
+								  </div>
+
+								  <line-breaker></line-breaker>	
+							 </div>
+
+				 <line-breaker></line-breaker>
+
+			 	</div>
+			</p>
+		</div>
+
+
 		<div id="floater"></div>
 	</ion-content>
 	
 	<!-- Footer Bar -->
 	<div  keyboard-attach class="bar-footer bar bar-assertive hide-on-keyboard-open">
 		<a class="button icon button-clear ion-ios-arrow-back" ng-click='validatePage.backState("instore-survey-a")'></a>
-        <a class="button icon button-clear ion-ios-arrow-forward" ng-click="debug()"></a>	
+        <a class="button icon button-clear ion-ios-arrow-forward" ng-click="validatePage.pageQBI()"></a>	
 	</div>
 
 </ion-view>

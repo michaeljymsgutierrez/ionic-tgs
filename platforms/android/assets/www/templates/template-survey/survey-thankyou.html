@@ -1,0 +1,47 @@
+<!--  Survey Thankyou Page View  -->
+
+<ion-view id="settings-bg" hide-back-button="true">
+
+	<ion-nav-buttons side="left">
+	 	<a id="view-title-color"  class="button button-icon icon ion-navicon" ng-click="toggleLeft()"></a>
+	</ion-nav-buttons>
+
+	<ion-content scroll="false" id="survey-home-bg">
+
+		<div ng-if="language == 'English'" class="landing-content">
+			<img src="./img/logo.jpg" id="landing-page-icon-thank"/>
+			<p class="store-type-text"> 
+				Thank you for accomplishing 
+				<line-breaker-2></line-breaker-2>
+				this survey form 
+			</p>
+			<p class="landing-text">
+				<line-breaker2></line-breaker2>
+				Please receive a special token from our crew
+				<line-breaker3></line-breaker3>
+				<a  id="landing-button" ui-sref="app-home" class="button button-clear" ng-click="">
+					Back to Home
+				</a>
+			</p>
+		</div>
+
+		<div ng-if="language == 'Tagalog'" class="landing-content">
+			<img src="./img/logo.jpg" id="landing-page-icon-thank"/>
+			<p class="store-type-text"> 
+				Salamat sa 
+				<line-breaker-2></line-breaker-2>
+				pagsagot ng form
+			</p>
+			<p class="landing-text">
+				<line-breaker2></line-breaker2>
+				Tanggapin ang special token na ibibigay ng crew
+				<line-breaker3></line-breaker3>
+				<a  id="landing-button" ui-sref="app-home" class="button button-clear" ng-click="">
+					Back to Home
+				</a>
+			</p>
+		</div>
+
+	</ion-content>
+
+</ion-view>

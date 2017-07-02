@@ -3,6 +3,8 @@ app.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider){
 
 	// Center Nav Title
 	$ionicConfigProvider.navBar.alignTitle('center');
+	// Remove slide animation of views
+	$ionicConfigProvider.views.transition('none');
 
 	// Initialization of States
 	$stateProvider
@@ -113,9 +115,21 @@ app.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider){
 		url: '/instore-survey-b',
 		templateUrl: 'templates/template-survey/instore-survey-b.html',
 		controller: 'surveyCtrl'
+	})
+	.state('survey-thankyou',{
+		cache: false,
+		url: '/survey-thankyou',
+		templateUrl: 'templates/template-survey/survey-thankyou.html',
+		controller: 'surveyCtrl'
+	})
+	.state('survey-sync',{
+		cache: false,
+		url: '/survey-sync',
+		templateUrl: 'templates/template-survey/survey-sync.html',
+		controller: 'surveyCtrl'
 	});
 
-	$urlRouterProvider.otherwise('/instore-survey-b');
+	$urlRouterProvider.otherwise('/settings');
 
 	
 });

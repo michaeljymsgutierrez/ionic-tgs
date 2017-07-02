@@ -4,7 +4,7 @@ app.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider){
 	// Center Nav Title
 	$ionicConfigProvider.navBar.alignTitle('center');
 	// Remove slide animation of views
-	$ionicConfigProvider.views.transition('none');
+	$ionicConfigProvider.views.transition('ios');
 
 	// Initialization of States
 	$stateProvider
@@ -129,7 +129,7 @@ app.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider){
 		controller: 'surveyCtrl'
 	});
 
-	$urlRouterProvider.otherwise('/survey-sync');
+	$urlRouterProvider.otherwise('/settings');
 
 	
 });
