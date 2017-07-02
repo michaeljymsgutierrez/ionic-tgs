@@ -1,4 +1,7 @@
-// Include all app services
+// Include all app services and constants
+
+// API endpoint
+app.constant('endpoint','https://staging.tgs.vielsoft.com/api/tgs');
 
 // Service for showing Toast Notification
 app.service('Toast',function($cordovaToast){
