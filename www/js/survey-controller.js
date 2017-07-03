@@ -1,5 +1,5 @@
 // Survey Controller
-app.controller('surveyCtrl',function($ionicSideMenuDelegate, $scope, $ionicHistory, $rootScope, $window, Toast, $state, Location, $interval, $timeout, $ionicPlatform, $cordovaSQLite, dateFormatter, schedule, storage){
+app.controller('surveyCtrl',function(loadingState, $ionicSideMenuDelegate, $scope, $ionicHistory, $rootScope, $window, Toast, $state, Location, $interval, $timeout, $ionicPlatform, $cordovaSQLite, dateFormatter, schedule, storage, endpoint, $http){
 
     // Execute process needed platform ready
     $ionicPlatform.ready(function(){
@@ -1028,7 +1028,7 @@ app.controller('surveyCtrl',function($ionicSideMenuDelegate, $scope, $ionicHisto
            $rootScope.total_sycned = res.rows.length;
         });
 
-
+        // Show synced data
         $scope.showSynced = function(){
             // Set active class and title
             $scope.activetabOne = false;
@@ -1040,18 +1040,63 @@ app.controller('surveyCtrl',function($ionicSideMenuDelegate, $scope, $ionicHisto
             });    
         };
 
+        // Show unsynced data
         $scope.showUnsynced = function(){
             // Set active class and title
             $scope.activetabOne = true;
             $scope.activetabTwo = false;
             $scope.sync_title = "Unsynced";
+
             $cordovaSQLite.execute(db,"SELECT * FROM survey_data WHERE is_synced = 0").then(function(res){
                $rootScope.total_unsycned = res.rows.length;
             });
         };
 
+        // Survey sync function
         $scope.syncAllData = function(){
             console.log("SYNC NOW");
+            $cordovaSQLite.execute(db,"SELECT * FROM survey_data WHERE is_synced = 0")
+            .then(function(res){
+                var length = res.rows.length;
+                var items = [];
+
+                for(var i = 0; i != length; i++){
+                    var parseAnswers = JSON.parse(res.rows.item(i).survey_answers);
+                    res.rows.item(i).survey_answers = parseAnswers;
+                    items.push(res.rows.item(i));
+                }
+
+                // Loading Duration
+                var duration = items.length * 1000;
+                loadingState.show(duration);
+
+                // Store ID
+                var store_id = storage.read('store_code');
+                
+                for(var i = 0; i != items.length; i++){
+
+                    var reqPayload = {
+                        store_id: store_id,
+                        survey_answers: items[i].survey_answers,
+                        store_type: items[i].schedule_type,
+                        schedule_type: items[i].schedule_type,
+                        created: items[i].created,
+                        date_start: items[i].date_start,
+                        date_end: items[i].date_end
+                    };
+
+                    $http({
+                        url: endpoint + "/" + store_id,
+                        method: 'POST',
+                        data:  reqPayload
+                    }).then(function(response){
+                        console.log(response);
+                    },function(err){
+                        console.log("NO");
+                    });
+                };
+
+            });
         };
 
     });
