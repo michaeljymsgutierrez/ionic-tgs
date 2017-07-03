@@ -16,6 +16,9 @@
     <!-- ionic budle -->
     <script src="lib/ionic/js/ionic.bundle.js"></script>
 
+    <!-- cryptojs md5 -->
+    <script src="lib/md5/rollups/md5.js"></script>
+
     <!-- ngCordova -->
     <script src="lib/ngCordova/dist/ng-cordova.min.js"></script>
 
@@ -72,7 +75,7 @@
           </div>
       </ion-side-menu-content>
 
-      <ion-side-menu side="left" id="side-menu" width="350">
+      <ion-side-menu side="left" id="side-menu" width="350" ng-controller="surveyCtrl">
 
         <img src="./img/close.png" id="tick-x" ng-click="toggleLeft()"/>
         <img src="./img/logo.jpg" id="side-menu-logo"/>
