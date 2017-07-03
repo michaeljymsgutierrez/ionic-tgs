@@ -1,4 +1,7 @@
-// Include all app services
+// Include all app services and constants
+
+// API endpoint
+app.constant('endpoint','https://staging.tgs.vielsoft.com/api/tgs');
 
 // Service for showing Toast Notification
 app.service('Toast',function($cordovaToast){
@@ -70,4 +73,25 @@ app.service('storage',function($window){
 	this.read = function(key){
 		return $window.localStorage.getItem(key);
 	};
+});
+
+// Loading Service
+app.service('loadingState',function($ionicLoading){
+      this.show = function(ms){
+          $ionicLoading.show({
+              template: '<ion-spinner icon="ios-small"></ion-spinner></br><span style="color:#FFFFFF !important;">Please wait while syncing data . . .<span>',
+              showBackDrop: false,
+              duration: ms
+          });
+      };
+});
+
+
+// Service for generating checksum
+app.service('checksum',function(){
+	this.generate = function(str){
+        var tohashObj = JSON.stringify(str);
+        var hash =  CryptoJS.MD5(tohashObj);
+        return hash.toString();
+	}
 });

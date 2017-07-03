@@ -1,5 +1,5 @@
 // Survey Controller
-app.controller('surveyCtrl',function($ionicSideMenuDelegate, $scope, $ionicHistory, $rootScope, $window, Toast, $state, Location, $interval, $timeout, $ionicPlatform, $cordovaSQLite, dateFormatter, schedule, storage){
+app.controller('surveyCtrl',function(loadingState, $ionicSideMenuDelegate, $scope, $ionicHistory, $rootScope, $window, Toast, $state, Location, $interval, $timeout, $ionicPlatform, $cordovaSQLite, dateFormatter, schedule, storage, endpoint, $http, checksum){
 
     // Execute process needed platform ready
     $ionicPlatform.ready(function(){
@@ -118,6 +118,7 @@ app.controller('surveyCtrl',function($ionicSideMenuDelegate, $scope, $ionicHisto
             survey_answers: storage.read('survey_answers'),
             store_type: storage.read('store_type'),
             schedule_type: storage.read('type'),
+            language_type: storage.read('language'),
             date_start: storage.read('start'),
             date_end: storage.read('end'),
             created: dateFormatter.toStandard(new Date()),
@@ -125,12 +126,13 @@ app.controller('surveyCtrl',function($ionicSideMenuDelegate, $scope, $ionicHisto
 
         };
         // Function save survey data
-        $cordovaSQLite.execute(db,"INSERT INTO survey_data (survey_answers, store_type, schedule_type, date_start, date_end, created, is_synced) VALUES(?,?,?,?,?,?,?)",
-        [save.survey_answers, save.store_type, save.schedule_type, save.date_start, save.date_end, save.created, save.is_synced])
+        $cordovaSQLite.execute(db,"INSERT INTO survey_data (survey_answers, store_type, schedule_type, language_type, date_start, date_end, created, is_synced) VALUES(?,?,?,?,?,?,?,?)",
+        [save.survey_answers, save.store_type, save.schedule_type, save.language_type, save.date_start, save.date_end, save.created, save.is_synced])
         .then(function(res){
             $state.go('survey-thankyou');
             Toast.show('Survey form successfully submitted . . .','short','bottom');
         },function(err){
+            console.log(err);
             Toast.show('Error submitting survey form . . .','short','bottom');
         });
     };
@@ -952,9 +954,9 @@ app.controller('surveyCtrl',function($ionicSideMenuDelegate, $scope, $ionicHisto
                 else if($rootScope.answer.hasOwnProperty('qB') == true && $rootScope.answer.qB.hasOwnProperty('sub') == false){
                     Toast.show("Please fill up all fields . . .","short","center");
                 }
-                else if($rootScope.answer.hasOwnProperty('qB') == true && $rootScope.answer.qB.ans != 'Home' && $rootScope.answer.qB.hasOwnProperty('sub') == true && $rootScope.answer.qA.sub.hasOwnProperty('est_name') == false){
-                    Toast.show("Please fill up all fields . . .","short","center");
-                }
+                // else if($rootScope.answer.hasOwnProperty('qB') == true && $rootScope.answer.qB.ans != 'Home' && $rootScope.answer.qB.hasOwnProperty('sub') == true && $rootScope.answer.qA.sub.hasOwnProperty('est_name') == false){
+                //     Toast.show("Please fill up all fields . . .","short","center");
+                // }
                 else if($rootScope.answer.hasOwnProperty('qB') == true && $rootScope.answer.qB.hasOwnProperty('sub') == true && $rootScope.answer.qB.sub.hasOwnProperty('region') == false){
                     Toast.show("Please fill up all fields . . .","short","center");
                 }
@@ -1028,7 +1030,7 @@ app.controller('surveyCtrl',function($ionicSideMenuDelegate, $scope, $ionicHisto
            $rootScope.total_sycned = res.rows.length;
         });
 
-
+        // Show synced data
         $scope.showSynced = function(){
             // Set active class and title
             $scope.activetabOne = false;
@@ -1040,19 +1042,99 @@ app.controller('surveyCtrl',function($ionicSideMenuDelegate, $scope, $ionicHisto
             });    
         };
 
+        // Show unsynced data
         $scope.showUnsynced = function(){
             // Set active class and title
             $scope.activetabOne = true;
             $scope.activetabTwo = false;
             $scope.sync_title = "Unsynced";
+
             $cordovaSQLite.execute(db,"SELECT * FROM survey_data WHERE is_synced = 0").then(function(res){
                $rootScope.total_unsycned = res.rows.length;
             });
         };
 
+        // Survey sync function
         $scope.syncAllData = function(){
-            console.log("SYNC NOW");
+            $cordovaSQLite.execute(db,"SELECT * FROM survey_data WHERE is_synced = 0")
+            .then(function(res){
+                var length = res.rows.length;
+                var items = [];
+
+                // Check if length of unsynced data is 0
+                if(length > 0){
+                    for(var i = 0; i != length; i++){
+                        var parseAnswers = JSON.parse(res.rows.item(i).survey_answers);
+                        res.rows.item(i).survey_answers = parseAnswers;
+                        items.push(res.rows.item(i));
+                    }
+
+                    // Loading Duration
+                    var duration = items.length * 1000;
+                    loadingState.show(duration);
+
+                    // Store ID
+                    var store_id = storage.read('store_code');
+                    
+                    for(var i = 0; i != items.length; i++){
+
+                        // Get Item ID
+                        var updateID = items[i].id;
+
+                        // Format data to be submitted
+                        var reqPayload = { 
+                            data: {
+                                store_id: store_id,
+                                survey_answers: items[i].survey_answers,
+                                store_type: items[i].store_type,
+                                schedule_type: items[i].schedule_type,
+                                language_type: items[i].language_type,
+                                created: items[i].created,
+                                date_start: items[i].date_start,
+                                date_end: items[i].date_end
+                            }
+                        };
+
+                        // Generate Checksum for data
+                        reqPayload.checksum = checksum.generate(reqPayload);
+
+                        // POST tgs data
+                        $http({
+                            url: endpoint + "/" + store_id,
+                            method: 'POST',
+                            data: reqPayload
+                        }).then(function(response){ console.log(response);
+                            // Success response
+                            if(response.status == "200"){
+                                $cordovaSQLite.execute(db,"UPDATE survey_data SET is_synced = 1 WHERE id = ?",[updateID])
+                                .then(function(res){
+                                    $scope.showUnsynced();
+                                    $scope.showSynced();
+                                    // Function for fetching unsynced data 
+                                    $cordovaSQLite.execute(db,"SELECT * FROM survey_data WHERE is_synced = 0").then(function(res){
+                                        $rootScope.unsynced_data = res.rows.length;
+                                    });
+                                },function(err){
+                                    // Error Updating is_synced
+                                    console.log(err);
+                                });
+                            }
+
+                        },function(err){
+                            // Error response
+                            Toast.show("Something went wrong, Please check your settings Store Code . . .","long","bottom");
+                            console.warn(err);
+                        });
+                    };
+                }
+                else{
+                    // Fallback for unsynced data is 0
+                    Toast.show("No data to be sync . . .","long","center");
+                }
+
+            });
         };
+
 
     });
     

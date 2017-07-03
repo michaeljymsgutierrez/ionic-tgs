@@ -1082,15 +1082,17 @@ app.controller('surveyCtrl',function(loadingState, $ionicSideMenuDelegate, $scop
                         var updateID = items[i].id;
 
                         // Format data to be submitted
-                        var reqPayload = {
-                            store_id: store_id,
-                            survey_answers: items[i].survey_answers,
-                            store_type: items[i].store_type,
-                            schedule_type: items[i].schedule_type,
-                            language_type: items[i].language_type,
-                            created: items[i].created,
-                            date_start: items[i].date_start,
-                            date_end: items[i].date_end
+                        var reqPayload = { 
+                            data: {
+                                store_id: store_id,
+                                survey_answers: items[i].survey_answers,
+                                store_type: items[i].store_type,
+                                schedule_type: items[i].schedule_type,
+                                language_type: items[i].language_type,
+                                created: items[i].created,
+                                date_start: items[i].date_start,
+                                date_end: items[i].date_end
+                            }
                         };
 
                         // Generate Checksum for data
@@ -1100,9 +1102,10 @@ app.controller('surveyCtrl',function(loadingState, $ionicSideMenuDelegate, $scop
                         $http({
                             url: endpoint + "/" + store_id,
                             method: 'POST',
-                            data:  reqPayload
-                        }).then(function(response){
-                            if(response.status == "200" && response.statusText == "OK"){
+                            data: reqPayload
+                        }).then(function(response){ console.log(response);
+                            // Success response
+                            if(response.status == "200"){
                                 $cordovaSQLite.execute(db,"UPDATE survey_data SET is_synced = 1 WHERE id = ?",[updateID])
                                 .then(function(res){
                                     $scope.showUnsynced();
@@ -1119,6 +1122,7 @@ app.controller('surveyCtrl',function(loadingState, $ionicSideMenuDelegate, $scop
 
                         },function(err){
                             // Error response
+                            Toast.show("Something went wrong, Please check your settings Store Code . . .","long","bottom");
                             console.warn(err);
                         });
                     };

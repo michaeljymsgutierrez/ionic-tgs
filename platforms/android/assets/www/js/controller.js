@@ -7,7 +7,7 @@ app.controller('settingsLoadCtrl',function($scope, $cordovaSQLite, $ionicPlatfor
 	$ionicPlatform.ready(function(){
 		
 		// Disable side menu  
-		$ionicSideMenuDelegate.canDragContent(false)
+		$ionicSideMenuDelegate.canDragContent(false);
 
 		// Initialize settings status object
 		$scope.status_settings = { 
