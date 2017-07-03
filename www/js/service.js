@@ -75,7 +75,7 @@ app.service('storage',function($window){
 	};
 });
 
-//Loading Service
+// Loading Service
 app.service('loadingState',function($ionicLoading){
       this.show = function(ms){
           $ionicLoading.show({
@@ -84,4 +84,14 @@ app.service('loadingState',function($ionicLoading){
               duration: ms
           });
       };
+});
+
+
+// Service for generating checksum
+app.service('checksum',function(){
+	this.generate = function(str){
+        var tohashObj = JSON.stringify(str);
+        var hash =  CryptoJS.MD5(tohashObj);
+        return hash.toString();
+	}
 });
