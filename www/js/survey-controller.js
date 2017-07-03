@@ -952,9 +952,9 @@ app.controller('surveyCtrl',function(loadingState, $ionicSideMenuDelegate, $scop
                 else if($rootScope.answer.hasOwnProperty('qB') == true && $rootScope.answer.qB.hasOwnProperty('sub') == false){
                     Toast.show("Please fill up all fields . . .","short","center");
                 }
-                else if($rootScope.answer.hasOwnProperty('qB') == true && $rootScope.answer.qB.ans != 'Home' && $rootScope.answer.qB.hasOwnProperty('sub') == true && $rootScope.answer.qA.sub.hasOwnProperty('est_name') == false){
-                    Toast.show("Please fill up all fields . . .","short","center");
-                }
+                // else if($rootScope.answer.hasOwnProperty('qB') == true && $rootScope.answer.qB.ans != 'Home' && $rootScope.answer.qB.hasOwnProperty('sub') == true && $rootScope.answer.qA.sub.hasOwnProperty('est_name') == false){
+                //     Toast.show("Please fill up all fields . . .","short","center");
+                // }
                 else if($rootScope.answer.hasOwnProperty('qB') == true && $rootScope.answer.qB.hasOwnProperty('sub') == true && $rootScope.answer.qB.sub.hasOwnProperty('region') == false){
                     Toast.show("Please fill up all fields . . .","short","center");
                 }
@@ -1078,7 +1078,7 @@ app.controller('surveyCtrl',function(loadingState, $ionicSideMenuDelegate, $scop
                     var reqPayload = {
                         store_id: store_id,
                         survey_answers: items[i].survey_answers,
-                        store_type: items[i].schedule_type,
+                        store_type: items[i].store_type,
                         schedule_type: items[i].schedule_type,
                         created: items[i].created,
                         date_start: items[i].date_start,
