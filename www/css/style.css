@@ -579,3 +579,12 @@ ion-spinner * {
   stroke: #FFFFFF!important;
   fill: #FFFFFF !important;
 }
+
+i.custom-icon {
+	color: red !important;
+	font-size: 40px !important;
+}
+
+i.reset {
+	color:red !important;
+}
