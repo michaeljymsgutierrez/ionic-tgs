@@ -118,6 +118,7 @@ app.controller('surveyCtrl',function(loadingState, $ionicSideMenuDelegate, $scop
             survey_answers: storage.read('survey_answers'),
             store_type: storage.read('store_type'),
             schedule_type: storage.read('type'),
+            language_type: storage.read('language'),
             date_start: storage.read('start'),
             date_end: storage.read('end'),
             created: dateFormatter.toStandard(new Date()),
@@ -125,12 +126,13 @@ app.controller('surveyCtrl',function(loadingState, $ionicSideMenuDelegate, $scop
 
         };
         // Function save survey data
-        $cordovaSQLite.execute(db,"INSERT INTO survey_data (survey_answers, store_type, schedule_type, date_start, date_end, created, is_synced) VALUES(?,?,?,?,?,?,?)",
-        [save.survey_answers, save.store_type, save.schedule_type, save.date_start, save.date_end, save.created, save.is_synced])
+        $cordovaSQLite.execute(db,"INSERT INTO survey_data (survey_answers, store_type, schedule_type, language_type, date_start, date_end, created, is_synced) VALUES(?,?,?,?,?,?,?,?)",
+        [save.survey_answers, save.store_type, save.schedule_type, save.language_type, save.date_start, save.date_end, save.created, save.is_synced])
         .then(function(res){
             $state.go('survey-thankyou');
             Toast.show('Survey form successfully submitted . . .','short','bottom');
         },function(err){
+            console.log(err);
             Toast.show('Error submitting survey form . . .','short','bottom');
         });
     };
@@ -1080,6 +1082,7 @@ app.controller('surveyCtrl',function(loadingState, $ionicSideMenuDelegate, $scop
                         survey_answers: items[i].survey_answers,
                         store_type: items[i].store_type,
                         schedule_type: items[i].schedule_type,
+                        language_type: items[i].language_type,
                         created: items[i].created,
                         date_start: items[i].date_start,
                         date_end: items[i].date_end
