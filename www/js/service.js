@@ -74,3 +74,14 @@ app.service('storage',function($window){
 		return $window.localStorage.getItem(key);
 	};
 });
+
+//Loading Service
+app.service('loadingState',function($ionicLoading){
+      this.show = function(ms){
+          $ionicLoading.show({
+              template: '<ion-spinner icon="dots"></ion-spinner></br><span style="color:#FFFFFF !important;">Please wait while syncing data . . .<span>',
+              showBackDrop: false,
+              duration: ms
+          });
+      };
+});
