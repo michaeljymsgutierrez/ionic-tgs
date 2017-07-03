@@ -1,5 +1,5 @@
 // Survey Controller
-app.controller('surveyCtrl',function(loadingState, $ionicSideMenuDelegate, $scope, $ionicHistory, $rootScope, $window, Toast, $state, Location, $interval, $timeout, $ionicPlatform, $cordovaSQLite, dateFormatter, schedule, storage, endpoint, $http){
+app.controller('surveyCtrl',function(loadingState, $ionicSideMenuDelegate, $scope, $ionicHistory, $rootScope, $window, Toast, $state, Location, $interval, $timeout, $ionicPlatform, $cordovaSQLite, dateFormatter, schedule, storage, endpoint, $http, checksum){
 
     // Execute process needed platform ready
     $ionicPlatform.ready(function(){
@@ -1056,51 +1056,81 @@ app.controller('surveyCtrl',function(loadingState, $ionicSideMenuDelegate, $scop
 
         // Survey sync function
         $scope.syncAllData = function(){
-            console.log("SYNC NOW");
             $cordovaSQLite.execute(db,"SELECT * FROM survey_data WHERE is_synced = 0")
             .then(function(res){
                 var length = res.rows.length;
                 var items = [];
 
-                for(var i = 0; i != length; i++){
-                    var parseAnswers = JSON.parse(res.rows.item(i).survey_answers);
-                    res.rows.item(i).survey_answers = parseAnswers;
-                    items.push(res.rows.item(i));
-                }
+                // Check if length of unsynced data is 0
+                if(length > 0){
+                    for(var i = 0; i != length; i++){
+                        var parseAnswers = JSON.parse(res.rows.item(i).survey_answers);
+                        res.rows.item(i).survey_answers = parseAnswers;
+                        items.push(res.rows.item(i));
+                    }
 
-                // Loading Duration
-                var duration = items.length * 1000;
-                loadingState.show(duration);
+                    // Loading Duration
+                    var duration = items.length * 1000;
+                    loadingState.show(duration);
 
-                // Store ID
-                var store_id = storage.read('store_code');
-                
-                for(var i = 0; i != items.length; i++){
+                    // Store ID
+                    var store_id = storage.read('store_code');
+                    
+                    for(var i = 0; i != items.length; i++){
 
-                    var reqPayload = {
-                        store_id: store_id,
-                        survey_answers: items[i].survey_answers,
-                        store_type: items[i].store_type,
-                        schedule_type: items[i].schedule_type,
-                        language_type: items[i].language_type,
-                        created: items[i].created,
-                        date_start: items[i].date_start,
-                        date_end: items[i].date_end
+                        // Get Item ID
+                        var updateID = items[i].id;
+
+                        // Format data to be submitted
+                        var reqPayload = {
+                            store_id: store_id,
+                            survey_answers: items[i].survey_answers,
+                            store_type: items[i].store_type,
+                            schedule_type: items[i].schedule_type,
+                            language_type: items[i].language_type,
+                            created: items[i].created,
+                            date_start: items[i].date_start,
+                            date_end: items[i].date_end
+                        };
+
+                        // Generate Checksum for data
+                        reqPayload.checksum = checksum.generate(reqPayload);
+
+                        // POST tgs data
+                        $http({
+                            url: endpoint + "/" + store_id,
+                            method: 'POST',
+                            data:  reqPayload
+                        }).then(function(response){
+                            if(response.status == "200" && response.statusText == "OK"){
+                                $cordovaSQLite.execute(db,"UPDATE survey_data SET is_synced = 1 WHERE id = ?",[updateID])
+                                .then(function(res){
+                                    $scope.showUnsynced();
+                                    $scope.showSynced();
+                                    // Function for fetching unsynced data 
+                                    $cordovaSQLite.execute(db,"SELECT * FROM survey_data WHERE is_synced = 0").then(function(res){
+                                        $rootScope.unsynced_data = res.rows.length;
+                                    });
+                                },function(err){
+                                    // Error Updating is_synced
+                                    console.log(err);
+                                });
+                            }
+
+                        },function(err){
+                            // Error response
+                            console.warn(err);
+                        });
                     };
-
-                    $http({
-                        url: endpoint + "/" + store_id,
-                        method: 'POST',
-                        data:  reqPayload
-                    }).then(function(response){
-                        console.log(response);
-                    },function(err){
-                        console.log("NO");
-                    });
-                };
+                }
+                else{
+                    // Fallback for unsynced data is 0
+                    Toast.show("No data to be sync . . .","long","center");
+                }
 
             });
         };
+
 
     });
     
