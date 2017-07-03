@@ -135,6 +135,11 @@ app.controller('settingsCtrl',function($scope, $ionicPopup, $rootScope, $cordova
 		});
 	};
 
+	// Function for go main settings
+	$rootScope.goHomeSettings = function(){
+		$state.go('settings');
+	}
+
 	// Popup Hide Object function
 	$scope.closeStoreType = {
 		cancel: function(){
