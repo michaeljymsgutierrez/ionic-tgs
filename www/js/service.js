@@ -79,7 +79,7 @@ app.service('storage',function($window){
 app.service('loadingState',function($ionicLoading){
       this.show = function(ms){
           $ionicLoading.show({
-              template: '<ion-spinner icon="dots"></ion-spinner></br><span style="color:#FFFFFF !important;">Please wait while syncing data . . .<span>',
+              template: '<ion-spinner icon="ios-small"></ion-spinner></br><span style="color:#FFFFFF !important;">Please wait while syncing data . . .<span>',
               showBackDrop: false,
               duration: ms
           });
