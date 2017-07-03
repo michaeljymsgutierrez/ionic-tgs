@@ -1103,7 +1103,7 @@ app.controller('surveyCtrl',function(loadingState, $ionicSideMenuDelegate, $scop
                             url: endpoint + "/" + store_id,
                             method: 'POST',
                             data: reqPayload
-                        }).then(function(response){ console.log(response);
+                        }).then(function(response){
 
                             // Get Item ID for update
                             var updateID = response.config.data.unique_id;
