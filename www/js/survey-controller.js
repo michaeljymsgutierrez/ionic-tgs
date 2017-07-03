@@ -1070,16 +1070,13 @@ app.controller('surveyCtrl',function(loadingState, $ionicSideMenuDelegate, $scop
                     }
 
                     // Loading Duration
-                    var duration = items.length * 1000;
+                    var duration = items.length * 1500;
                     loadingState.show(duration);
 
                     // Store ID
                     var store_id = storage.read('store_code');
                     
                     for(var i = 0; i != items.length; i++){
-
-                        // Get Item ID
-                        var updateID = items[i].id;
 
                         // Format data to be submitted
                         var reqPayload = { 
@@ -1095,6 +1092,9 @@ app.controller('surveyCtrl',function(loadingState, $ionicSideMenuDelegate, $scop
                             }
                         };
 
+                        // Item unique ID
+                        reqPayload.unique_id = items[i].id;
+
                         // Generate Checksum for data
                         reqPayload.checksum = checksum.generate(reqPayload);
 
@@ -1104,6 +1104,10 @@ app.controller('surveyCtrl',function(loadingState, $ionicSideMenuDelegate, $scop
                             method: 'POST',
                             data: reqPayload
                         }).then(function(response){ console.log(response);
+
+                            // Get Item ID for update
+                            var updateID = response.config.data.unique_id;
+
                             // Success response
                             if(response.status == "200"){
                                 $cordovaSQLite.execute(db,"UPDATE survey_data SET is_synced = 1 WHERE id = ?",[updateID])
