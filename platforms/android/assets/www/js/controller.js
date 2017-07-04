@@ -66,7 +66,7 @@ app.controller('settingsLoadCtrl',function($scope, $cordovaSQLite, $ionicPlatfor
 		},500);
 
 		// Start Using the app
-		$scope.startapp = function(){
+		$scope.startapp = function(){	
 			$state.go('app-home');
 		}
 

@@ -46,6 +46,7 @@
 #store-form-label {
 	font-weight: bold;
 	margin-left: 30px;
+	color: black;
 }
 
 #input-wrapper {
@@ -130,6 +131,7 @@ input[type='radio']:checked:before {
 #language-text {
 	font-weight: bold;
 	margin-left: 30px;
+	color: black;
 }
 
 .survey-checkbox {
@@ -578,4 +580,13 @@ ion-spinner * {
   height: 50px !important;
   stroke: #FFFFFF!important;
   fill: #FFFFFF !important;
+}
+
+i.custom-icon {
+	color: red !important;
+	font-size: 40px !important;
+}
+
+i.reset {
+	color:red !important;
 }

@@ -5,6 +5,11 @@ app.run(function($ionicPlatform, $cordovaSQLite, $ionicPickerI18n) {
   
     $ionicPlatform.ready(function() {
       
+      // Register back button prevent default
+      $ionicPlatform.registerBackButtonAction(function(e){
+            e.preventDefault();
+      },101);
+
       if(window.cordova && window.cordova.plugins.Keyboard) {
         cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
         cordova.plugins.Keyboard.disableScroll(true);
