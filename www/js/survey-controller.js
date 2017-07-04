@@ -113,6 +113,10 @@ app.controller('surveyCtrl',function(loadingState, $ionicSideMenuDelegate, $scop
 
      // Function for saving data
     $scope.saveSurvey = function(){
+
+        // Write status for disabling schedule settings
+        storage.write(storage.read('type'),'1');
+
         // Form objects to  save
         var save = {
             survey_answers: storage.read('survey_answers'),
