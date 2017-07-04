@@ -1,11 +1,27 @@
 // Main Controller
 // Consist of controllers on load at a time
 
-app.controller('settingsLoadCtrl',function($scope, $cordovaSQLite, $ionicPlatform, $timeout, $state, $ionicSideMenuDelegate, $window){
-
+app.controller('settingsLoadCtrl',function($scope, $rootScope, $cordovaSQLite, $ionicPlatform, $timeout, $state, $ionicSideMenuDelegate, $window, storage){
+	
 	//  On platform ready
 	$ionicPlatform.ready(function(){
-		
+
+		// Get data to update the sidebar
+		$timeout(function(){
+			$rootScope.store_name = storage.read('store_name');
+			$rootScope.store_type = storage.read('store_type');
+			$rootScope.showBurgerIcon = storage.read('showBurger');
+		},1000);
+
+		// Show reset button 
+		$rootScope.showReset = storage.read('showReset');
+
+		// Toggle Sidemenu on survey controller
+		$rootScope.toggleLeft = function(){
+	        $ionicSideMenuDelegate.toggleLeft();
+	    };
+
+
 		// Disable side menu  
 		$ionicSideMenuDelegate.canDragContent(false);
 
@@ -55,18 +71,29 @@ app.controller('settingsLoadCtrl',function($scope, $cordovaSQLite, $ionicPlatfor
 		$cordovaSQLite.execute(db,'SELECT * FROM non_payday_weekend').then(function(res){
 			$scope.status_settings.nonpayday_weekend = res.rows.length; 
 		});
+		
+		// Check status of show start up btn
+		if(storage.read('showStartAppBtn') == "false"){
+			// Write false show start up btn false
+			$scope.showStartApp = false;
+			storage.write('showBurger',true);
+		}
+		else{ 
+			$timeout(function(){
+				if($scope.status_settings.store_settings == 1 && $scope.status_settings.survey_language == 1 && $scope.status_settings.payday_weekday == 1 && $scope.status_settings.nonpayday_weekday == 1 && $scope.status_settings.payday_weekend == 1 && $scope.status_settings.nonpayday_weekend == 1){
+					$scope.showStartApp = true;
+				}
+				else{
+					$scope.showStartApp = false;
+				}
+			},500);
+		}
 
-		$timeout(function(){
-			if($scope.status_settings.store_settings == 1 && $scope.status_settings.survey_language == 1 && $scope.status_settings.payday_weekday == 1 && $scope.status_settings.nonpayday_weekday == 1 && $scope.status_settings.payday_weekend == 1 && $scope.status_settings.nonpayday_weekend == 1){
-				$scope.showStartApp = true;
-			}
-			else{
-				$scope.showStartApp = false;
-			}
-		},500);
-
-		// Start Using the app
+		// Start Using the app btn
 		$scope.startapp = function(){
+			// Write status for reset  and show start up btn
+			storage.write('showReset','true');
+			storage.write('showStartAppBtn','false');
 			$state.go('app-home');
 		}
 
