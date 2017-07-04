@@ -135,7 +135,7 @@ app.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider, $h
 		controller: 'surveyCtrl'
 	});
 
-	$urlRouterProvider.otherwise('/survey-sync');
+	$urlRouterProvider.otherwise('/settings');
 
 	
 });
