@@ -590,3 +590,9 @@ i.custom-icon {
 i.reset {
 	color:red !important;
 }
+
+/* Disable schedule if have data */
+a.disabledSched{
+	pointer-events: none !important;
+	opacity: 0.4;
+}
