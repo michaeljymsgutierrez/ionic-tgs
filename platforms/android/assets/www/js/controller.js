@@ -105,7 +105,6 @@ app.controller('settingsLoadCtrl',function($scope, $rootScope, $cordovaSQLite, $
 
 		// Function for Reset application
 		$rootScope.resetApp = function(){
-			// $rootScope.hideMe();
 			$window.localStorage.clear();
 			$cordovaSQLite.execute(db,"DELETE FROM survey_data");
 			$cordovaSQLite.execute(db,"DELETE FROM store_settings");
