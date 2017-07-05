@@ -1,5 +1,5 @@
 // Settings Controller
-app.controller('settingsCtrl',function($scope, $ionicPopup, $rootScope, $cordovaSQLite, $location, Toast, $ionicPlatform, $state, $timeout, dateFormatter){
+app.controller('settingsCtrl',function($scope, $ionicPopup, $rootScope, $cordovaSQLite, $location, Toast, $ionicPlatform, $state, $timeout, dateFormatter, storage){
 
 	// Initialize store object for settings
 	// rootScope  is used due to hiding of popup
@@ -25,6 +25,14 @@ app.controller('settingsCtrl',function($scope, $ionicPopup, $rootScope, $cordova
 
 	// Initialize main display survey settings schedule
 	$scope.summary_schedule = { };
+
+	// Initialize survey schedule status for disabling  item
+	$scope.schedStatus = {
+		pwd: false,
+		npwd: false,
+		pwe: false,
+		npwe: false
+	};
 
 	// Platform ready code execution 
 	$ionicPlatform.ready(function(){
@@ -124,7 +132,13 @@ app.controller('settingsCtrl',function($scope, $ionicPopup, $rootScope, $cordova
 			});
 
 	});
- 
+
+	// Get status from  storage
+	$scope.schedStatus.pwd = JSON.parse(storage.read("Payday Weekday"));
+ 	$scope.schedStatus.npwd = JSON.parse(storage.read("Non Payday Weekday"));
+ 	$scope.schedStatus.pwe = JSON.parse(storage.read("Payday Weekend"));
+ 	$scope.schedStatus.npwe = JSON.parse(storage.read("Non Payday Weekend"));
+
 	// Popup show store type
 	$scope.storeType =  function(){
 		// Use rootScope for closing Custom Popup

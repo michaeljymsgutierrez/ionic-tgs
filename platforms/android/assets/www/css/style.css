@@ -590,3 +590,26 @@ i.custom-icon {
 i.reset {
 	color:red !important;
 }
+
+/* Disable schedule if have data */
+a.disabledSched{
+	pointer-events: none !important;
+	opacity: 0.4;
+}
+
+/* Reset settings */
+
+a.oKonly {
+	color: #024c1d !important;
+}
+
+a.yes {
+	color: #024c1d !important;
+	margin-left: 30px !important;
+}
+
+a.no {
+	color:#024c1d !important;
+	margin-left:-2px !important;
+}
+

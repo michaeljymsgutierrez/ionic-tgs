@@ -5,13 +5,16 @@
 		<span id=view-title-color>Settings</span>
 	</ion-nav-title>
 
+	<ion-nav-buttons side="left">
+	 	<a id="view-title-color" class="button button-icon icon ion-navicon" ng-click="toggleLeft()" ng-if="showBurgerIcon"></a>
+	</ion-nav-buttons>
+
 	<ion-content scroll="false" id="settings-bg">
 
 		<div class="list" id="settings-list">
 
 			  <a class="item item-icon-right" id="settings-item" ui-sref="store">
 	    		<i class="icon ion-ios-briefcase-outline custom-icon" id="settings-icon"></i>
-	    		<!--<img src="img/store-settings.png">-->
 			    <span id="settings-icon-text">Store Settings</span>
 			    <i class="icon ion-chevron-right" id="settings-arrow" ></i>
 			    <div id="custom-divider-survey"></div>
@@ -19,7 +22,6 @@
 
 			  <a class="item item-icon-right" id="settings-item"  ui-sref="language">
 	    		<i class="icon ion-ios-chatbubble-outline custom-icon" id="settings-icon"></i>
-	    		<!--<img src="img/survey-language-settings.png">-->
 			    <span id="settings-icon-text">Survey Language</span>
 			    <i class="icon ion-chevron-right" id="settings-arrow" ></i>
 			    <div id="custom-divider-survey"></div>
@@ -27,13 +29,12 @@
 
 			  <a class="item item-icon-right" id="settings-item"  ui-sref="survey-home">
 	    		<i class="icon ion-ios-paper-outline custom-icon" id="settings-icon"></i>
-	    		<!--<img src="img/survey-settings.png">-->
 			    <span id="settings-icon-text">Survey Settings</span>
 			    <i class="icon ion-chevron-right" id="settings-arrow"></i>
-			    <div id="custom-divider-survey"></div>
+			    <div id="custom-divider-survey" ng-if="showReset"></div>
 			  </a>
 
-			  <a class="item item-icon-right" id="settings-item">
+			  <a class="item item-icon-right" id="settings-item" ng-if="showReset" ng-click="reset()">
 	    		<i class="icon ion-ios-loop-strong reset" id="settings-icon"></i>
 			    <span id="settings-icon-text">Reset</span>
 			    <i class="icon ion-chevron-right" id="settings-arrow"></i>

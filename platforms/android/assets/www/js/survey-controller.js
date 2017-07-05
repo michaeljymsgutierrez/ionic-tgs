@@ -113,6 +113,10 @@ app.controller('surveyCtrl',function(loadingState, $ionicSideMenuDelegate, $scop
 
      // Function for saving data
     $scope.saveSurvey = function(){
+
+        // Write status for disabling schedule settings
+        storage.write(storage.read('type'),'true');
+
         // Form objects to  save
         var save = {
             survey_answers: storage.read('survey_answers'),
@@ -422,7 +426,7 @@ app.controller('surveyCtrl',function(loadingState, $ionicSideMenuDelegate, $scop
 
 
 	// Renable side menu  
-	$ionicSideMenuDelegate.canDragContent(true);
+	$ionicSideMenuDelegate.canDragContent(false);
 
     // Clear History after start app 
     $ionicHistory.clearHistory();
@@ -1092,15 +1096,15 @@ app.controller('surveyCtrl',function(loadingState, $ionicSideMenuDelegate, $scop
                             }
                         };
 
+                        // Generate Checksum for data
+                        var calcChecksum = checksum.generate(reqPayload.data);
+
                         // Item unique ID
                         reqPayload.unique_id = items[i].id;
 
-                        // Generate Checksum for data
-                        reqPayload.checksum = checksum.generate(reqPayload);
-
                         // POST tgs data
                         $http({
-                            url: endpoint + "/" + store_id,
+                            url: endpoint + "/" + calcChecksum,
                             method: 'POST',
                             data: reqPayload
                         }).then(function(response){
@@ -1126,7 +1130,7 @@ app.controller('surveyCtrl',function(loadingState, $ionicSideMenuDelegate, $scop
 
                         },function(err){
                             // Error response
-                            Toast.show("Something went wrong, Please check your settings Store Code . . .","long","bottom");
+                            Toast.show("Please check your settings Store Code or Internet connection . . .","long","bottom");
                             console.warn(err);
                         });
                     };
