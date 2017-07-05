@@ -426,7 +426,7 @@ app.controller('surveyCtrl',function(loadingState, $ionicSideMenuDelegate, $scop
 
 
 	// Renable side menu  
-	$ionicSideMenuDelegate.canDragContent(true);
+	$ionicSideMenuDelegate.canDragContent(false);
 
     // Clear History after start app 
     $ionicHistory.clearHistory();
