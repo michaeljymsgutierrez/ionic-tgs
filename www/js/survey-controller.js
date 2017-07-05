@@ -1097,14 +1097,14 @@ app.controller('surveyCtrl',function(loadingState, $ionicSideMenuDelegate, $scop
                         };
 
                         // Generate Checksum for data
-                        reqPayload.checksum = checksum.generate(reqPayload.data);
+                        var calcChecksum = checksum.generate(reqPayload.data);
 
                         // Item unique ID
                         reqPayload.unique_id = items[i].id;
 
                         // POST tgs data
                         $http({
-                            url: endpoint + "/" + store_id,
+                            url: endpoint + "/" + calcChecksum,
                             method: 'POST',
                             data: reqPayload
                         }).then(function(response){
