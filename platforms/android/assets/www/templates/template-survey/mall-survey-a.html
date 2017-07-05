@@ -112,14 +112,17 @@
 						  <line-breaker></line-breaker>		
 
 						  <div class="sub-2-column">
-                                
-                               <select ng-disabled="qAsection2" id="multi-liner" class="option-column-one" ng-model="answer.qA.sub.region" ng-change="QAFilter.region(answer.qA.sub.region.regCode)" ng-options="a.regDesc for a in qa_regions">
-                                          <option value="">Select Region</option>
-                                </select>  
+                                <div class="wrapper-one">
+	                                <select ng-disabled="qAsection2" class="borderless-one" ng-model="answer.qA.sub.region" ng-change="QAFilter.region(answer.qA.sub.region.regCode)" ng-options="a.regDesc for a in qa_regions">
+	                                          <option value="">Select Region</option>
+	                                </select>  
+	                            </div>
 
-						  		<select ng-disabled="qAsection2" id="multi-liner" class="option-column-two" ng-model="answer.qA.sub.province" ng-change="QAFilter.province(answer.qA.sub.province.provCode)" ng-options="b.provDesc for b in qa_provinces">
-						  				  <option value="">Select Province</option>
-						  		</select>  
+	                            <div class="wrapper-two">
+							  		<select ng-disabled="qAsection2" class="borderless-two" ng-model="answer.qA.sub.province" ng-change="QAFilter.province(answer.qA.sub.province.provCode)" ng-options="b.provDesc for b in qa_provinces">
+							  				  <option value="">Select Province</option>
+							  		</select>  
+							  	</div>
 						  		
 						  </div>
 
@@ -127,13 +130,17 @@
 
 						  <div class="sub-2-column">
 						  		
-						  		<select ng-disabled="qAsection2" id="multi-liner" class="option-column-one" ng-model="answer.qA.sub.city" ng-change="QAFilter.city(answer.qA.sub.city.citymunCode)" ng-options="c.citymunDesc for c in qa_city">
-						  				  <option value="">Select City</option>
-						  		</select>  
+						  		<div class="wrapper-one">
+							  		<select ng-disabled="qAsection2" class="borderless-one" ng-model="answer.qA.sub.city" ng-change="QAFilter.city(answer.qA.sub.city.citymunCode)" ng-options="c.citymunDesc for c in qa_city">
+							  				  <option value="">Select City</option>
+							  		</select>  
+							  	</div>
 
-						  		<select ng-disabled="qAsection2" id="multi-liner" class="option-column-two" ng-model="answer.qA.sub.brgy" ng-options="d.brgyDesc for d in qa_brgy">
-						  				  <option value="">Select Barangay</option>
-						  		</select>  
+							  	<div class="wrapper-two">
+							  		<select ng-disabled="qAsection2" class="borderless-two" ng-model="answer.qA.sub.brgy" ng-options="d.brgyDesc for d in qa_brgy">
+							  				  <option value="">Select Barangay</option>
+							  		</select>  
+							  	</div>
 						  		
 						  </div>
 
@@ -277,28 +284,34 @@
 						  <line-breaker></line-breaker>		
 
 						  <div class="sub-2-column">
-                                
-                               <select ng-disabled="qAsection2" id="multi-liner" class="option-column-one" ng-model="answer.qA.sub.region" ng-change="QAFilter.region(answer.qA.sub.region.regCode)" ng-options="a.regDesc for a in qa_regions">
-                                          <option value="">Rehiyon</option>
-                                </select>  
+                                <div class="wrapper-one">
+	                                <select ng-disabled="qAsection2"  class="borderless-one" ng-model="answer.qA.sub.region" ng-change="QAFilter.region(answer.qA.sub.region.regCode)" ng-options="a.regDesc for a in qa_regions">
+	                                          <option value="">Rehiyon</option>
+	                                </select>  
+	                            </div>
 
-						  		<select ng-disabled="qAsection2" id="multi-liner" class="option-column-two" ng-model="answer.qA.sub.province" ng-change="QAFilter.province(answer.qA.sub.province.provCode)" ng-options="b.provDesc for b in qa_provinces">
-						  				  <option value="">Probinsya</option>
-						  		</select>  
+	                            <div class="wrapper-two">
+							  		<select ng-disabled="qAsection2" class="borderless-two" ng-model="answer.qA.sub.province" ng-change="QAFilter.province(answer.qA.sub.province.provCode)" ng-options="b.provDesc for b in qa_provinces">
+							  				  <option value="">Probinsya</option>
+							  		</select>  
+							  	</div>
 						  		
 						  </div>
 
 						  <line-breaker></line-breaker>	
 
 						  <div class="sub-2-column">
-						  		
-						  		<select ng-disabled="qAsection2" id="multi-liner" class="option-column-one borderless-top" ng-model="answer.qA.sub.city" ng-change="QAFilter.city(answer.qA.sub.city.citymunCode)" ng-options="c.citymunDesc for c in qa_city">
-						  				  <option value="">Siyudad/Munisipalidad </option>
-						  		</select>  
+						  		<div class="wrapper-one">
+							  		<select ng-disabled="qAsection2" class="borderless-one" ng-model="answer.qA.sub.city" ng-change="QAFilter.city(answer.qA.sub.city.citymunCode)" ng-options="c.citymunDesc for c in qa_city">
+							  				  <option value="">Siyudad/Munisipalidad </option>
+							  		</select>  
+							  	</div>
 
-						  		<select ng-disabled="qAsection2" id="multi-liner" class="option-column-two borderless-top" ng-model="answer.qA.sub.brgy" ng-options="d.brgyDesc for d in qa_brgy">
-						  				  <option value="">Barangay</option>
-						  		</select>  
+							  	<div class="wrapper-two">
+							  		<select ng-disabled="qAsection2" class="borderless-two" ng-model="answer.qA.sub.brgy" ng-options="d.brgyDesc for d in qa_brgy">
+							  				  <option value="">Barangay</option>
+							  		</select>  
+							  	</div>
 						  		
 						  </div>
 
