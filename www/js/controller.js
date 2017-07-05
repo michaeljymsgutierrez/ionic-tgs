@@ -1,7 +1,7 @@
 // Main Controller
 // Consist of controllers on load at a time
 
-app.controller('settingsLoadCtrl',function($scope, $rootScope, $cordovaSQLite, $ionicPlatform, $timeout, $state, $ionicSideMenuDelegate, $window, storage){
+app.controller('settingsLoadCtrl',function($scope, $rootScope, $cordovaSQLite, $ionicPlatform, $timeout, $state, $ionicSideMenuDelegate, $window, storage, $ionicPopup){
 	
 	//  On platform ready
 	$ionicPlatform.ready(function(){
@@ -96,6 +96,43 @@ app.controller('settingsLoadCtrl',function($scope, $rootScope, $cordovaSQLite, $
 			storage.write('showReset','true');
 			storage.write('showStartAppBtn','false');
 			$state.go('app-home');
+		}
+
+		// Function for Hide pop up for reset
+		$rootScope.hideMe = function(){
+			$rootScope.resetPopup.close();
+		};
+
+		// Function for Reset application
+		$rootScope.resetApp = function(){
+			console.log("RESET APP");
+		}
+
+		// Function for reset settings
+		$scope.reset = function(){	
+			$cordovaSQLite.execute(db,"SELECT * FROM survey_data WHERE is_synced = 0")
+			.then(function(res){
+				if(res.rows.length > 0){
+						// Prompt if  data there are unsynced data
+						$rootScope.resetPopup = $ionicPopup.show({
+							title: '<p align="center" style="font-weight:bold;"><font size="4" color="#024c1d">Reset Settings ?</font></p>',
+							scope: $scope,
+							template: '<p align="center" style="font-size: 15px;">You must first sync all the data before you can reset the application <br/><br/> <a class="button button-clear oKonly" ng-click="hideMe()">OK</a></p>'
+						});
+				}
+				else if(res.rows.length  == 0){
+						// Prompt if there are no data to sync
+						$rootScope.resetPopup = $ionicPopup.show({
+							title: '<p align="center" style="font-weight:bold;"><font size="4" color="#024c1d">Reset Settings ?</font></p>',
+							scope: $scope,
+							template: '<p align="center" style="font-size: 15px;">Are you sure you want to reset application? <br/><br/> <a class="button button-clear no" ng-click="hideMe()">NO</a> <a  class="button button-clear yes" ng-click="resetApp()">YES</a></p>'
+						});
+				}
+
+			},function(err){
+				// Error Log
+				console.log(err);
+			});
 		}
 
 	});
