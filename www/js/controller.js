@@ -92,6 +92,7 @@ app.controller('settingsLoadCtrl',function($scope, $rootScope, $cordovaSQLite, $
 		// Start Using the app btn
 		$scope.startapp = function(){
 			// Write status for reset  and show start up btn
+			storage.write('skipSetup','true');
 			storage.write('showReset','true');
 			storage.write('showStartAppBtn','false');
 			$state.go('app-home');
