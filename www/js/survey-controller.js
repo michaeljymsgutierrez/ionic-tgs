@@ -1130,7 +1130,7 @@ app.controller('surveyCtrl',function(loadingState, $ionicSideMenuDelegate, $scop
 
                         },function(err){
                             // Error response
-                            Toast.show("Something went wrong, Please check your settings Store Code . . .","long","bottom");
+                            Toast.show("Please check your settings Store Code or Internet connection . . .","long","bottom");
                             console.warn(err);
                         });
                     };
