@@ -1,9 +1,14 @@
 // main tgs module
 var app = angular.module('tgs', ['ionic','ngCordova','ion-datetime-picker']);
 
-app.run(function($ionicPlatform, $cordovaSQLite, $ionicPickerI18n) {
+app.run(function($ionicPlatform, $cordovaSQLite, $ionicPickerI18n, $state, storage) {
   
     $ionicPlatform.ready(function() {
+
+      // Verify if initial setup is done
+      if(storage.read('skipSetup') == 'true'){
+        $state.go('app-home');
+      }
       
       // Register back button prevent default
       $ionicPlatform.registerBackButtonAction(function(e){
