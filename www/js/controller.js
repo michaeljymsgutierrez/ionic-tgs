@@ -1,7 +1,7 @@
 // Main Controller
 // Consist of controllers on load at a time
 
-app.controller('settingsLoadCtrl',function($scope, $rootScope, $cordovaSQLite, $ionicPlatform, $timeout, $state, $ionicSideMenuDelegate, $window, storage, $ionicPopup){
+app.controller('settingsLoadCtrl',function($scope, $rootScope, $cordovaSQLite, $ionicPlatform, $timeout, $state, $ionicSideMenuDelegate, $window, storage, $ionicPopup, $ionicLoading){
 	
 	//  On platform ready
 	$ionicPlatform.ready(function(){
@@ -105,7 +105,26 @@ app.controller('settingsLoadCtrl',function($scope, $rootScope, $cordovaSQLite, $
 
 		// Function for Reset application
 		$rootScope.resetApp = function(){
-			console.log("RESET APP");
+			$window.localStorage.clear();
+			$cordovaSQLite.execute(db,"DELETE FROM survey_data");
+			$cordovaSQLite.execute(db,"DELETE FROM store_settings");
+			$cordovaSQLite.execute(db,"DELETE FROM survey_language");
+			$cordovaSQLite.execute(db,"DELETE FROM payday_weekday");
+			$cordovaSQLite.execute(db,"DELETE FROM non_payday_weekday");
+			$cordovaSQLite.execute(db,"DELETE FROM payday_weekend");
+			$cordovaSQLite.execute(db,"DELETE FROM non_payday_weekend");
+	        $ionicLoading.show({
+	              template: '<ion-spinner icon="ios-small"></ion-spinner></br><span style="color:#FFFFFF !important;">Please wait while resetting data . . .<span>',
+	              showBackDrop: false,
+	              duration: 6000
+	        });
+
+	        $timeout(function(){
+	          	$rootScope.hideMe();
+	          	$state.go('settings');
+	          	$state.reload();
+	        },6000);
+
 		}
 
 		// Function for reset settings
