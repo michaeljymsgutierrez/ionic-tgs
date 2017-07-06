@@ -1,5 +1,5 @@
 // Survey Controller
-app.controller('surveyCtrl',function(loadingState, $ionicSideMenuDelegate, $scope, $ionicHistory, $rootScope, $window, Toast, $state, Location, $interval, $timeout, $ionicPlatform, $cordovaSQLite, dateFormatter, schedule, storage, endpoint, $http, checksum){
+app.controller('surveyCtrl',function(loadingState, $ionicSideMenuDelegate, $scope, $ionicHistory, $rootScope, $window, Toast, $state, Location, $interval, $timeout, $ionicPlatform, $cordovaSQLite, dateFormatter, schedule, storage, endpoint, $http, checksum, reinitializeSchedule){
 
     // Execute process needed platform ready
     $ionicPlatform.ready(function(){
@@ -20,82 +20,9 @@ app.controller('surveyCtrl',function(loadingState, $ionicSideMenuDelegate, $scop
                 $window.localStorage.setItem('store_address',res.rows.item(0).store_address);
             }
         });
-
-        // Determine schedule type, start , end for saving dat to database
-        var dateNow = new Date().getDay();
-        storage.write('surveyBtn','false');
-        if(dateNow == 0 || dateNow == 6){
-
-            $cordovaSQLite.execute(db,"SELECT * FROM payday_weekend").then(function(res){
-                if(res.rows.length != 0){
-                    var d1 =  dateFormatter.toDate(new Date());
-                    var d2 = dateFormatter.toDate(new Date(res.rows.item(0).payday_weekend_date));
-                    var d3 = dateFormatter.toTimestamp(dateFormatter.toStandard(new Date()));
-                    var start = dateFormatter.toTimestamp(dateFormatter.toDate(new Date(res.rows.item(0).payday_weekend_date)) + " " + dateFormatter.toTimeSec(new Date(res.rows.item(0).payday_weekend_start)));
-                    var end = dateFormatter.toTimestamp(dateFormatter.toDate(new Date(res.rows.item(0).payday_weekend_date)) + " " + dateFormatter.toTimeSec(new Date(res.rows.item(0).payday_weekend_end)));
-                    if(d1 == d2 && (d3 >= start && d3 <= end)){
-                        schedule.setType("Payday Weekend");
-                        schedule.setStart(dateFormatter.toDate(new Date(res.rows.item(0).payday_weekend_date)) + " " + dateFormatter.toTimeSec(new Date(res.rows.item(0).payday_weekend_start)));
-                        schedule.setEnd(dateFormatter.toDate(new Date(res.rows.item(0).payday_weekend_date)) + " " + dateFormatter.toTimeSec(new Date(res.rows.item(0).payday_weekend_end)));
-                        storage.write('surveyBtn','true');
-                    }
-                }
-            });
-
-            $cordovaSQLite.execute(db,"SELECT * FROM non_payday_weekend").then(function(res){
-                if(res.rows.length != 0){
-                    var d1 =  dateFormatter.toDate(new Date());
-                    var d2 = dateFormatter.toDate(new Date(res.rows.item(0).non_payday_weekend_date));
-                    var d3 = dateFormatter.toTimestamp(dateFormatter.toStandard(new Date()));
-                    var start = dateFormatter.toTimestamp(dateFormatter.toDate(new Date(res.rows.item(0).non_payday_weekend_date)) + " " + dateFormatter.toTimeSec(new Date(res.rows.item(0).non_payday_weekend_start)));
-                    var end = dateFormatter.toTimestamp(dateFormatter.toDate(new Date(res.rows.item(0).non_payday_weekend_date)) + " " + dateFormatter.toTimeSec(new Date(res.rows.item(0).non_payday_weekend_end)));
-                    if(d1 == d2 && (d3 >= start && d3 <= end)){
-                        schedule.setType("Non Payday Weekend");
-                        schedule.setStart(dateFormatter.toDate(new Date(res.rows.item(0).non_payday_weekend_date)) + " " + dateFormatter.toTimeSec(new Date(res.rows.item(0).non_payday_weekend_start)));
-                        schedule.setEnd(dateFormatter.toDate(new Date(res.rows.item(0).non_payday_weekend_date)) + " " + dateFormatter.toTimeSec(new Date(res.rows.item(0).non_payday_weekend_end)));
-                        storage.write('surveyBtn','true');
-                    }
-                }
-
-            });
-
-        }
-        else{
-
-            $cordovaSQLite.execute(db,"SELECT * FROM payday_weekday").then(function(res){
-                if(res.rows.length != 0){
-                    var d1 =  dateFormatter.toDate(new Date());
-                    var d2 = dateFormatter.toDate(new Date(res.rows.item(0).payday_weekday_date));
-                    var d3 = dateFormatter.toTimestamp(dateFormatter.toStandard(new Date()));
-                    var start = dateFormatter.toTimestamp(dateFormatter.toDate(new Date(res.rows.item(0).payday_weekday_date)) + " " + dateFormatter.toTimeSec(new Date(res.rows.item(0).payday_weekday_start)));
-                    var end = dateFormatter.toTimestamp(dateFormatter.toDate(new Date(res.rows.item(0).payday_weekday_date)) + " " + dateFormatter.toTimeSec(new Date(res.rows.item(0).payday_weekday_end)));
-                    if(d1 == d2 && (d3 >= start && d3 <= end)){
-                        schedule.setType("Payday Weekday");
-                        schedule.setStart(dateFormatter.toDate(new Date(res.rows.item(0).payday_weekday_date)) + " " + dateFormatter.toTimeSec(new Date(res.rows.item(0).payday_weekday_start)));
-                        schedule.setEnd(dateFormatter.toDate(new Date(res.rows.item(0).payday_weekday_date)) + " " + dateFormatter.toTimeSec(new Date(res.rows.item(0).payday_weekday_end)));
-                        storage.write('surveyBtn','true');
-                    }
-                }
-            });
-
-            $cordovaSQLite.execute(db,"SELECT * FROM non_payday_weekday").then(function(res){
-                if(res.rows.length != 0){
-                    var d1 =  dateFormatter.toDate(new Date());
-                    var d2 = dateFormatter.toDate(new Date(res.rows.item(0).non_payday_weekday_date));
-                    var d3 = dateFormatter.toTimestamp(dateFormatter.toStandard(new Date()));
-                    var start = dateFormatter.toTimestamp(dateFormatter.toDate(new Date(res.rows.item(0).non_payday_weekday_date)) + " " + dateFormatter.toTimeSec(new Date(res.rows.item(0).non_payday_weekday_start)));
-                    var end = dateFormatter.toTimestamp(dateFormatter.toDate(new Date(res.rows.item(0).non_payday_weekday_date)) + " " + dateFormatter.toTimeSec(new Date(res.rows.item(0).non_payday_weekday_end)));
-                    if(d1 == d2 && (d3 >= start && d3 <= end)){
-                        schedule.setType("Non Payday Weekday");
-                        schedule.setStart(dateFormatter.toDate(new Date(res.rows.item(0).non_payday_weekday_date)) + " " + dateFormatter.toTimeSec(new Date(res.rows.item(0).non_payday_weekday_start)));
-                        schedule.setEnd(dateFormatter.toDate(new Date(res.rows.item(0).non_payday_weekday_date)) + " " + dateFormatter.toTimeSec(new Date(res.rows.item(0).non_payday_weekday_end)));
-                        storage.write('surveyBtn','true');
-                    }
-                }
-
-            });
-        }
-
+        
+        // Reinitialize schedule 
+        reinitializeSchedule.update();
     });
 
     // Function for disabling survey when no schedule is set on that day

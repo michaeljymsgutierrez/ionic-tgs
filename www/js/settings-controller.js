@@ -1,5 +1,5 @@
 // Settings Controller
-app.controller('settingsCtrl',function($scope, $ionicPopup, $rootScope, $cordovaSQLite, $location, Toast, $ionicPlatform, $state, $timeout, dateFormatter, storage){
+app.controller('settingsCtrl',function($scope, $ionicPopup, $rootScope, $cordovaSQLite, $location, Toast, $ionicPlatform, $state, $timeout, dateFormatter, storage, reinitializeSchedule){
 
 	// Initialize store object for settings
 	// rootScope  is used due to hiding of popup
@@ -36,6 +36,10 @@ app.controller('settingsCtrl',function($scope, $ionicPopup, $rootScope, $cordova
 
 	// Platform ready code execution 
 	$ionicPlatform.ready(function(){
+		
+			// Reinitialize schedule 
+			reinitializeSchedule.update();
+
 			//  Load all current settings from db when state on store settings
 			$cordovaSQLite.execute(db,"SELECT * FROM store_settings").then(function(res){
 				if(res.rows.length != 0){
