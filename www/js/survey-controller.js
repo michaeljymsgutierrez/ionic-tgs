@@ -1127,10 +1127,13 @@ app.controller('surveyCtrl',function(loadingState, $ionicSideMenuDelegate, $scop
                                     console.log(err);
                                 });
                             }
+                            else if(response.status == "206"){
+                                Toast.show("Please check your store code on store settings . . .","long","bottom");
+                            }
 
                         },function(err){
                             // Error response
-                            Toast.show("Please check your settings Store Code or Internet connection . . .","long","bottom");
+                            Toast.show("Please check your network connection . . .","long","bottom");
                             console.warn(err);
                         });
                     };
