@@ -144,7 +144,7 @@ app.controller('settingsLoadCtrl',function($scope, $rootScope, $cordovaSQLite, $
 						$rootScope.resetPopup = $ionicPopup.show({
 							title: '<p align="center" style="font-weight:bold;"><font size="4" color="#024c1d">Reset Settings ?</font></p>',
 							scope: $scope,
-							template: '<p align="center" style="font-size: 15px;">Are you sure you want to reset application? <br/><br/> <a class="button button-clear no" ng-click="hideMe()">NO</a> <a  class="button button-clear yes" ng-click="resetApp()">YES</a></p>'
+							template: '<p align="center" style="font-size: 15px;">Are you sure you want to reset application? <br/><br/> <a class="button button-clear no" ng-click="hideMe()">CANCEL</a> <a  class="button button-clear yes" ng-click="resetApp()">RESET</a></p>'
 						});
 				}
 
