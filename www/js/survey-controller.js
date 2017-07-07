@@ -1073,6 +1073,11 @@ app.controller('surveyCtrl',function(loadingState, $ionicSideMenuDelegate, $scop
             });
         };
 
+        // Revert is_synced - my debugger
+        $scope.revert = function(){
+            $cordovaSQLite.execute(db,"UPDATE survey_data SET is_synced = 0"); console.log("REVERTED");
+        }
+
 
     });
     
