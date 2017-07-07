@@ -1,0 +1,368 @@
+<!--  Survey Landing Page A View  -->
+
+<ion-view id="settings-bg" hide-back-button="true">
+
+	<ion-nav-title>
+		<span id="view-title-color"> {{ store_name }}</span>
+	</ion-nav-title>
+
+	<ion-nav-buttons side="left">
+	 	<a id="view-title-color"  class="button button-icon icon ion-navicon" ng-click="toggleLeft()"></a>
+	</ion-nav-buttons>
+
+	<ion-content scroll="true" id="survey-background">
+
+		<!-- Lnaguage English -->
+		<div ng-if="(language == 'English' && store_type == 'Mall') || (language == 'English' && store_type == 'Food Court')" id="survey-margin">
+			<p>
+				<span class="number"> A. </span> 
+				<span class="question"> Before going to this Mang Inasal store, which particular place in this</span>
+				<span class="question" id="line-break">mall did you  <span>
+				<div class="list tab-option">
+
+					  <label class="item item-icon-left borderless">
+					    <i class="icon" id="red-radio"><input type='radio' name="qA" ng-model="answer.qA.ans" value="None" ng-change="deleteObj.dual('qA','sub')"/></i>
+					    <span class="option-text">None</span>
+					  </label>
+
+					  <label class="item item-icon-left borderless">
+					    <i class="icon" id="red-radio"><input type='radio' name="qA" ng-model="answer.qA.ans" value="Cinema" ng-change="deleteObj.dual('qA','sub')"/></i>
+					    <span class="option-text">Cinema</span>
+					  </label>
+
+					  <label class="item item-icon-left borderless">
+					    <i class="icon" id="red-radio"><input type='radio' name="qA" ng-model="answer.qA.ans" value="Amusement" ng-change="deleteObj.dual('qA','sub')"/></i>
+					    <span class="option-text">Amusement</span>
+					  </label>
+
+					  <label class="item item-icon-left borderless">
+					    <i class="icon" id="red-radio"><input type='radio' name="qA" ng-model="answer.qA.ans" value="Shoe Store" ng-change="deleteObj.dual('qA','sub')"/></i>
+					    <span class="option-text">Shoe Store</span>
+					  </label>
+
+		  			  <label class="item item-icon-left borderless">
+					    <i class="icon" id="red-radio"><input type='radio' name="qA" ng-model="answer.qA.ans" value="Supermarket" ng-change="deleteObj.dual('qA','sub')"/></i>
+					    <span class="option-text">Supermarket</span>
+					  </label>
+
+		  			  <label class="item item-icon-left borderless">
+					    <i class="icon" id="red-radio"><input type='radio' name="qA" ng-model="answer.qA.ans" value="Bingo" ng-change="deleteObj.dual('qA','sub')"/></i>
+					    <span class="option-text">Bingo</span>
+					  </label>
+
+		  			  <label class="item item-icon-left borderless">
+					    <i class="icon" id="red-radio"><input type='radio' name="qA" ng-model="answer.qA.ans" value="Bookstore" ng-change="deleteObj.dual('qA','sub')"/></i>
+					    <span class="option-text">Bookstore</span>
+					  </label>
+
+		  			  <label class="item item-icon-left borderless">
+					    <i class="icon" id="red-radio"><input type='radio' name="qA" ng-model="answer.qA.ans" value="Hardware" ng-change="deleteObj.dual('qA','sub')"/></i>
+					    <span class="option-text">Hardware</span>
+					  </label>
+
+		  			  <label class="item item-icon-left borderless">
+					    <i class="icon" id="red-radio"><input type='radio' name="qA" ng-model="answer.qA.ans" value="Toy Store" ng-change="deleteObj.dual('qA','sub')"/></i>
+					    <span class="option-text">Toy Store</span>
+					  </label>		
+
+		  			  <label class="item item-icon-left borderless">
+					    <i class="icon" id="red-radio"><input type='radio' name="qA" ng-model="answer.qA.ans" value="Furniture" ng-change="deleteObj.dual('qA','sub')"/></i>
+					    <span class="option-text">Furniture</span>
+					  </label>
+
+		  			  <label class="item item-icon-left borderless">
+					    <i class="icon" id="red-radio"><input type='radio' name="qA" ng-model="answer.qA.ans" value="Clothes Shop" ng-change="deleteObj.dual('qA','sub')"/></i>
+					    <span class="option-text">Clothes Shop</span>
+					  </label>		
+
+		  			  <label class="item item-icon-left borderless">
+					    <i class="icon" id="red-radio"><input type='radio' name="qA" ng-model="answer.qA.ans" value="Dept. Store" ng-change="deleteObj.dual('qA','sub')"/></i>
+					    <span class="option-text">Dept. Store</span>
+					  </label>	
+
+		  			  <label class="item item-icon-left borderless">
+					    <i class="icon" id="red-radio"><input type='radio' name="qA" ng-model="answer.qA.ans" value="Appliance Store" ng-change="deleteObj.dual('qA','sub')"/></i>
+					    <span class="option-text">Appliance Store</span>
+					  </label>	
+
+		  			  <label class="item item-icon-left borderless">
+					    <i class="icon" id="red-radio"><input type='radio' name="qA" ng-model="answer.qA.ans" value="Others"/></i>
+					    <span class="option-text">Other</span>
+					  </label>		
+
+					  <!-- Sub content of addresses -->
+					  <div ng-if="answer.qA.ans == 'Others'">
+						  <div class="sub-2-column">
+						  		<input ng-disabled="qAsection1" id="multi-liner" type="text" placeholder="Shop Names" class="column-one" ng-model="answer.qA.sub.shop_name"/>  
+						  		<input ng-disabled="qAsection1" id="multi-liner" type="text" placeholder="Floor Number" class="column-two" ng-model="answer.qA.sub.shop_floor"/>
+						  </div>
+						  
+						  <line-breaker></line-breaker>
+
+						  <div class="sub-2-column">
+						  		<span class="question-2">If from outside the mall, please write the complete address of the place where you came from.</span>
+						  </div>
+						
+						  <line-breaker></line-breaker>			
+
+	  					  <div class="sub-2-column">
+						  		<input ng-disabled="qAsection2" id="multi-liner" type="text" placeholder="Name of Establishment" class="column-one" ng-model="answer.qA.sub.est_name"/>  
+						  </div>		  
+
+						  <line-breaker></line-breaker>		
+
+						  <div class="sub-2-column">
+                                <div class="wrapper-one">
+	                                <select ng-disabled="qAsection2" class="borderless-one" ng-model="answer.qA.sub.region" ng-change="QAFilter.region(answer.qA.sub.region.regCode)" ng-options="a.regDesc for a in qa_regions">
+	                                          <option value="">Select Region</option>
+	                                </select>  
+	                            </div>
+
+	                            <div class="wrapper-two">
+							  		<select ng-disabled="qAsection2" class="borderless-two" ng-model="answer.qA.sub.province" ng-change="QAFilter.province(answer.qA.sub.province.provCode)" ng-options="b.provDesc for b in qa_provinces">
+							  				  <option value="">Select Province</option>
+							  		</select>  
+							  	</div>
+						  		
+						  </div>
+
+						  <line-breaker></line-breaker>	
+
+						  <div class="sub-2-column">
+						  		
+						  		<div class="wrapper-one">
+							  		<select ng-disabled="qAsection2" class="borderless-one" ng-model="answer.qA.sub.city" ng-change="QAFilter.city(answer.qA.sub.city.citymunCode)" ng-options="c.citymunDesc for c in qa_city">
+							  				  <option value="">Select City</option>
+							  		</select>  
+							  	</div>
+
+							  	<div class="wrapper-two">
+							  		<select ng-disabled="qAsection2" class="borderless-two" ng-model="answer.qA.sub.brgy" ng-options="d.brgyDesc for d in qa_brgy">
+							  				  <option value="">Select Barangay</option>
+							  		</select>  
+							  	</div>
+						  		
+						  </div>
+
+						  <line-breaker></line-breaker>	
+
+						  <div class="sub-2-column">
+						  		<input ng-disabled="qAsection2" id="multi-liner" type="text" placeholder="Street Name" class="column-one" ng-model="answer.qA.sub.street_name"/>  
+						  		<input ng-disabled="qAsection2" id="multi-liner" type="text" placeholder="Houe No./Ltd No./Building No." class="column-two" ng-model="answer.qA.sub.building_no"/>
+						  </div>
+
+						  <line-breaker></line-breaker>	
+					 </div>
+
+					 <line-breaker></line-breaker>	
+
+					 <label class="item item-icon-left borderless">
+					    <span class="icon" id="question-tab">How  did you get to this Mall? </span>
+					 </label>	
+
+					 <label class="item item-icon-left borderless">
+					    <i class="icon" id="red-radio"><input type='radio' name="qA2" ng-model="answer.qA.ans2" value="Public Transportation"/></i>
+					    <span class="option-text">Public Transportation</span>
+					 </label>
+
+					 <label class="item item-icon-left borderless">
+					    <i class="icon" id="red-radio"><input type='radio' name="qA2" ng-model="answer.qA.ans2" value="Private Vehicle"/></i>
+					    <span class="option-text">Private Vehicle</span>
+					 </label>
+
+					 <label class="item item-icon-left borderless">
+					    <i class="icon" id="red-radio"><input type='radio' name="qA2" ng-model="answer.qA.ans2" value="On Foot"/></i>
+					    <span class="option-text">On Foot</span>
+					 </label>
+
+					 <line-breaker></line-breaker>
+
+			 	</div>
+			</p>
+		</div>
+
+
+
+
+		<!-- Lnaguage Tagalog -->
+		<div ng-if="(language == 'Tagalog' && store_type == 'Mall') || (language == 'Tagalog' && store_type == 'Food Court')" id="survey-margin">
+			<p>
+				<span class="number"> A. </span> 
+				<span class="question"> Bago po kayo nagpunta rito sa Mang Inasal, saan pong lugar sa loob </span>
+				<span class="question" id="line-break"> ng mall kayo nanggaling?  (Maaaring pumili ng isang sagot) <span> <br/>
+				<div class="list tab-option">
+
+					  <label class="item item-icon-left borderless">
+					    <i class="icon" id="red-radio"><input type='radio' name="qA" ng-model="answer.qA.ans" value="None" ng-change="deleteObj.dual('qA','sub')"/></i>
+					    <span class="option-text">Wala</span>
+					  </label>
+
+					  <label class="item item-icon-left borderless">
+					    <i class="icon" id="red-radio"><input type='radio' name="qA" ng-model="answer.qA.ans" value="Cinema" ng-change="deleteObj.dual('qA','sub')"/></i>
+					    <span class="option-text">Sinehan</span>
+					  </label>
+
+					  <label class="item item-icon-left borderless">
+					    <i class="icon" id="red-radio"><input type='radio' name="qA" ng-model="answer.qA.ans" value="Amusement" ng-change="deleteObj.dual('qA','sub')"/></i>
+					    <span class="option-text">Amusement</span>
+					  </label>
+
+					  <label class="item item-icon-left borderless">
+					    <i class="icon" id="red-radio"><input type='radio' name="qA" ng-model="answer.qA.ans" value="Shoe Store" ng-change="deleteObj.dual('qA','sub')"/></i>
+					    <span class="option-text">Shoe Store</span>
+					  </label>
+
+		  			  <label class="item item-icon-left borderless">
+					    <i class="icon" id="red-radio"><input type='radio' name="qA" ng-model="answer.qA.ans" value="Supermarket" ng-change="deleteObj.dual('qA','sub')"/></i>
+					    <span class="option-text">Supermarket</span>
+					  </label>
+
+		  			  <label class="item item-icon-left borderless">
+					    <i class="icon" id="red-radio"><input type='radio' name="qA" ng-model="answer.qA.ans" value="Bingo" ng-change="deleteObj.dual('qA','sub')"/></i>
+					    <span class="option-text">Bingo</span>
+					  </label>
+
+		  			  <label class="item item-icon-left borderless">
+					    <i class="icon" id="red-radio"><input type='radio' name="qA" ng-model="answer.qA.ans" value="Bookstore" ng-change="deleteObj.dual('qA','sub')"/></i>
+					    <span class="option-text">Bookstore</span>
+					  </label>
+
+		  			  <label class="item item-icon-left borderless">
+					    <i class="icon" id="red-radio"><input type='radio' name="qA" ng-model="answer.qA.ans" value="Hardware" ng-change="deleteObj.dual('qA','sub')"/></i>
+					    <span class="option-text">Hardware</span>
+					  </label>
+
+		  			  <label class="item item-icon-left borderless">
+					    <i class="icon" id="red-radio"><input type='radio' name="qA" ng-model="answer.qA.ans" value="Toy Store" ng-change="deleteObj.dual('qA','sub')"/></i>
+					    <span class="option-text">Toy Store</span>
+					  </label>		
+
+		  			  <label class="item item-icon-left borderless">
+					    <i class="icon" id="red-radio"><input type='radio' name="qA" ng-model="answer.qA.ans" value="Furniture" ng-change="deleteObj.dual('qA','sub')"/></i>
+					    <span class="option-text">Furniture</span>
+					  </label>
+
+		  			  <label class="item item-icon-left borderless">
+					    <i class="icon" id="red-radio"><input type='radio' name="qA" ng-model="answer.qA.ans" value="Clothes Shop" ng-change="deleteObj.dual('qA','sub')"/></i>
+					    <span class="option-text">Clothes Shop</span>
+					  </label>		
+
+		  			  <label class="item item-icon-left borderless">
+					    <i class="icon" id="red-radio"><input type='radio' name="qA" ng-model="answer.qA.ans" value="Dept. Store" ng-change="deleteObj.dual('qA','sub')"/></i>
+					    <span class="option-text">Dept. Store</span>
+					  </label>	
+
+		  			  <label class="item item-icon-left borderless">
+					    <i class="icon" id="red-radio"><input type='radio' name="qA" ng-model="answer.qA.ans" value="Appliance Store" ng-change="deleteObj.dual('qA','sub')"/></i>
+					    <span class="option-text">Appliance Store</span>
+					  </label>	
+
+		  			  <label class="item item-icon-left borderless">
+					    <i class="icon" id="red-radio"><input type='radio' name="qA" ng-model="answer.qA.ans" value="Others"/></i>
+					    <span class="option-text">Ibang lugar</span>
+					  </label>		
+
+					  <!-- Sub content of addresses -->
+					  <div ng-if="answer.qA.ans == 'Others'">
+						  <div class="sub-2-column">
+						  		<input ng-disabled="qAsection1" id="multi-liner" type="text" placeholder="Pangalan ng Shop" class="column-one" ng-model="answer.qA.sub.shop_name"/>  
+						  		<input ng-disabled="qAsection1" id="multi-liner" type="text" placeholder="Palapag" class="column-two" ng-model="answer.qA.sub.shop_floor"/>
+						  </div>
+						  
+						  <line-breaker></line-breaker>
+
+						  <div class="sub-2-column">
+						  		<span class="question-2"> Kung galing sa labas ng mall na ito, maaaring ilagay ang kumpletong address ng lugar na inyong pinanggalingan.</span>
+						  </div>
+						
+						  <line-breaker></line-breaker>			
+
+	  					  <div class="sub-2-column">
+						  		<input ng-disabled="qAsection2" id="multi-liner" type="text" placeholder="Pangalan ng Establisyemento" class="column-one" ng-model="answer.qA.sub.est_name"/>  
+						  </div>		  
+
+						  <line-breaker></line-breaker>		
+
+						  <div class="sub-2-column">
+                                <div class="wrapper-one">
+	                                <select ng-disabled="qAsection2"  class="borderless-one" ng-model="answer.qA.sub.region" ng-change="QAFilter.region(answer.qA.sub.region.regCode)" ng-options="a.regDesc for a in qa_regions">
+	                                          <option value="">Rehiyon</option>
+	                                </select>  
+	                            </div>
+
+	                            <div class="wrapper-two">
+							  		<select ng-disabled="qAsection2" class="borderless-two" ng-model="answer.qA.sub.province" ng-change="QAFilter.province(answer.qA.sub.province.provCode)" ng-options="b.provDesc for b in qa_provinces">
+							  				  <option value="">Probinsya</option>
+							  		</select>  
+							  	</div>
+						  		
+						  </div>
+
+						  <line-breaker></line-breaker>	
+
+						  <div class="sub-2-column">
+						  		<div class="wrapper-one">
+							  		<select ng-disabled="qAsection2" class="borderless-one" ng-model="answer.qA.sub.city" ng-change="QAFilter.city(answer.qA.sub.city.citymunCode)" ng-options="c.citymunDesc for c in qa_city">
+							  				  <option value="">Siyudad/Munisipalidad </option>
+							  		</select>  
+							  	</div>
+
+							  	<div class="wrapper-two">
+							  		<select ng-disabled="qAsection2" class="borderless-two" ng-model="answer.qA.sub.brgy" ng-options="d.brgyDesc for d in qa_brgy">
+							  				  <option value="">Barangay</option>
+							  		</select>  
+							  	</div>
+						  		
+						  </div>
+
+						  <line-breaker></line-breaker>	
+
+						  <div class="sub-2-column">
+						  		<input ng-disabled="qAsection2" id="multi-liner" type="text" placeholder="Pangalan ng kalye" class="column-one" ng-model="answer.qA.sub.street_name"/>  
+						  		<input ng-disabled="qAsection2" id="multi-liner" type="text" placeholder="Houe No./Ltd No./Building No." class="column-two" ng-model="answer.qA.sub.building_no"/>
+						  </div>
+
+						  <line-breaker></line-breaker>	
+					 </div>
+
+					 <line-breaker></line-breaker>	
+
+					 <label class="item item-icon-left borderless">
+					    <span class="icon" id="question-tab">Paano po kayo nakarating sa mall na ito?</span>
+					 </label>	
+
+					 <label class="item item-icon-left borderless">
+					    <i class="icon" id="red-radio"><input type='radio' name="qA2" ng-model="answer.qA.ans2" value="Public Transportation"/></i>
+					    <span class="option-text">Pampublikong sasakyan</span>
+					 </label>
+
+					 <label class="item item-icon-left borderless">
+					    <i class="icon" id="red-radio"><input type='radio' name="qA2" ng-model="answer.qA.ans2" value="Private Vehicle"/></i>
+					    <span class="option-text">Pribadong sasakyan</span>
+					 </label>
+
+					 <label class="item item-icon-left borderless">
+					    <i class="icon" id="red-radio"><input type='radio' name="qA2" ng-model="answer.qA.ans2" value="On Foot"/></i>
+					    <span class="option-text">Naglakad</span>
+					 </label>
+
+					 <line-breaker></line-breaker>
+
+			 	</div>
+			</p>
+		</div>
+
+
+
+
+
+		<div id="floater"></div>
+	</ion-content>
+	
+	<!-- Footer Bar -->
+	<div  keyboard-attach class="bar-footer bar bar-assertive hide-on-keyboard-open">
+		<a class="button icon button-clear ion-ios-arrow-back" ng-click='validatePage.backState("survey-page3")'></a>
+        <a class="button icon button-clear ion-ios-arrow-forward" ng-click="validatePage.pageQA()"></a>	
+	</div>
+
+</ion-view>

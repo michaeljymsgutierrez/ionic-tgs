@@ -1,8 +1,16 @@
 // Configuration and States
-app.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider){
+app.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider, $httpProvider){
 
 	// Center Nav Title
 	$ionicConfigProvider.navBar.alignTitle('center');
+	// Remove slide animation of views
+	$ionicConfigProvider.views.transition('ios');
+
+	// Required headers for API
+	$httpProvider.defaults.headers.post['Content-Type'] = 'application/json';
+	$httpProvider.defaults.headers.post['Accept'] = 'application/json';
+	$httpProvider.defaults.headers.post['api-key'] = 'mang_inasal_auth_key';
+	delete $httpProvider.defaults.headers.common["X-Requested-With"];
 
 	// Initialization of States
 	$stateProvider
@@ -10,7 +18,7 @@ app.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider){
 		cache: false,
 		url:'/settings',
 		templateUrl: 'templates/template-settings/settings.html',
-		controller: 'mainCtrl'
+		controller: 'settingsLoadCtrl'
 	})
 	.state('store',{
 		cache: false,
@@ -53,6 +61,78 @@ app.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider){
 		url: '/nonpayday/weekend',
 		templateUrl: 'templates/template-settings/survey-settings/nonpayday-weekend.html',
 		controller: 'settingsCtrl'
+	})
+	.state('app-home',{
+		cache: false,
+		url: '/app-home',
+		templateUrl: 'templates/template-survey/app-home.html',
+		controller: 'surveyCtrl'
+	})
+	.state('survey-landing',{
+		cache: false,
+		url: '/survey-landing',
+		templateUrl: 'templates/template-survey/survey-landing-page.html',
+		controller: 'surveyCtrl'
+	})
+	.state('survey-page1',{
+		cache: false,
+		url: '/survey-page1',
+		templateUrl: 'templates/template-survey/survey-page1.html',
+		controller: 'surveyCtrl'
+	})
+	.state('survey-page2',{
+		cache: false,
+		url: '/survey-page2',
+		templateUrl: 'templates/template-survey/survey-page2.html',
+		controller: 'surveyCtrl'
+	})
+	.state('survey-page3',{
+		cache: false,
+		url: '/survey-page3',
+		templateUrl: 'templates/template-survey/survey-page3.html',
+		controller: 'surveyCtrl'
+	})
+	.state('mall-survey-a',{
+		cache: false,
+		url: '/mall-survey-a',
+		templateUrl: 'templates/template-survey/mall-survey-a.html',
+		controller: 'surveyCtrl'
+	})
+	.state('mall-survey-b',{
+		cache: false,
+		url: '/mall-survey-b',
+		templateUrl: 'templates/template-survey/mall-survey-b.html',
+		controller: 'surveyCtrl'
+	})
+	.state('personal-info',{
+		cache: false,
+		url: '/personal-info',
+		templateUrl: 'templates/template-survey/personal-information.html',
+		controller: 'surveyCtrl'
+	})
+	.state('instore-survey-a',{
+		cache: false,
+		url: '/instore-survey-a',
+		templateUrl: 'templates/template-survey/instore-survey-a.html',
+		controller: 'surveyCtrl'
+	})
+	.state('instore-survey-b',{
+		cache: false,
+		url: '/instore-survey-b',
+		templateUrl: 'templates/template-survey/instore-survey-b.html',
+		controller: 'surveyCtrl'
+	})
+	.state('survey-thankyou',{
+		cache: false,
+		url: '/survey-thankyou',
+		templateUrl: 'templates/template-survey/survey-thankyou.html',
+		controller: 'surveyCtrl'
+	})
+	.state('survey-sync',{
+		cache: false,
+		url: '/survey-sync',
+		templateUrl: 'templates/template-survey/survey-sync.html',
+		controller: 'surveyCtrl'
 	});
 
 	$urlRouterProvider.otherwise('/settings');

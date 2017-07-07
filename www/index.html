@@ -16,6 +16,9 @@
     <!-- ionic budle -->
     <script src="lib/ionic/js/ionic.bundle.js"></script>
 
+    <!-- cryptojs md5 -->
+    <script src="lib/md5/rollups/md5.js"></script>
+
     <!-- ngCordova -->
     <script src="lib/ngCordova/dist/ng-cordova.min.js"></script>
 
@@ -33,7 +36,13 @@
 
     <!-- services -->
     <script src="js/service.js"></script>
+
+    <!-- location services -->
+    <script src="js/location.js"></script>
       
+    <!-- dircetives -->
+    <script src="js/directive.js"></script>
+
     <!-- state and configuration -->
     <script src="js/state.js"></script>
     
@@ -43,20 +52,82 @@
     <!-- settings-controller -->
     <script src="js/settings-controller.js"></script>
 
+    <!-- survey-controller -->
+    <script src="js/survey-controller.js"></script>
 
   </head>
 
   <body ng-app="tgs">
 
-   <!-- Initialize back button -->
-   <ion-nav-bar class="bar-assertive">
-      <ion-nav-back-button></ion-nav-back-button>
-   </ion-nav-bar>
+  <ion-side-menus>
+      <!-- Load the view and main content -->
+      <ion-side-menu-content >
+          <div ng-class="{'opaque-content' : sidemenuopened}">
+               <!-- Initialize back button -->
+               <ion-nav-bar class="bar-assertive">
+                  <ion-nav-back-button></ion-nav-back-button>
+               </ion-nav-bar>
 
-   <!-- Render the ion views -->
-   <ion-pane>
-      <ion-nav-view></ion-nav-view>
-  </ion-pane>
+               <!-- Render the ion views -->
+               <ion-pane>
+                  <ion-nav-view></ion-nav-view>
+               </ion-pane>
+          </div>
+      </ion-side-menu-content>
+
+      <ion-side-menu side="left" id="side-menu" width="350">
+
+        <img src="./img/close.png" id="tick-x" ng-click="toggleLeft()"/>
+        <img src="./img/logo.jpg" id="side-menu-logo"/>
+
+        <div id="side-menu-container">
+
+          <ion-list>
+
+            <ion-item id="side-list">
+              <a class="button button-clear item item-icon-left" ui-sref="app-home" ng-click="toggleLeft()">
+                <i class="icon">
+                  <i class="ion-ios-home-outline" id="side-menu-icons"></i>
+                </i>
+                <span id="side-menu-item-text"> Home </span>
+              </a>
+            </ion-item>
+
+            <ion-item id="side-list">
+                <a class="button button-clear item item-icon-left" ng-click="clickSurvey()">
+                <!-- Uncomment this line below in case or for debug purpose -->
+                <!-- <a class="button button-clear item item-icon-left" ui-sref="survey-landing" ng-click="toggleLeft()"> -->
+                <i class="icon">
+                  <i class="ion-ios-list-outline" id="side-menu-icons"></i>
+                </i>
+                <span id="side-menu-item-text"> {{ store_type }} Survey </span>
+              </a>
+            </ion-item>
+
+            <ion-item id="side-list">
+              <a class="button button-clear item item-icon-left" ui-sref="settings" ng-click="toggleLeft()">
+                <i class="icon">
+                  <i class="ion-ios-gear-outline" id="side-menu-icons"></i>
+                </i>
+                <span id="side-menu-item-text"> Settings </span>
+              </a>
+            </ion-item>
+
+            <ion-item id="side-list">
+              <a class="button button-clear item item-icon-left" ui-sref="survey-sync" ng-click="toggleLeft()">
+                <i class="icon">
+                  <i class="ion-android-sync" id="side-menu-icons"></i>
+                </i>
+                <span id="side-menu-item-text"> Unsynced ( {{ unsynced_data }} ) </span>
+              </a>
+            </ion-item>
+          </ion-list>
+          <div id="side-menu-store-name">{{ store_name }}</div>
+        </div>
+
+      </ion-side-menu>
+
+  </ion-side-menus>
 
   </body>
 

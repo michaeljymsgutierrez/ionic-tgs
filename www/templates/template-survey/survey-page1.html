@@ -1,0 +1,146 @@
+<!--  Survey Landing Page1 View  -->
+
+<ion-view id="settings-bg" hide-back-button="true">
+
+	<ion-nav-title>
+		<span id="view-title-color"> {{ store_name }}</span>
+	</ion-nav-title>
+
+	<ion-nav-buttons side="left">
+	 	<a id="view-title-color"  class="button button-icon icon ion-navicon" ng-click="toggleLeft()"></a>
+	</ion-nav-buttons>
+
+	<ion-content scroll="false" id="survey-background">
+
+		<!-- Lnaguage English -->
+		<div ng-if="language == 'English'" id="survey-margin">
+			<p>
+				<span class="number"> 1. </span> 
+				<span class="question"> Is this your first time to visit this Mang Inasal store? </span>
+				<div class="list tab-option">
+					  <label class="item item-icon-left borderless">
+					    <i class="icon" id="red-radio"><input type='radio' name="q1" ng-model="answer.q1.ans" value="Yes"/></i>
+					    <span class="option-text">Yes</span>
+					  </label>
+
+					  <label class="item item-icon-left borderless">
+					    <i class="icon" id="red-radio"><input  type='radio' name="q1" ng-model="answer.q1.ans" value="No"/></i> 
+					    <span class="option-text">No</span>
+					  </label>
+			 	</div>
+			</p>
+
+			<p>
+				<span class="number"> 2. </span> 
+				<span class="question"> For today’s visit, when specifically did you make the decision </span> <br/> 
+				<span class="question" id="line-break"> to visit this Mang Inasal store? </span>
+
+				<div class="list tab-option">
+					  <label class="item item-icon-left borderless">
+					    <i class="icon" id="red-radio"><input  type='radio' name="q2" ng-model="answer.q2.ans" value="Today"/></i>
+					    <span class="option-text">Today</span>
+					  </label>
+
+		  			  		<div class="list tab-option" ng-show="answer.q2.ans =='Today'">
+								  <label class="item item-icon-left borderless">
+								    <i class="icon" id="red-radio"><input  type='radio' name="q2_sub" ng-model="answer.q2.sub" value="15  minutes before comming here"/></i>
+								    <span class="option-text">15 minutes before comming here</span>
+								  </label>
+								  	
+
+								  <label class="item item-icon-left borderless">
+								    <i class="icon" id="red-radio"><input  type='radio' name="q2_sub" ng-model="answer.q2.sub" value="between 15 mins. to 1 hour before coming"/></i> 
+								    <span class="option-text">between 15 mins. to 1 hour before coming</span>
+								  </label>
+
+			  					  <label class="item item-icon-left borderless">
+								    <i class="icon" id="red-radio"><input  type='radio' name="q2_sub" ng-model="answer.q2.sub" value="More than 1 hour before coming here"/></i> 
+								    <span class="option-text">More than 1 hour before coming here</span>
+								  </label>
+						 	</div>
+
+					  <label class="item item-icon-left borderless">
+					    <i class="icon" id="red-radio"><input  type='radio' name="q2" ng-model="answer.q2.ans" ng-change="deleteObj.dual('q2','sub')" value="Yesterday"/></i> 
+					    <span class="option-text">Yesterday</span>
+					  </label>
+
+  					  <label class="item item-icon-left borderless">
+					    <i class="icon" id="red-radio"><input  type='radio' name="q2" ng-model="answer.q2.ans" ng-change="deleteObj.dual('q2','sub')" value="Before Yesterday"/></i> 
+					    <span class="option-text">Before Yesterday</span>
+					  </label>
+			 	</div>
+			</p>
+
+		</div>	
+
+
+		<!-- Lnaguage Tagalog -->
+		<div ng-if="language == 'Tagalog'" id="survey-margin">
+			<p>
+				<span class="number"> 1. </span> 
+				<span class="question"> Ito po ba ang kauna-unahan ninyong pagbisita sa Mang Inasal na ito? </span>
+				<div class="list tab-option">
+					  <label class="item item-icon-left borderless">
+					    <i class="icon" id="red-radio"><input type='radio' name="q1" ng-model="answer.q1.ans" value="Yes"/></i>
+					    <span class="option-text">Oo</span>
+					  </label>
+
+					  <label class="item item-icon-left borderless">
+					    <i class="icon" id="red-radio"><input  type='radio' name="q1" ng-model="answer.q1.ans" value="No"/></i> 
+					    <span class="option-text">Hindi</span>
+					  </label>
+			 	</div>
+			</p>
+
+			<p>
+				<span class="number"> 2. </span> 
+				<span class="question"> Kailan po kayo nagpasyang pumunta dito sa Mang Inasal store </span> <br/> 
+				<span class="question" id="line-break"> na ito? </span>
+
+				<div class="list tab-option">
+					  <label class="item item-icon-left borderless">
+					    <i class="icon" id="red-radio"><input  type='radio' name="q2" ng-model="answer.q2.ans" value="Today"/></i>
+					    <span class="option-text">Ngayong araw</span>
+					  </label>
+
+		  			  		<div class="list tab-option" ng-show="answer.q2.ans =='Today'">
+								  <label class="item item-icon-left borderless">
+								    <i class="icon" id="red-radio"><input  type='radio' name="q2_sub" ng-model="answer.q2.sub" value="15  minutes before comming here"/></i>
+								    <span class="option-text">15 minuto bago pumunta dito</span>
+								  </label>
+								  	
+
+								  <label class="item item-icon-left borderless">
+								    <i class="icon" id="red-radio"><input  type='radio' name="q2_sub" ng-model="answer.q2.sub" value="between 15 mins. to 1 hour before coming"/></i> 
+								    <span class="option-text">Sa pagitan ng 15 minuto hanggang 1 oras bago pumunta dito</span>
+								  </label>
+
+			  					  <label class="item item-icon-left borderless">
+								    <i class="icon" id="red-radio"><input  type='radio' name="q2_sub" ng-model="answer.q2.sub" value="More than 1 hour before coming here"/></i> 
+								    <span class="option-text">Higit sa isang oras bago pumunta dito</span>
+								  </label>
+						 	</div>
+
+					  <label class="item item-icon-left borderless">
+					    <i class="icon" id="red-radio"><input  type='radio' name="q2" ng-model="answer.q2.ans" ng-change="deleteObj.dual('q2','sub')" value="Yesterday"/></i> 
+					    <span class="option-text">Kahapon</span>
+					  </label>
+
+  					  <label class="item item-icon-left borderless">
+					    <i class="icon" id="red-radio"><input  type='radio' name="q2" ng-model="answer.q2.ans" ng-change="deleteObj.dual('q2','sub')" value="Before Yesterday"/></i> 
+					    <span class="option-text">Bago pa kahapon</span>
+					  </label>
+			 	</div>
+			</p>
+
+		</div>	
+	
+	</ion-content>
+	
+	<!-- Footer Bar -->
+	<div class="bar-footer bar bar-assertive">
+		<a class="button button-clear" ></a>
+        <a class="button icon button-clear ion-ios-arrow-forward" ng-click="validatePage.page1()"></a>	
+	</div>
+
+</ion-view>

@@ -1,0 +1,135 @@
+<!--  Survey Landing Page3 View  -->
+
+<ion-view id="settings-bg" hide-back-button="true">
+
+	<ion-nav-title>
+		<span id="view-title-color"> {{ store_name }}</span>
+	</ion-nav-title>
+
+	<ion-nav-buttons side="left">
+	 	<a id="view-title-color"  class="button button-icon icon ion-navicon" ng-click="toggleLeft()"></a>
+	</ion-nav-buttons>
+
+	<ion-content scroll="false" id="survey-background">
+
+		<!-- Lnaguage English -->
+		<div ng-if="language == 'English'" id="survey-margin">
+			<p>
+				<span class="number"> 5. </span> 
+				<span class="question"> Who decided on visiting this particular Mang Inasal store today? <span>
+				<div class="list tab-option">
+					  <label class="item item-icon-left borderless">
+					    <i class="icon" id="red-radio"><input type='radio' name="q5" ng-model="answer.q5.ans" ng-change="deleteObj.dual('q5','sub')" value="Myself"/></i>
+					    <span class="option-text">Myself</span>
+					  </label>
+
+					  <label class="item item-icon-left borderless">
+					    <i class="icon" id="red-radio"><input  type='radio' name="q5" ng-model="answer.q5.ans" value="My companion"/></i> 
+					    <span class="option-text">My companion</span>
+					  </label>
+
+  					  <label ng-if="answer.q5.ans =='My companion'" class="item borderless tab-option2">
+					  		<span>Please specify relationship with you. </span><br/>
+					  		<div class="bottom-liner">
+					  			<input type="text" placeholder="Enter Text Here" class="input-liner" ng-model="answer.q5.sub"/>
+					  		</div>
+					  <label>
+			 	</div>
+			</p>
+
+			<p>
+				<span class="number"> 6. </span> 
+				<span class="question"> How much did you spend for today’s visit? <span> <br/>
+				<div class="list tab-option">
+  					  <label class="item borderless">
+					  		<span class="currency">₱</span>
+					  		<div class="bottom-liner currency-input">
+					  			<input type="text" placeholder="Enter Text Here" class="input-liner" ng-model="answer.q6.ans"/>
+					  		</div>
+					  <label>
+			 	</div>
+			</p>
+
+			<p>
+				<span class="number"> 7. </span> 
+				<span class="question"> Are you going to buy additional food for dine-in or for take-out? <span>
+				<div class="list tab-option">
+					  <label class="item item-icon-left borderless">
+					    <i class="icon" id="red-radio"><input type='radio' name="q7" ng-model="answer.q7.ans" value="Yes"/></i>
+					    <span class="option-text">Yes</span>
+					  </label>
+
+					  <label class="item item-icon-left borderless">
+					    <i class="icon" id="red-radio"><input  type='radio' name="q7" ng-model="answer.q7.ans" value="No"/></i> 
+					    <span class="option-text">No</span>
+					  </label>
+			 	</div>
+			</p>
+		</div>
+
+		<!-- Language Tagalog -->
+		<div ng-if="language == 'Tagalog'" id="survey-margin">
+			<p>
+				<span class="number"> 5. </span> 
+				<span class="question"> Sino po ang pumili na magpunta sa Mang Inasal store na ito ngayon? <span>
+				<div class="list tab-option">
+					  <label class="item item-icon-left borderless">
+					    <i class="icon" id="red-radio"><input type='radio' name="q5" ng-model="answer.q5.ans" ng-change="deleteObj.dual('q5','sub')" value="Myself"/></i>
+					    <span class="option-text">Ako</span>
+					  </label>
+
+					  <label class="item item-icon-left borderless">
+					    <i class="icon" id="red-radio"><input  type='radio' name="q5" ng-model="answer.q5.ans" value="My companion"/></i> 
+					    <span class="option-text">Kasama ko</span>
+					  </label>
+
+  					  <label ng-if="answer.q5.ans =='My companion'" class="item borderless tab-option2">
+					  		<span>Please specify relationship with you. </span><br/>
+					  		<div class="bottom-liner">
+					  			<input type="text" placeholder="Sagot" class="input-liner" ng-model="answer.q5.sub"/>
+					  		</div>
+					  <label>
+			 	</div>
+			</p>
+
+			<p>
+				<span class="number"> 6. </span> 
+				<span class="question"> Magkano po lahat lahat ang inorder ninyo ngayon? <span> <br/>
+				<div class="list tab-option">
+  					  <label class="item borderless">
+					  		<span class="currency">₱</span>
+					  		<div class="bottom-liner currency-input">
+					  			<input type="text" placeholder="Sagot" class="input-liner" ng-model="answer.q6.ans"/>
+					  		</div>
+					  <label>
+			 	</div>
+			</p>
+
+			<p>
+				<span class="number"> 7. </span> 
+				<span class="question"> Kayo po ba ay bibili pa ng karagdagang pagkain para kainin dito o <span>
+				<span class="question" id="line-break"> pang take-out?</span>
+				<div class="list tab-option">
+					  <label class="item item-icon-left borderless">
+					    <i class="icon" id="red-radio"><input type='radio' name="q7" ng-model="answer.q7.ans" value="Yes"/></i>
+					    <span class="option-text">Oo</span>
+					  </label>
+
+					  <label class="item item-icon-left borderless">
+					    <i class="icon" id="red-radio"><input  type='radio' name="q7" ng-model="answer.q7.ans" value="No"/></i> 
+					    <span class="option-text">Hindi</span>
+					  </label>
+			 	</div>
+			</p>
+		</div>
+
+		<div id="floater"></div>
+	</ion-content>
+	
+	<!-- Footer Bar -->
+	<div  keyboard-attach class="bar-footer bar bar-assertive hide-on-keyboard-open">
+		<a class="button icon button-clear ion-ios-arrow-back" ng-click='validatePage.backState("survey-page2")'></a>
+        <a class="button icon button-clear ion-ios-arrow-forward" ng-click="validatePage.page3()"></a>	
+	</div>
+
+</ion-view>
