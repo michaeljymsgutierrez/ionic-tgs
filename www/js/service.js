@@ -1,8 +1,8 @@
 // Include all app services and constants
 
 // API endpoint
-// app.constant('endpoint','https://staging.tgs.vielsoft.com/api/tgs');
-app.constant('endpoint','http://192.168.10.56/api/tgs');
+app.constant('endpoint','https://staging.tgs.vielsoft.com/api/tgs');
+// app.constant('endpoint','http://192.168.10.56/api/tgs');
 
 // Service for showing Toast Notification
 app.service('Toast',function($cordovaToast){
