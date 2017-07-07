@@ -1,7 +1,8 @@
 // Include all app services and constants
 
 // API endpoint
-app.constant('endpoint','https://staging.tgs.vielsoft.com/api/tgs');
+// app.constant('endpoint','https://staging.tgs.vielsoft.com/api/tgs');
+app.constant('endpoint','http://192.168.10.56/api/tgs');
 
 // Service for showing Toast Notification
 app.service('Toast',function($cordovaToast){
@@ -90,7 +91,7 @@ app.service('loadingState',function($ionicLoading){
 // Service for generating checksum
 app.service('checksum',function(){
 	this.generate = function(str){
-        var tohashObj = JSON.stringify(str);
+        var tohashObj = angular.toJson(str);
         var hash =  CryptoJS.MD5(tohashObj);
         return hash.toString();
 	}
