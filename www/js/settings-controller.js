@@ -172,10 +172,10 @@ app.controller('settingsCtrl',function($scope, $ionicPopup, $rootScope, $cordova
 	// Insert-Update function for store settings
 	$scope.save_store_settings = function(){
 		if($rootScope.store_form.store_code == undefined || $rootScope.store_form.store_branch == undefined || $rootScope.store_form.store_address == undefined || $rootScope.store_form.store_type == undefined || $rootScope.store_form.store_manager == undefined){
-			Toast.show("Please fill up all fields before saving . . .","long","bottom");
+			Toast.show("Please fill up all fields before saving","long","bottom");
 		}
 		else if($rootScope.store_form.store_code == "" || $rootScope.store_form.store_branch == "" || $rootScope.store_form.store_address == "" || $rootScope.store_form.store_type == "" || $rootScope.store_form.store_manager == ""){
-			Toast.show("Please fill up all fields before saving . . .","long","bottom");
+			Toast.show("Please fill up all fields before saving","long","bottom");
 		}
 		else{
 			$cordovaSQLite.execute(db,'SELECT * FROM store_settings').then(function(res){
@@ -184,7 +184,7 @@ app.controller('settingsCtrl',function($scope, $ionicPopup, $rootScope, $cordova
 					$cordovaSQLite.execute(db,'INSERT INTO store_settings (store_code, store_branch, store_address, store_type, store_manager) VALUES (?,?,?,?,?)',
 					[$rootScope.store_form.store_code, $rootScope.store_form.store_branch, $rootScope.store_form.store_address, $rootScope.store_form.store_type, $rootScope.store_form.store_manager])
 					.then(function(res){
-						Toast.show("Store settings successfully saved . . .","long","bottom");
+						Toast.show("Store settings successfully saved","long","bottom");
 						$timeout(function(){
 							$state.go('settings');
 						},3000);
@@ -200,7 +200,7 @@ app.controller('settingsCtrl',function($scope, $ionicPopup, $rootScope, $cordova
 					$cordovaSQLite.execute(db,"UPDATE store_settings SET store_code = ?, store_branch = ?, store_address = ?, store_type = ?, store_manager = ? WHERE id = ?",
 					[$rootScope.store_form.store_code, $rootScope.store_form.store_branch, $rootScope.store_form.store_address, $rootScope.store_form.store_type, $rootScope.store_form.store_manager,id])
 					.then(function(res){
-						Toast.show("Store settings successfully updated . . .","long","bottom");
+						Toast.show("Store settings successfully updated","long","bottom");
 						$timeout(function(){
 							$state.go('settings');
 						},3000);
@@ -233,7 +233,7 @@ app.controller('settingsCtrl',function($scope, $ionicPopup, $rootScope, $cordova
 			if(res.rows.length == 0){
 				$cordovaSQLite.execute(db,"INSERT INTO survey_language (language) VALUES (?)",[data])
 				.then(function(res){
-					Toast.show("Successfully saved language type . . .","long","bottom");
+					Toast.show("Successfully saved language type","long","bottom");
 					console.log(res);
 				},function(err){
 					// Error insert data
@@ -244,7 +244,7 @@ app.controller('settingsCtrl',function($scope, $ionicPopup, $rootScope, $cordova
 				id = res.rows.item(0).id;
 				$cordovaSQLite.execute(db,"UPDATE survey_language SET language = ? WHERE id = ?",[data, id])
 				.then(function(res){
-					Toast.show("Successfully updated language type . . .","long","bottom");
+					Toast.show("Successfully updated language type","long","bottom");
 					console.log(res);
 				},function(err){
 					// Error update data
@@ -269,18 +269,18 @@ app.controller('settingsCtrl',function($scope, $ionicPopup, $rootScope, $cordova
 		}
 
 		if($scope.payday_weekday.date == "" || $scope.payday_weekday.date == undefined || $scope.payday_weekday.start == "" || $scope.payday_weekday.start == undefined || $scope.payday_weekday.end == "" || $scope.payday_weekday.end == undefined ){
-			Toast.show("Please set all fields before saving . . .","long","bottom");
+			Toast.show("Please set all fields before saving","long","bottom");
 		}
 		else if(schedule.pwd == schedule.npwd || schedule.pwd == schedule.pwe || schedule.pwd == schedule.npwe){
-			Toast.show("Please choose another schedule . . .","long","bottom");
+			Toast.show("Please choose another schedule","long","bottom");
 		}
 		else if(schedule.day < 1 || schedule.day > 5){
-			Toast.show("Please choose weekdays schedule only . . .","long","bottom");
+			Toast.show("Please choose weekdays schedule only","long","bottom");
 		}
 		else{
 			// Validate if starts time > ends time
 			if(dateFormatter.toTimestamp($scope.payday_weekday + " " + $scope.payday_weekday.start) >= dateFormatter.toTimestamp($scope.payday_weekday + " " + $scope.payday_weekday.end)){
-				Toast.show("Please set all fields correctly before saving . . .","long","bottom");
+				Toast.show("Please set all fields correctly before saving","long","bottom");
 			}
 			else{
 				$cordovaSQLite.execute(db,'SELECT * FROM payday_weekday').then(function(res){
@@ -288,7 +288,7 @@ app.controller('settingsCtrl',function($scope, $ionicPopup, $rootScope, $cordova
 						$cordovaSQLite.execute(db,"INSERT INTO payday_weekday (payday_weekday_date, payday_weekday_start, payday_weekday_end) VALUES (?,?,?)",
 							[dateFormatter.toStandard($scope.payday_weekday.date), dateFormatter.toStandard($scope.payday_weekday.start), dateFormatter.toStandard($scope.payday_weekday.end)])
 							.then(function(res){
-								Toast.show("Successfully saved Payday Weekday schedule . . .","long","bottom");
+								Toast.show("Successfully saved Payday Weekday schedule","long","bottom");
 								$timeout(function(){
 									$state.go('survey-home');
 								},3000);
@@ -302,7 +302,7 @@ app.controller('settingsCtrl',function($scope, $ionicPopup, $rootScope, $cordova
 						$cordovaSQLite.execute(db,"UPDATE payday_weekday SET payday_weekday_date = ?, payday_weekday_start = ?, payday_weekday_end = ? WHERE id = ?",
 							[dateFormatter.toStandard($scope.payday_weekday.date), dateFormatter.toStandard($scope.payday_weekday.start), dateFormatter.toStandard($scope.payday_weekday.end), id])
 							.then(function(res){
-								Toast.show("Successfully updated Payday Weekday schedule . . .","long","bottom");
+								Toast.show("Successfully updated Payday Weekday schedule","long","bottom");
 								$timeout(function(){
 									$state.go('survey-home');
 								},3000);
@@ -334,18 +334,18 @@ app.controller('settingsCtrl',function($scope, $ionicPopup, $rootScope, $cordova
 		}
 
 		if($scope.nonpayday_weekday.date == "" || $scope.nonpayday_weekday.date == undefined || $scope.nonpayday_weekday.start == "" || $scope.nonpayday_weekday.start == undefined || $scope.nonpayday_weekday.end == "" || $scope.nonpayday_weekday.end == undefined ){
-			Toast.show("Please set all fields before saving . . .","long","bottom");
+			Toast.show("Please set all fields before saving","long","bottom");
 		}
 		else if(schedule.npwd == schedule.pwd || schedule.npwd == schedule.pwe || schedule.npwd == schedule.npwe){
-			Toast.show("Please choose another schedule . . .","long","bottom");
+			Toast.show("Please choose another schedule","long","bottom");
 		}
 		else if(schedule.day < 1 || schedule.day > 5){
-			Toast.show("Please choose weekdays schedule only . . .","long","bottom");
+			Toast.show("Please choose weekdays schedule only","long","bottom");
 		}
 		else{
 			// Validate if starts time > ends time
 			if(dateFormatter.toTimestamp($scope.nonpayday_weekday + " " + $scope.nonpayday_weekday.start) >= dateFormatter.toTimestamp($scope.nonpayday_weekday + " " + $scope.nonpayday_weekday.end)){
-				Toast.show("Please set all fields correctly before saving . . .","long","bottom");
+				Toast.show("Please set all fields correctly before saving","long","bottom");
 			}
 			else{
 				$cordovaSQLite.execute(db,'SELECT * FROM non_payday_weekday').then(function(res){
@@ -353,7 +353,7 @@ app.controller('settingsCtrl',function($scope, $ionicPopup, $rootScope, $cordova
 						$cordovaSQLite.execute(db,"INSERT INTO non_payday_weekday (non_payday_weekday_date, non_payday_weekday_start, non_payday_weekday_end) VALUES (?,?,?)",
 							[dateFormatter.toStandard($scope.nonpayday_weekday.date), dateFormatter.toStandard($scope.nonpayday_weekday.start), dateFormatter.toStandard($scope.nonpayday_weekday.end)])
 							.then(function(res){
-								Toast.show("Successfully saved Non Payday Weekday schedule . . .","long","bottom");
+								Toast.show("Successfully saved Non Payday Weekday schedule","long","bottom");
 								$timeout(function(){
 									$state.go('survey-home');
 								},3000);
@@ -367,7 +367,7 @@ app.controller('settingsCtrl',function($scope, $ionicPopup, $rootScope, $cordova
 						$cordovaSQLite.execute(db,"UPDATE non_payday_weekday SET non_payday_weekday_date = ?, non_payday_weekday_start = ?, non_payday_weekday_end = ? WHERE id = ?",
 							[dateFormatter.toStandard($scope.nonpayday_weekday.date), dateFormatter.toStandard($scope.nonpayday_weekday.start), dateFormatter.toStandard($scope.nonpayday_weekday.end), id])
 							.then(function(res){
-								Toast.show("Successfully updated Non Payday Weekday schedule . . .","long","bottom");
+								Toast.show("Successfully updated Non Payday Weekday schedule","long","bottom");
 								$timeout(function(){
 									$state.go('survey-home');
 								},3000);
@@ -399,18 +399,18 @@ app.controller('settingsCtrl',function($scope, $ionicPopup, $rootScope, $cordova
 		}
 
 		if($scope.payday_weekend.date == "" || $scope.payday_weekend.date == undefined || $scope.payday_weekend.start == "" || $scope.payday_weekend.start == undefined || $scope.payday_weekend.end == "" || $scope.payday_weekend.end == undefined ){
-			Toast.show("Please set all fields before saving . . .","long","bottom");
+			Toast.show("Please set all fields before saving","long","bottom");
 		}
 		else if(schedule.pwe == schedule.pwd || schedule.pwe == schedule.npwd || schedule.pwe == schedule.npwe){
-			Toast.show("Please choose another schedule . . .","long","bottom");
+			Toast.show("Please choose another schedule","long","bottom");
 		}
 		else if(schedule.day != 0 && schedule.day != 6){
-			Toast.show("Please choose weekends schedule only . . .","long","bottom");
+			Toast.show("Please choose weekends schedule only","long","bottom");
 		}
 		else{
 			// Validate if starts time > ends time
 			if(dateFormatter.toTimestamp($scope.payday_weekend + " " + $scope.payday_weekend.start) >= dateFormatter.toTimestamp($scope.payday_weekend + " " + $scope.payday_weekend.end)){
-				Toast.show("Please set all fields correctly before saving . . .","long","bottom");
+				Toast.show("Please set all fields correctly before saving","long","bottom");
 			}
 			else{
 				$cordovaSQLite.execute(db,'SELECT * FROM payday_weekend').then(function(res){
@@ -418,7 +418,7 @@ app.controller('settingsCtrl',function($scope, $ionicPopup, $rootScope, $cordova
 						$cordovaSQLite.execute(db,"INSERT INTO payday_weekend (payday_weekend_date, payday_weekend_start, payday_weekend_end) VALUES (?,?,?)",
 							[dateFormatter.toStandard($scope.payday_weekend.date), dateFormatter.toStandard($scope.payday_weekend.start), dateFormatter.toStandard($scope.payday_weekend.end)])
 							.then(function(res){
-								Toast.show("Successfully saved Payday Weekend schedule . . .","long","bottom");
+								Toast.show("Successfully saved Payday Weekend schedule","long","bottom");
 								$timeout(function(){
 									$state.go('survey-home');
 								},3000);
@@ -432,7 +432,7 @@ app.controller('settingsCtrl',function($scope, $ionicPopup, $rootScope, $cordova
 						$cordovaSQLite.execute(db,"UPDATE payday_weekend SET payday_weekend_date = ?, payday_weekend_start = ?, payday_weekend_end = ? WHERE id = ?",
 							[dateFormatter.toStandard($scope.payday_weekend.date), dateFormatter.toStandard($scope.payday_weekend.start), dateFormatter.toStandard($scope.payday_weekend.end), id])
 							.then(function(res){
-								Toast.show("Successfully updated Payday Weekend schedule . . .","long","bottom");
+								Toast.show("Successfully updated Payday Weekend schedule","long","bottom");
 								$timeout(function(){
 									$state.go('survey-home');
 								},3000);
@@ -465,18 +465,18 @@ app.controller('settingsCtrl',function($scope, $ionicPopup, $rootScope, $cordova
 		}
 
 		if($scope.nonpayday_weekend.date == "" || $scope.nonpayday_weekend.date == undefined || $scope.nonpayday_weekend.start == "" || $scope.nonpayday_weekend.start == undefined || $scope.nonpayday_weekend.end == "" || $scope.nonpayday_weekend.end == undefined ){
-			Toast.show("Please set all fields before saving . . .","long","bottom");
+			Toast.show("Please set all fields before saving","long","bottom");
 		}
 		else if(schedule.npwe == schedule.pwd || schedule.npwe == schedule.npwd || schedule.npwe == schedule.pwe){
-			Toast.show("Please choose another schedule . . .","long","bottom");
+			Toast.show("Please choose another schedule","long","bottom");
 		}
 		else if(schedule.day != 0 && schedule.day != 6){
-			Toast.show("Please choose weekends schedule only . . .","long","bottom");
+			Toast.show("Please choose weekends schedule only","long","bottom");
 		}
 		else{
 			// Validate if starts time > ends time
 			if(dateFormatter.toTimestamp($scope.nonpayday_weekend + " " + $scope.nonpayday_weekend.start) >= dateFormatter.toTimestamp($scope.nonpayday_weekend + " " + $scope.nonpayday_weekend.end)){
-				Toast.show("Please set all fields correctly before saving . . .","long","bottom");
+				Toast.show("Please set all fields correctly before saving","long","bottom");
 			}
 			else{
 				$cordovaSQLite.execute(db,'SELECT * FROM non_payday_weekend').then(function(res){
@@ -484,7 +484,7 @@ app.controller('settingsCtrl',function($scope, $ionicPopup, $rootScope, $cordova
 						$cordovaSQLite.execute(db,"INSERT INTO non_payday_weekend (non_payday_weekend_date, non_payday_weekend_start, non_payday_weekend_end) VALUES (?,?,?)",
 							[dateFormatter.toStandard($scope.nonpayday_weekend.date), dateFormatter.toStandard($scope.nonpayday_weekend.start), dateFormatter.toStandard($scope.nonpayday_weekend.end)])
 							.then(function(res){
-								Toast.show("Successfully saved Non Payday Weekend schedule . . .","long","bottom");
+								Toast.show("Successfully saved Non Payday Weekend schedule","long","bottom");
 								$timeout(function(){
 									$state.go('survey-home');
 								},3000);
@@ -498,7 +498,7 @@ app.controller('settingsCtrl',function($scope, $ionicPopup, $rootScope, $cordova
 						$cordovaSQLite.execute(db,"UPDATE non_payday_weekend SET non_payday_weekend_date = ?, non_payday_weekend_start = ?, non_payday_weekend_end = ? WHERE id = ?",
 							[dateFormatter.toStandard($scope.nonpayday_weekend.date), dateFormatter.toStandard($scope.nonpayday_weekend.start), dateFormatter.toStandard($scope.nonpayday_weekend.end), id])
 							.then(function(res){
-								Toast.show("Successfully updated Non Payday Weekend schedule . . .","long","bottom");
+								Toast.show("Successfully updated Non Payday Weekend schedule","long","bottom");
 								$timeout(function(){
 									$state.go('survey-home');
 								},3000);
