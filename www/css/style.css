@@ -50,6 +50,9 @@ html, body {
 
 
 /* Store Settings */
+input.store-settings {
+	width: 100%;
+}
 
 #store-form-label {
 	font-weight: bold;
