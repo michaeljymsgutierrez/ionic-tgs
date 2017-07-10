@@ -34,7 +34,7 @@ app.controller('surveyCtrl',function(loadingState, $ionicSideMenuDelegate, $scop
             }
             else{
                 // Prompt to show there is no schedule
-                Toast.show("Sorry, you are not allowed to conduct survey today. Instead, you can access this feature on your next survey date. Thank you!","long","center");
+                Toast.show("Sorry, you are not allowed to conduct survey today. Instead, you can access this feature on your next survey date. Thank you!","long","bottom");
             }
     };
 
