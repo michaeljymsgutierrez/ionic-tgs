@@ -35,7 +35,7 @@ app.directive('noEmoji',function(){
                 if(val != ""){
                   // Remove occurence of emoji
                   try{
-                  	  var text = val.replace(/([\uE000-\uF8FF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|[\u2694-\u2697]|\uD83E[\uDD10-\uDD5D])/g, '')
+                  	var text = val.replace(/([\uE000-\uF8FF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|[\u2694-\u2697]|\uD83E[\uDD10-\uDD5D])/g, '')
 	                  ngModel.$setViewValue(text);
 	                  ngModel.$render();
                   }catch(err) {}
