@@ -134,7 +134,9 @@ input[type='radio']:checked:before {
 }
 
 .opaque-content {
-   opacity: 0.1;
+	-webkit-transition: opacity 300ms ease-in-out;
+    transition: opacity 300ms ease-in-out;
+    opacity: 0;
 }
 
 
