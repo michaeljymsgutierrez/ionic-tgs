@@ -1,12 +1,6 @@
 {
   "name": "mang-inasal-tgs",
   "app_id": "",
-  "proxies": [
-    {
-      "path": "/api",
-      "proxyUrl": "https://staging.tgs.vielsoft.com/api"
-    }
-  ],
   "gulpStartupTasks": [
     "sass",
     "watch"
