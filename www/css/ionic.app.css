@@ -9834,7 +9834,7 @@ a.button {
   src: url("../fonts/Roboto-Regular.ttf") format("truetype"); }
 
 html, body {
-  /*font-family: 'Roboto Regular';*/ }
+  font-family: 'Roboto Regular'; }
 
 /* Settings  CSS */
 #view-title-color {
