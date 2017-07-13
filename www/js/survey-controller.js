@@ -282,30 +282,7 @@ app.controller('surveyCtrl',function(loadingState, $ionicSideMenuDelegate, $scop
 
     }
 
-    // Initialize Locations for Question A Mall - Foodcourt
-    $rootScope.qa_regions = Location.region();
-    $rootScope.qa_provinces = [];
-    $rootScope.qa_city = [];
-    $rootScope.qa_brgy = [];
-
-    // Initialize Locations for Question B Mall - Foodcourt
-    $rootScope.qb_regions = Location.region();
-    $rootScope.qb_provinces = [];
-    $rootScope.qb_city = [];
-    $rootScope.qb_brgy = [];
-
-
-    // Initialize Locations for Question P Mall - Foodcourt
-    $rootScope.qp_regions = Location.region();
-    $rootScope.qp_provinces = [];
-    $rootScope.qp_city = [];
-    $rootScope.qp_brgy = [];
-
-
-    // Initialize object that will hold the answers
-    $rootScope.answer = { };
-
-
+    // Hoisting all onload variables
     try{
     	// Load the data to $rootScope.answers
     	// Comeup to this approach is due to un stoppable reload of controllers
@@ -313,7 +290,7 @@ app.controller('surveyCtrl',function(loadingState, $ionicSideMenuDelegate, $scop
     	if(data){
     		$rootScope.answer = JSON.parse(data);
 
-            // Question A Mall - Foodcourt
+            // Question A - Mall - Foodcourt - Instore - Freestand
             if($rootScope.answer.qA.sub.region){
                 $rootScope.qa_regions.push($rootScope.answer.qA.sub.region);
             }
@@ -328,7 +305,7 @@ app.controller('surveyCtrl',function(loadingState, $ionicSideMenuDelegate, $scop
             }
         
 
-            // Question B Mall - Foodcourt
+            // Question B - Mall - Foodcourt - Instore - Freestand
             if($rootScope.answer.qB.sub.region){
                 $rootScope.qb_regions.push($rootScope.answer.qB.sub.region);
             }
@@ -342,12 +319,35 @@ app.controller('surveyCtrl',function(loadingState, $ionicSideMenuDelegate, $scop
                $rootScope.qb_brgy.push($rootScope.answer.qB.sub.brgy);   
             }
 
-            // Question P Mall - Foodcourt and Instore and Free Stand
+            // Question P - Mall - Foodcourt - Instore - Freestand
             $rootScope.qp_regions.push($rootScope.answer.qP3.sub.region);
             $rootScope.qp_provinces.push($rootScope.answer.qP3.sub.province);
             $rootScope.qp_city.push($rootScope.answer.qP3.sub.city);
             $rootScope.qp_brgy.push($rootScope.answer.qP3.sub.brgy);
     	}
+        else{
+
+            // Initialize Locations for Question A Mall - Foodcourt - Instore - Freestand
+            $rootScope.qa_regions = Location.region();
+            $rootScope.qa_provinces = [];
+            $rootScope.qa_city = [];
+            $rootScope.qa_brgy = [];
+
+            // Initialize Locations for Question B Mall - Foodcourt - Instore - Freestand
+            $rootScope.qb_regions = Location.region();
+            $rootScope.qb_provinces = [];
+            $rootScope.qb_city = [];
+            $rootScope.qb_brgy = [];
+
+            // Initialize Locations for Question P Mall - Foodcourt - Instore - Freestand
+            $rootScope.qp_regions = Location.region();
+            $rootScope.qp_provinces = [];
+            $rootScope.qp_city = [];
+            $rootScope.qp_brgy = [];
+
+            // Initialize object that will hold the answers
+            $rootScope.answer = { };
+        }
     } catch(err){ };
 
 
