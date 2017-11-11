@@ -22,13 +22,13 @@
         "cordova-plugin-whitelist": {
             "PACKAGE_NAME": "com.ionicframework.manginasaltgs786518"
         },
-        "ionic-plugin-keyboard": {
+        "cordova-plugin-x-toast": {
             "PACKAGE_NAME": "com.ionicframework.manginasaltgs786518"
         },
         "cordova-sqlite-storage": {
             "PACKAGE_NAME": "com.ionicframework.manginasaltgs786518"
         },
-        "cordova-plugin-x-toast": {
+        "ionic-plugin-keyboard": {
             "PACKAGE_NAME": "com.ionicframework.manginasaltgs786518"
         }
     },
